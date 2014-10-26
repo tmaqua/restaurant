@@ -1,0 +1,2 @@
+pod "GPUImage"
+pod "MagicalRecord"
