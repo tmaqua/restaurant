@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2E169E1A19FF79FA0048FA88 /* selected.png in Resources */ = {isa = PBXBuildFile; fileRef = 2E169E1919FF79FA0048FA88 /* selected.png */; };
+		2E169E1C19FF7B950048FA88 /* nonselect.png in Resources */ = {isa = PBXBuildFile; fileRef = 2E169E1B19FF7B950048FA88 /* nonselect.png */; };
 		2E3D315F19FAA89F00F53297 /* TestEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E3D315E19FAA89F00F53297 /* TestEntity.m */; };
 		2E3D316219FAA90400F53297 /* _TestEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E3D316119FAA90400F53297 /* _TestEntity.m */; };
 		2E72B47B19FA5918001A0DE3 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E72B47A19FA5918001A0DE3 /* main.m */; };
@@ -23,7 +25,6 @@
 		2E72B4F019FA59D7001A0DE3 /* MenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E72B4D919FA59D7001A0DE3 /* MenuViewController.m */; };
 		2E72B4F119FA59D7001A0DE3 /* OtherDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E72B4DB19FA59D7001A0DE3 /* OtherDetailViewController.m */; };
 		2E72B4F219FA59D7001A0DE3 /* OtherViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E72B4DD19FA59D7001A0DE3 /* OtherViewController.m */; };
-		2E72B4F319FA59D7001A0DE3 /* ShoppingCartViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E72B4DF19FA59D7001A0DE3 /* ShoppingCartViewController.m */; };
 		2E72B4F419FA59D7001A0DE3 /* Menu.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E72B4E219FA59D7001A0DE3 /* Menu.m */; };
 		2E72B4F519FA59D7001A0DE3 /* MenuTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2E72B4E419FA59D7001A0DE3 /* MenuTableCell.xib */; };
 		2E72B4F619FA59D7001A0DE3 /* image.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 2E72B4E719FA59D7001A0DE3 /* image.jpg */; };
@@ -45,6 +46,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		2E169E1919FF79FA0048FA88 /* selected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = selected.png; sourceTree = "<group>"; };
+		2E169E1B19FF7B950048FA88 /* nonselect.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = nonselect.png; sourceTree = "<group>"; };
 		2E3D315D19FAA89F00F53297 /* TestEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TestEntity.h; path = ../../CoreData/TestEntity.h; sourceTree = "<group>"; };
 		2E3D315E19FAA89F00F53297 /* TestEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TestEntity.m; path = ../../CoreData/TestEntity.m; sourceTree = "<group>"; };
 		2E3D316019FAA90400F53297 /* _TestEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = _TestEntity.h; path = restaurant_ios/CoreData/_TestEntity.h; sourceTree = SOURCE_ROOT; };
@@ -76,8 +79,6 @@
 		2E72B4DB19FA59D7001A0DE3 /* OtherDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OtherDetailViewController.m; sourceTree = "<group>"; };
 		2E72B4DC19FA59D7001A0DE3 /* OtherViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OtherViewController.h; sourceTree = "<group>"; };
 		2E72B4DD19FA59D7001A0DE3 /* OtherViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OtherViewController.m; sourceTree = "<group>"; };
-		2E72B4DE19FA59D7001A0DE3 /* ShoppingCartViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShoppingCartViewController.h; sourceTree = "<group>"; };
-		2E72B4DF19FA59D7001A0DE3 /* ShoppingCartViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShoppingCartViewController.m; sourceTree = "<group>"; };
 		2E72B4E119FA59D7001A0DE3 /* Menu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Menu.h; sourceTree = "<group>"; };
 		2E72B4E219FA59D7001A0DE3 /* Menu.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Menu.m; sourceTree = "<group>"; };
 		2E72B4E419FA59D7001A0DE3 /* MenuTableCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MenuTableCell.xib; sourceTree = "<group>"; };
@@ -201,8 +202,6 @@
 				2E72B4DB19FA59D7001A0DE3 /* OtherDetailViewController.m */,
 				2E72B4DC19FA59D7001A0DE3 /* OtherViewController.h */,
 				2E72B4DD19FA59D7001A0DE3 /* OtherViewController.m */,
-				2E72B4DE19FA59D7001A0DE3 /* ShoppingCartViewController.h */,
-				2E72B4DF19FA59D7001A0DE3 /* ShoppingCartViewController.m */,
 			);
 			path = controller;
 			sourceTree = "<group>";
@@ -232,6 +231,8 @@
 		2E72B4E619FA59D7001A0DE3 /* picture */ = {
 			isa = PBXGroup;
 			children = (
+				2E169E1B19FF7B950048FA88 /* nonselect.png */,
+				2E169E1919FF79FA0048FA88 /* selected.png */,
 				2E72B4E719FA59D7001A0DE3 /* image.jpg */,
 				2E72B4E819FA59D7001A0DE3 /* list.png */,
 				2E72B4E919FA59D7001A0DE3 /* minus.png */,
@@ -340,6 +341,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2E169E1C19FF7B950048FA88 /* nonselect.png in Resources */,
 				2E72B48719FA5918001A0DE3 /* Main.storyboard in Resources */,
 				2E72B48C19FA5918001A0DE3 /* LaunchScreen.xib in Resources */,
 				2E72B48919FA5918001A0DE3 /* Images.xcassets in Resources */,
@@ -348,6 +350,7 @@
 				2E72B4F819FA59D7001A0DE3 /* minus.png in Resources */,
 				2E72B4F619FA59D7001A0DE3 /* image.jpg in Resources */,
 				2E72B4F719FA59D7001A0DE3 /* list.png in Resources */,
+				2E169E1A19FF79FA0048FA88 /* selected.png in Resources */,
 				2E72B4F919FA59D7001A0DE3 /* plus.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -410,7 +413,6 @@
 				2E72B4F019FA59D7001A0DE3 /* MenuViewController.m in Sources */,
 				2E72B48119FA5918001A0DE3 /* restaurant_ios.xcdatamodeld in Sources */,
 				2E72B4EC19FA59D7001A0DE3 /* CustomTableViewCell.m in Sources */,
-				2E72B4F319FA59D7001A0DE3 /* ShoppingCartViewController.m in Sources */,
 				2E72B47B19FA5918001A0DE3 /* main.m in Sources */,
 				2E72B4EF19FA59D7001A0DE3 /* EatListViewController.m in Sources */,
 			);

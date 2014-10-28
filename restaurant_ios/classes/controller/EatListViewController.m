@@ -27,9 +27,9 @@
 {
     [super viewDidLoad];
     
-    
-    // Do any additional setup after loading the view.
     _weekSelectNum = 0;
+    _selectedImage = [UIImage imageNamed:@"selected.png"];
+    _nonselectImage = [UIImage imageNamed:@"nonselect.png"];
     
     [_listButton setBackgroundImage:[UIImage imageNamed:@"list.png"] forState:UIControlStateNormal];
     _dateUnderBar1.backgroundColor = [UIColor colorWithRed:1.00 green:0.66 blue:0.27 alpha:1.0];
@@ -59,67 +59,67 @@
 
     switch (eventType) {
         case 0:
-            [_weekButton0 setBackgroundColor:[UIColor blueColor]];
-            [_weekButton1 setBackgroundColor:[UIColor whiteColor]];
-            [_weekButton2 setBackgroundColor:[UIColor whiteColor]];
-            [_weekButton3 setBackgroundColor:[UIColor whiteColor]];
-            [_weekButton4 setBackgroundColor:[UIColor whiteColor]];
-            [_weekButton5 setBackgroundColor:[UIColor whiteColor]];
-            [_weekButton6 setBackgroundColor:[UIColor whiteColor]];
+            [_weekButton0 setBackgroundImage:_selectedImage forState:UIControlStateNormal];
+            [_weekButton1 setBackgroundImage:_nonselectImage forState:UIControlStateNormal];
+            [_weekButton2 setBackgroundImage:_nonselectImage forState:UIControlStateNormal];
+            [_weekButton3 setBackgroundImage:_nonselectImage forState:UIControlStateNormal];
+            [_weekButton4 setBackgroundImage:_nonselectImage forState:UIControlStateNormal];
+            [_weekButton5 setBackgroundImage:_nonselectImage forState:UIControlStateNormal];
+            [_weekButton6 setBackgroundImage:_nonselectImage forState:UIControlStateNormal];
             break;
         case 1:
-            [_weekButton0 setBackgroundColor:[UIColor whiteColor]];
-            [_weekButton1 setBackgroundColor:[UIColor blueColor]];
-            [_weekButton2 setBackgroundColor:[UIColor whiteColor]];
-            [_weekButton3 setBackgroundColor:[UIColor whiteColor]];
-            [_weekButton4 setBackgroundColor:[UIColor whiteColor]];
-            [_weekButton5 setBackgroundColor:[UIColor whiteColor]];
-            [_weekButton6 setBackgroundColor:[UIColor whiteColor]];
+            [_weekButton0 setBackgroundImage:_nonselectImage forState:UIControlStateNormal];
+            [_weekButton1 setBackgroundImage:_selectedImage forState:UIControlStateNormal];
+            [_weekButton2 setBackgroundImage:_nonselectImage forState:UIControlStateNormal];
+            [_weekButton3 setBackgroundImage:_nonselectImage forState:UIControlStateNormal];
+            [_weekButton4 setBackgroundImage:_nonselectImage forState:UIControlStateNormal];
+            [_weekButton5 setBackgroundImage:_nonselectImage forState:UIControlStateNormal];
+            [_weekButton6 setBackgroundImage:_nonselectImage forState:UIControlStateNormal];
             break;
         case 2:
-            [_weekButton0 setBackgroundColor:[UIColor whiteColor]];
-            [_weekButton1 setBackgroundColor:[UIColor whiteColor]];
-            [_weekButton2 setBackgroundColor:[UIColor blueColor]];
-            [_weekButton3 setBackgroundColor:[UIColor whiteColor]];
-            [_weekButton4 setBackgroundColor:[UIColor whiteColor]];
-            [_weekButton5 setBackgroundColor:[UIColor whiteColor]];
-            [_weekButton6 setBackgroundColor:[UIColor whiteColor]];
+            [_weekButton0 setBackgroundImage:_nonselectImage forState:UIControlStateNormal];
+            [_weekButton1 setBackgroundImage:_nonselectImage forState:UIControlStateNormal];
+            [_weekButton2 setBackgroundImage:_selectedImage forState:UIControlStateNormal];
+            [_weekButton3 setBackgroundImage:_nonselectImage forState:UIControlStateNormal];
+            [_weekButton4 setBackgroundImage:_nonselectImage forState:UIControlStateNormal];
+            [_weekButton5 setBackgroundImage:_nonselectImage forState:UIControlStateNormal];
+            [_weekButton6 setBackgroundImage:_nonselectImage forState:UIControlStateNormal];
             break;
         case 3:
-            [_weekButton0 setBackgroundColor:[UIColor whiteColor]];
-            [_weekButton1 setBackgroundColor:[UIColor whiteColor]];
-            [_weekButton2 setBackgroundColor:[UIColor whiteColor]];
-            [_weekButton3 setBackgroundColor:[UIColor blueColor]];
-            [_weekButton4 setBackgroundColor:[UIColor whiteColor]];
-            [_weekButton5 setBackgroundColor:[UIColor whiteColor]];
-            [_weekButton6 setBackgroundColor:[UIColor whiteColor]];
+            [_weekButton0 setBackgroundImage:_nonselectImage forState:UIControlStateNormal];
+            [_weekButton1 setBackgroundImage:_nonselectImage forState:UIControlStateNormal];
+            [_weekButton2 setBackgroundImage:_nonselectImage forState:UIControlStateNormal];
+            [_weekButton3 setBackgroundImage:_selectedImage forState:UIControlStateNormal];
+            [_weekButton4 setBackgroundImage:_nonselectImage forState:UIControlStateNormal];
+            [_weekButton5 setBackgroundImage:_nonselectImage forState:UIControlStateNormal];
+            [_weekButton6 setBackgroundImage:_nonselectImage forState:UIControlStateNormal];
             break;
         case 4:
-            [_weekButton0 setBackgroundColor:[UIColor whiteColor]];
-            [_weekButton1 setBackgroundColor:[UIColor whiteColor]];
-            [_weekButton2 setBackgroundColor:[UIColor whiteColor]];
-            [_weekButton3 setBackgroundColor:[UIColor whiteColor]];
-            [_weekButton4 setBackgroundColor:[UIColor blueColor]];
-            [_weekButton5 setBackgroundColor:[UIColor whiteColor]];
-            [_weekButton6 setBackgroundColor:[UIColor whiteColor]];
+            [_weekButton0 setBackgroundImage:_nonselectImage forState:UIControlStateNormal];
+            [_weekButton1 setBackgroundImage:_nonselectImage forState:UIControlStateNormal];
+            [_weekButton2 setBackgroundImage:_nonselectImage forState:UIControlStateNormal];
+            [_weekButton3 setBackgroundImage:_nonselectImage forState:UIControlStateNormal];
+            [_weekButton4 setBackgroundImage:_selectedImage forState:UIControlStateNormal];
+            [_weekButton5 setBackgroundImage:_nonselectImage forState:UIControlStateNormal];
+            [_weekButton6 setBackgroundImage:_nonselectImage forState:UIControlStateNormal];
             break;
         case 5:
-            [_weekButton0 setBackgroundColor:[UIColor whiteColor]];
-            [_weekButton1 setBackgroundColor:[UIColor whiteColor]];
-            [_weekButton2 setBackgroundColor:[UIColor whiteColor]];
-            [_weekButton3 setBackgroundColor:[UIColor whiteColor]];
-            [_weekButton4 setBackgroundColor:[UIColor whiteColor]];
-            [_weekButton5 setBackgroundColor:[UIColor blueColor]];
-            [_weekButton6 setBackgroundColor:[UIColor whiteColor]];
+            [_weekButton0 setBackgroundImage:_nonselectImage forState:UIControlStateNormal];
+            [_weekButton1 setBackgroundImage:_nonselectImage forState:UIControlStateNormal];
+            [_weekButton2 setBackgroundImage:_nonselectImage forState:UIControlStateNormal];
+            [_weekButton3 setBackgroundImage:_nonselectImage forState:UIControlStateNormal];
+            [_weekButton4 setBackgroundImage:_nonselectImage forState:UIControlStateNormal];
+            [_weekButton5 setBackgroundImage:_selectedImage forState:UIControlStateNormal];
+            [_weekButton6 setBackgroundImage:_nonselectImage forState:UIControlStateNormal];
             break;
         case 6:
-            [_weekButton0 setBackgroundColor:[UIColor whiteColor]];
-            [_weekButton1 setBackgroundColor:[UIColor whiteColor]];
-            [_weekButton2 setBackgroundColor:[UIColor whiteColor]];
-            [_weekButton3 setBackgroundColor:[UIColor whiteColor]];
-            [_weekButton4 setBackgroundColor:[UIColor whiteColor]];
-            [_weekButton5 setBackgroundColor:[UIColor whiteColor]];
-            [_weekButton6 setBackgroundColor:[UIColor blueColor]];
+            [_weekButton0 setBackgroundImage:_nonselectImage forState:UIControlStateNormal];
+            [_weekButton1 setBackgroundImage:_nonselectImage forState:UIControlStateNormal];
+            [_weekButton2 setBackgroundImage:_nonselectImage forState:UIControlStateNormal];
+            [_weekButton3 setBackgroundImage:_nonselectImage forState:UIControlStateNormal];
+            [_weekButton4 setBackgroundImage:_nonselectImage forState:UIControlStateNormal];
+            [_weekButton5 setBackgroundImage:_nonselectImage forState:UIControlStateNormal];
+            [_weekButton6 setBackgroundImage:_selectedImage forState:UIControlStateNormal];
             break;
         default:
             break;
@@ -164,6 +164,7 @@
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
     NSDateFormatter *showDayFormatter = [[NSDateFormatter alloc] init];
     [dateFormatter setLocale:[NSLocale currentLocale]];
+    [showDayFormatter setLocale:[NSLocale currentLocale]];
     NSMutableArray *weekDay = [self getThisWeekDays];
     
     _selectedWeeks = [weekDay mutableCopy];
@@ -250,14 +251,11 @@
     
     NSDate *tempDate = [today initWithTimeInterval:-1*(comps.weekday-1+_weekSelectNum)*24*60*60 sinceDate:today];
     NSMutableArray *weeks = [NSMutableArray array];
-    NSInteger todayWeek = comps.weekday-1;
 
     [weeks addObject:tempDate];
     for (int i = 1; i < 7; i++) {
         [weeks addObject:[tempDate initWithTimeInterval:(i)*24*60*60 sinceDate:tempDate]];
     }
-    
-    [weeks addObject:[NSNumber numberWithInteger:todayWeek]];
     
 //    NSLog(@"%@", weeks);
     
@@ -306,11 +304,25 @@
 
 - (IBAction)backButton:(id)sender {
     _weekSelectNum += 7.0;
+    [_weekButton0 setBackgroundImage:_nonselectImage forState:UIControlStateNormal];
+    [_weekButton1 setBackgroundImage:_nonselectImage forState:UIControlStateNormal];
+    [_weekButton2 setBackgroundImage:_nonselectImage forState:UIControlStateNormal];
+    [_weekButton3 setBackgroundImage:_nonselectImage forState:UIControlStateNormal];
+    [_weekButton4 setBackgroundImage:_nonselectImage forState:UIControlStateNormal];
+    [_weekButton5 setBackgroundImage:_nonselectImage forState:UIControlStateNormal];
+    [_weekButton6 setBackgroundImage:_nonselectImage forState:UIControlStateNormal];
     [self calcDate];
 }
 
 - (IBAction)newxtButton:(id)sender {
     _weekSelectNum -= 7.0;
+    [_weekButton0 setBackgroundImage:_nonselectImage forState:UIControlStateNormal];
+    [_weekButton1 setBackgroundImage:_nonselectImage forState:UIControlStateNormal];
+    [_weekButton2 setBackgroundImage:_nonselectImage forState:UIControlStateNormal];
+    [_weekButton3 setBackgroundImage:_nonselectImage forState:UIControlStateNormal];
+    [_weekButton4 setBackgroundImage:_nonselectImage forState:UIControlStateNormal];
+    [_weekButton5 setBackgroundImage:_nonselectImage forState:UIControlStateNormal];
+    [_weekButton6 setBackgroundImage:_nonselectImage forState:UIControlStateNormal];
     [self calcDate];
 }
 @end

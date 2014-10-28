@@ -27,13 +27,12 @@
 @property (weak, nonatomic) IBOutlet UILabel *todayPrice;
 @property (weak, nonatomic) IBOutlet UILabel *weekPrice;
 
+@property (nonatomic) NSInteger weekSelectNum;
+@property (nonatomic) NSMutableArray *selectedWeeks;
+@property (nonatomic) UIImage *selectedImage;
+@property (nonatomic) UIImage *nonselectImage;
+
 - (IBAction)backButton:(id)sender;
 - (IBAction)newxtButton:(id)sender;
-
-
-@property (nonatomic) NSInteger weekSelectNum;
-
-@property (nonatomic) NSMutableArray *selectedWeeks;
-
 
 @end
