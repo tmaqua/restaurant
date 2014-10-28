@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>2DA5C52B-DD7E-4779-93CE-9CBE33959D46</string>
+	<key>IDESourceControlProjectName</key>
+	<string>restaurant_ios</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>591995D96B94991C3FC542CB8A9A78D28ACA0C5F</key>
+		<string>https://github.com/tmaqua/restaurant.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>restaurant_ios.xcworkspace</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>591995D96B94991C3FC542CB8A9A78D28ACA0C5F</key>
+		<string>..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>https://github.com/tmaqua/restaurant.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>111</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>591995D96B94991C3FC542CB8A9A78D28ACA0C5F</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>591995D96B94991C3FC542CB8A9A78D28ACA0C5F</string>
+			<key>IDESourceControlWCCName</key>
+			<string>restaurant_ios</string>
+		</dict>
+	</array>
+</dict>
+</plist>

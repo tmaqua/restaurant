@@ -26,6 +26,8 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    
     // Do any additional setup after loading the view.
     _weekSelectNum = 0;
     
@@ -35,10 +37,103 @@
     _todayPrice.textColor = [UIColor whiteColor];
     _weekPrice.textColor = [UIColor whiteColor];
     
-    // あとでuibuttonクラス作ってここらへんをまとめとこう
+    [self initButton];
+    
+    [self generateImageView];
+    
+}
+
+- (void)didReceiveMemoryWarning
+{
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
+}
+
+- (void)buttonDidTap:(UIButton *)button
+{
+    //タグを格納
+    NSInteger eventType = button.tag-1;
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setLocale:[NSLocale currentLocale]];
+    [dateFormatter setDateFormat:@"yyyy/MM/dd"];
+
+    switch (eventType) {
+        case 0:
+            [_weekButton0 setBackgroundColor:[UIColor blueColor]];
+            [_weekButton1 setBackgroundColor:[UIColor whiteColor]];
+            [_weekButton2 setBackgroundColor:[UIColor whiteColor]];
+            [_weekButton3 setBackgroundColor:[UIColor whiteColor]];
+            [_weekButton4 setBackgroundColor:[UIColor whiteColor]];
+            [_weekButton5 setBackgroundColor:[UIColor whiteColor]];
+            [_weekButton6 setBackgroundColor:[UIColor whiteColor]];
+            break;
+        case 1:
+            [_weekButton0 setBackgroundColor:[UIColor whiteColor]];
+            [_weekButton1 setBackgroundColor:[UIColor blueColor]];
+            [_weekButton2 setBackgroundColor:[UIColor whiteColor]];
+            [_weekButton3 setBackgroundColor:[UIColor whiteColor]];
+            [_weekButton4 setBackgroundColor:[UIColor whiteColor]];
+            [_weekButton5 setBackgroundColor:[UIColor whiteColor]];
+            [_weekButton6 setBackgroundColor:[UIColor whiteColor]];
+            break;
+        case 2:
+            [_weekButton0 setBackgroundColor:[UIColor whiteColor]];
+            [_weekButton1 setBackgroundColor:[UIColor whiteColor]];
+            [_weekButton2 setBackgroundColor:[UIColor blueColor]];
+            [_weekButton3 setBackgroundColor:[UIColor whiteColor]];
+            [_weekButton4 setBackgroundColor:[UIColor whiteColor]];
+            [_weekButton5 setBackgroundColor:[UIColor whiteColor]];
+            [_weekButton6 setBackgroundColor:[UIColor whiteColor]];
+            break;
+        case 3:
+            [_weekButton0 setBackgroundColor:[UIColor whiteColor]];
+            [_weekButton1 setBackgroundColor:[UIColor whiteColor]];
+            [_weekButton2 setBackgroundColor:[UIColor whiteColor]];
+            [_weekButton3 setBackgroundColor:[UIColor blueColor]];
+            [_weekButton4 setBackgroundColor:[UIColor whiteColor]];
+            [_weekButton5 setBackgroundColor:[UIColor whiteColor]];
+            [_weekButton6 setBackgroundColor:[UIColor whiteColor]];
+            break;
+        case 4:
+            [_weekButton0 setBackgroundColor:[UIColor whiteColor]];
+            [_weekButton1 setBackgroundColor:[UIColor whiteColor]];
+            [_weekButton2 setBackgroundColor:[UIColor whiteColor]];
+            [_weekButton3 setBackgroundColor:[UIColor whiteColor]];
+            [_weekButton4 setBackgroundColor:[UIColor blueColor]];
+            [_weekButton5 setBackgroundColor:[UIColor whiteColor]];
+            [_weekButton6 setBackgroundColor:[UIColor whiteColor]];
+            break;
+        case 5:
+            [_weekButton0 setBackgroundColor:[UIColor whiteColor]];
+            [_weekButton1 setBackgroundColor:[UIColor whiteColor]];
+            [_weekButton2 setBackgroundColor:[UIColor whiteColor]];
+            [_weekButton3 setBackgroundColor:[UIColor whiteColor]];
+            [_weekButton4 setBackgroundColor:[UIColor whiteColor]];
+            [_weekButton5 setBackgroundColor:[UIColor blueColor]];
+            [_weekButton6 setBackgroundColor:[UIColor whiteColor]];
+            break;
+        case 6:
+            [_weekButton0 setBackgroundColor:[UIColor whiteColor]];
+            [_weekButton1 setBackgroundColor:[UIColor whiteColor]];
+            [_weekButton2 setBackgroundColor:[UIColor whiteColor]];
+            [_weekButton3 setBackgroundColor:[UIColor whiteColor]];
+            [_weekButton4 setBackgroundColor:[UIColor whiteColor]];
+            [_weekButton5 setBackgroundColor:[UIColor whiteColor]];
+            [_weekButton6 setBackgroundColor:[UIColor blueColor]];
+            break;
+        default:
+            break;
+    }
+    _todayDate.text = [dateFormatter stringFromDate:_selectedWeeks[eventType]];
+    
+}
+
+-(void)initButton {
+    // あとでbuttonクラス作ってここらへんをまとめとこう
     [_weekButton0 addTarget:self
-               action:@selector(buttonDidTap:)
-     forControlEvents:UIControlEventTouchUpInside];
+                     action:@selector(buttonDidTap:)
+           forControlEvents:UIControlEventTouchUpInside];
+    
     [_weekButton0 addTarget:self
                      action:@selector(buttonDidTap:)
            forControlEvents:UIControlEventTouchUpInside];
@@ -62,43 +157,21 @@
            forControlEvents:UIControlEventTouchUpInside];
     
     [self calcDate];
-    
-    [self generateImageView];
-    
-}
-
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
-
-- (void)buttonDidTap:(UIButton *)button
-{
-    //タグを格納
-    NSInteger eventType = button.tag-1;
-//    button.backgroundColor = [UIColor blueColor];
-    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-    [dateFormatter setLocale:[NSLocale currentLocale]];
-    [dateFormatter setDateFormat:@"yyyy/MM/dd"];
-
-    _todayDate.text = [dateFormatter stringFromDate:_selectedWeeks[eventType]];
-    
 }
 
 - (void)calcDate {
     NSDate *date = [NSDate date];
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    NSDateFormatter *showDayFormatter = [[NSDateFormatter alloc] init];
     [dateFormatter setLocale:[NSLocale currentLocale]];
     NSMutableArray *weekDay = [self getThisWeekDays];
     
     _selectedWeeks = [weekDay mutableCopy];
     
-    NSInteger todayweek = [weekDay[7] integerValue];
-
     [dateFormatter setDateFormat:@"yyyy/MM/dd"];
     _todayDate.text = [dateFormatter stringFromDate:date];
     _todayDate.textColor = [UIColor whiteColor];
+    NSString *todayStr = [dateFormatter stringFromDate:date];
     
     NSString *str1 = [dateFormatter stringFromDate:weekDay[0]];
     [dateFormatter setDateFormat:@"MM/dd"];
@@ -107,56 +180,64 @@
     
     _weekLabel7.text = str;
     _weekLabel7.textColor = [UIColor whiteColor];
-    
-    [dateFormatter setDateFormat:@"dd"];
-    [_weekButton0 setTitle:[dateFormatter stringFromDate:weekDay[0]] forState:UIControlStateNormal];
-    if (todayweek == 0) {
+
+    [dateFormatter setDateFormat:@"yyyy/MM/dd"];
+    [showDayFormatter setDateFormat:@"dd"];
+    [_weekButton0 setTitle:[showDayFormatter stringFromDate:weekDay[0]] forState:UIControlStateNormal];
+    if ([todayStr isEqualToString:[dateFormatter stringFromDate:weekDay[0]]]) {
         [_weekButton0.titleLabel setFont:[UIFont boldSystemFontOfSize:17]];
     } else {
         [_weekButton0.titleLabel setFont:[UIFont systemFontOfSize:17]];
     }
+    [_weekButton0 setBackgroundColor:[UIColor whiteColor]];
     
-    [_weekButton1 setTitle:[dateFormatter stringFromDate:weekDay[1]] forState:UIControlStateNormal];
-    if (todayweek == 1) {
+    [_weekButton1 setTitle:[showDayFormatter stringFromDate:weekDay[1]] forState:UIControlStateNormal];
+    if ([todayStr isEqualToString:[dateFormatter stringFromDate:weekDay[1]]]) {
         [_weekButton1.titleLabel setFont:[UIFont boldSystemFontOfSize:17]];
     } else {
         [_weekButton1.titleLabel setFont:[UIFont systemFontOfSize:17]];
     }
+    [_weekButton1 setBackgroundColor:[UIColor whiteColor]];
     
-    [_weekButton2 setTitle:[dateFormatter stringFromDate:weekDay[2]] forState:UIControlStateNormal];
-    if (todayweek == 2) {
+    [_weekButton2 setTitle:[showDayFormatter stringFromDate:weekDay[2]] forState:UIControlStateNormal];
+    if ([todayStr isEqualToString:[dateFormatter stringFromDate:weekDay[2]]]) {
         [_weekButton2.titleLabel setFont:[UIFont boldSystemFontOfSize:17]];
     } else {
         [_weekButton2.titleLabel setFont:[UIFont systemFontOfSize:17]];
     }
+    [_weekButton2 setBackgroundColor:[UIColor whiteColor]];
     
-    [_weekButton3 setTitle:[dateFormatter stringFromDate:weekDay[3]] forState:UIControlStateNormal];
-    if (todayweek == 3) {
+    [_weekButton3 setTitle:[showDayFormatter stringFromDate:weekDay[3]] forState:UIControlStateNormal];
+    if ([todayStr isEqualToString:[dateFormatter stringFromDate:weekDay[3]]]) {
         [_weekButton3.titleLabel setFont:[UIFont boldSystemFontOfSize:17]];
     } else {
         [_weekButton3.titleLabel setFont:[UIFont systemFontOfSize:17]];
     }
+    [_weekButton3 setBackgroundColor:[UIColor whiteColor]];
     
-    [_weekButton4 setTitle:[dateFormatter stringFromDate:weekDay[4]] forState:UIControlStateNormal];
-    if (todayweek == 4) {
+    [_weekButton4 setTitle:[showDayFormatter stringFromDate:weekDay[4]] forState:UIControlStateNormal];
+    if ([todayStr isEqualToString:[dateFormatter stringFromDate:weekDay[4]]]) {
         [_weekButton4.titleLabel setFont:[UIFont boldSystemFontOfSize:17]];
     } else {
         [_weekButton4.titleLabel setFont:[UIFont systemFontOfSize:17]];
     }
+    [_weekButton4 setBackgroundColor:[UIColor whiteColor]];
     
-    [_weekButton5 setTitle:[dateFormatter stringFromDate:weekDay[5]] forState:UIControlStateNormal];
-    if (todayweek == 5) {
+    [_weekButton5 setTitle:[showDayFormatter stringFromDate:weekDay[5]] forState:UIControlStateNormal];
+    if ([todayStr isEqualToString:[dateFormatter stringFromDate:weekDay[5]]]) {
         [_weekButton5.titleLabel setFont:[UIFont boldSystemFontOfSize:17]];
     } else {
         [_weekButton5.titleLabel setFont:[UIFont systemFontOfSize:17]];
     }
+    [_weekButton5 setBackgroundColor:[UIColor whiteColor]];
     
-    [_weekButton6 setTitle:[dateFormatter stringFromDate:weekDay[6]] forState:UIControlStateNormal];
-    if (todayweek == 6) {
+    [_weekButton6 setTitle:[showDayFormatter stringFromDate:weekDay[6]] forState:UIControlStateNormal];
+    if ([todayStr isEqualToString:[dateFormatter stringFromDate:weekDay[6]]]) {
         [_weekButton6.titleLabel setFont:[UIFont boldSystemFontOfSize:17]];
     } else {
         [_weekButton6.titleLabel setFont:[UIFont systemFontOfSize:17]];
     }
+    [_weekButton6 setBackgroundColor:[UIColor whiteColor]];
     
 }
 
