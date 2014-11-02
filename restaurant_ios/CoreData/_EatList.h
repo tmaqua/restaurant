@@ -5,19 +5,17 @@
 
 
 extern const struct EatListAttributes {
-	__unsafe_unretained NSString *created_at;
-	__unsafe_unretained NSString *deleted_at;
-	__unsafe_unretained NSString *food_id;
+	__unsafe_unretained NSString *ate_at;
 } EatListAttributes;
 
 extern const struct EatListRelationships {
+	__unsafe_unretained NSString *food;
 } EatListRelationships;
 
 extern const struct EatListFetchedProperties {
 } EatListFetchedProperties;
 
-
-
+@class Food;
 
 
 
@@ -34,44 +32,23 @@ extern const struct EatListFetchedProperties {
 
 
 
-@property (nonatomic, strong) NSNumber* created_at;
+@property (nonatomic, strong) NSNumber* ate_at;
 
 
 
-@property int16_t created_atValue;
-- (int16_t)created_atValue;
-- (void)setCreated_atValue:(int16_t)value_;
+@property int32_t ate_atValue;
+- (int32_t)ate_atValue;
+- (void)setAte_atValue:(int32_t)value_;
 
-//- (BOOL)validateCreated_at:(id*)value_ error:(NSError**)error_;
-
-
-
-
-
-@property (nonatomic, strong) NSNumber* deleted_at;
-
-
-
-@property int16_t deleted_atValue;
-- (int16_t)deleted_atValue;
-- (void)setDeleted_atValue:(int16_t)value_;
-
-//- (BOOL)validateDeleted_at:(id*)value_ error:(NSError**)error_;
+//- (BOOL)validateAte_at:(id*)value_ error:(NSError**)error_;
 
 
 
 
 
-@property (nonatomic, strong) NSNumber* food_id;
+@property (nonatomic, strong) NSSet *food;
 
-
-
-@property int16_t food_idValue;
-- (int16_t)food_idValue;
-- (void)setFood_idValue:(int16_t)value_;
-
-//- (BOOL)validateFood_id:(id*)value_ error:(NSError**)error_;
-
+- (NSMutableSet*)foodSet;
 
 
 
@@ -81,36 +58,28 @@ extern const struct EatListFetchedProperties {
 
 @interface _EatList (CoreDataGeneratedAccessors)
 
+- (void)addFood:(NSSet*)value_;
+- (void)removeFood:(NSSet*)value_;
+- (void)addFoodObject:(Food*)value_;
+- (void)removeFoodObject:(Food*)value_;
+
 @end
 
 @interface _EatList (CoreDataGeneratedPrimitiveAccessors)
 
 
-- (NSNumber*)primitiveCreated_at;
-- (void)setPrimitiveCreated_at:(NSNumber*)value;
+- (NSNumber*)primitiveAte_at;
+- (void)setPrimitiveAte_at:(NSNumber*)value;
 
-- (int16_t)primitiveCreated_atValue;
-- (void)setPrimitiveCreated_atValue:(int16_t)value_;
-
-
-
-
-- (NSNumber*)primitiveDeleted_at;
-- (void)setPrimitiveDeleted_at:(NSNumber*)value;
-
-- (int16_t)primitiveDeleted_atValue;
-- (void)setPrimitiveDeleted_atValue:(int16_t)value_;
+- (int32_t)primitiveAte_atValue;
+- (void)setPrimitiveAte_atValue:(int32_t)value_;
 
 
 
 
-- (NSNumber*)primitiveFood_id;
-- (void)setPrimitiveFood_id:(NSNumber*)value;
 
-- (int16_t)primitiveFood_idValue;
-- (void)setPrimitiveFood_idValue:(int16_t)value_;
-
-
+- (NSMutableSet*)primitiveFood;
+- (void)setPrimitiveFood:(NSMutableSet*)value;
 
 
 @end

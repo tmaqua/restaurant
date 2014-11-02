@@ -4,12 +4,11 @@
 #import "_EatList.h"
 
 const struct EatListAttributes EatListAttributes = {
-	.created_at = @"created_at",
-	.deleted_at = @"deleted_at",
-	.food_id = @"food_id",
+	.ate_at = @"ate_at",
 };
 
 const struct EatListRelationships EatListRelationships = {
+	.food = @"food",
 };
 
 const struct EatListFetchedProperties EatListFetchedProperties = {
@@ -41,18 +40,8 @@ const struct EatListFetchedProperties EatListFetchedProperties = {
 + (NSSet*)keyPathsForValuesAffectingValueForKey:(NSString*)key {
 	NSSet *keyPaths = [super keyPathsForValuesAffectingValueForKey:key];
 	
-	if ([key isEqualToString:@"created_atValue"]) {
-		NSSet *affectingKey = [NSSet setWithObject:@"created_at"];
-		keyPaths = [keyPaths setByAddingObjectsFromSet:affectingKey];
-		return keyPaths;
-	}
-	if ([key isEqualToString:@"deleted_atValue"]) {
-		NSSet *affectingKey = [NSSet setWithObject:@"deleted_at"];
-		keyPaths = [keyPaths setByAddingObjectsFromSet:affectingKey];
-		return keyPaths;
-	}
-	if ([key isEqualToString:@"food_idValue"]) {
-		NSSet *affectingKey = [NSSet setWithObject:@"food_id"];
+	if ([key isEqualToString:@"ate_atValue"]) {
+		NSSet *affectingKey = [NSSet setWithObject:@"ate_at"];
 		keyPaths = [keyPaths setByAddingObjectsFromSet:affectingKey];
 		return keyPaths;
 	}
@@ -63,83 +52,44 @@ const struct EatListFetchedProperties EatListFetchedProperties = {
 
 
 
-@dynamic created_at;
+@dynamic ate_at;
 
 
 
-- (int16_t)created_atValue {
-	NSNumber *result = [self created_at];
-	return [result shortValue];
+- (int32_t)ate_atValue {
+	NSNumber *result = [self ate_at];
+	return [result intValue];
 }
 
-- (void)setCreated_atValue:(int16_t)value_ {
-	[self setCreated_at:[NSNumber numberWithShort:value_]];
+- (void)setAte_atValue:(int32_t)value_ {
+	[self setAte_at:[NSNumber numberWithInt:value_]];
 }
 
-- (int16_t)primitiveCreated_atValue {
-	NSNumber *result = [self primitiveCreated_at];
-	return [result shortValue];
+- (int32_t)primitiveAte_atValue {
+	NSNumber *result = [self primitiveAte_at];
+	return [result intValue];
 }
 
-- (void)setPrimitiveCreated_atValue:(int16_t)value_ {
-	[self setPrimitiveCreated_at:[NSNumber numberWithShort:value_]];
-}
-
-
-
-
-
-@dynamic deleted_at;
-
-
-
-- (int16_t)deleted_atValue {
-	NSNumber *result = [self deleted_at];
-	return [result shortValue];
-}
-
-- (void)setDeleted_atValue:(int16_t)value_ {
-	[self setDeleted_at:[NSNumber numberWithShort:value_]];
-}
-
-- (int16_t)primitiveDeleted_atValue {
-	NSNumber *result = [self primitiveDeleted_at];
-	return [result shortValue];
-}
-
-- (void)setPrimitiveDeleted_atValue:(int16_t)value_ {
-	[self setPrimitiveDeleted_at:[NSNumber numberWithShort:value_]];
+- (void)setPrimitiveAte_atValue:(int32_t)value_ {
+	[self setPrimitiveAte_at:[NSNumber numberWithInt:value_]];
 }
 
 
 
 
 
-@dynamic food_id;
+@dynamic food;
 
-
-
-- (int16_t)food_idValue {
-	NSNumber *result = [self food_id];
-	return [result shortValue];
+	
+- (NSMutableSet*)foodSet {
+	[self willAccessValueForKey:@"food"];
+  
+	NSMutableSet *result = (NSMutableSet*)[self mutableSetValueForKey:@"food"];
+  
+	[self didAccessValueForKey:@"food"];
+	return result;
 }
-
-- (void)setFood_idValue:(int16_t)value_ {
-	[self setFood_id:[NSNumber numberWithShort:value_]];
-}
-
-- (int16_t)primitiveFood_idValue {
-	NSNumber *result = [self primitiveFood_id];
-	return [result shortValue];
-}
-
-- (void)setPrimitiveFood_idValue:(int16_t)value_ {
-	[self setPrimitiveFood_id:[NSNumber numberWithShort:value_]];
-}
-
-
-
-
+	
 
 
 

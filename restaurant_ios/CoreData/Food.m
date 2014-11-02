@@ -1,14 +1,14 @@
-#import "EatList.h"
+#import "Food.h"
 
 
-@interface EatList ()
+@interface Food ()
 
 // Private interface goes here.
 
 @end
 
 
-@implementation EatList
+@implementation Food
 
 // Custom logic goes here.
 

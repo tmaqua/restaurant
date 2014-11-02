@@ -86,6 +86,9 @@
                                 <state key="normal" title="確定">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <action selector="saveButton:" destination="CZ4-MO-1fc" eventType="touchUpInside" id="3HX-6f-MvS"/>
+                                </connections>
                             </button>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="合計" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="m0i-ko-lDA">
                                 <rect key="frame" x="16" y="481" width="34" height="21"/>
@@ -164,7 +167,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6qN-DP-I2c" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1353" y="-138"/>
+            <point key="canvasLocation" x="1171" y="-138"/>
         </scene>
         <!--eat-->
         <scene sceneID="p6s-yo-llF">
@@ -221,21 +224,17 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rDC-Dg-EyQ">
+                            <button opaque="NO" tag="20" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rDC-Dg-EyQ">
                                 <rect key="frame" x="268" y="289" width="32" height="32"/>
-                                <color key="backgroundColor" red="0.4653719133" green="1" blue="0.30183786159999998" alpha="1" colorSpace="calibratedRGB"/>
-                                <state key="normal" title="B">
+                                <state key="normal">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4cQ-ST-rMK">
+                            <button opaque="NO" tag="10" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4cQ-ST-rMK">
                                 <rect key="frame" x="268" y="169" width="32" height="32"/>
                                 <state key="normal">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
-                                <connections>
-                                    <segue destination="LYC-77-dmh" kind="push" id="9PS-R3-SfZ"/>
-                                </connections>
                             </button>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="QqL-Po-0Xk">
                                 <rect key="frame" x="107" y="275" width="60" height="60"/>
@@ -339,7 +338,8 @@
                     <connections>
                         <outlet property="dateUnderBar1" destination="Jmg-ly-wD5" id="bEi-ec-4O7"/>
                         <outlet property="dateUnderBar2" destination="jEK-bZ-R4T" id="5HD-vg-6ZC"/>
-                        <outlet property="listButton" destination="4cQ-ST-rMK" id="YaA-8w-369"/>
+                        <outlet property="listDayButton" destination="4cQ-ST-rMK" id="g0T-Hl-UGJ"/>
+                        <outlet property="listWeekButton" destination="rDC-Dg-EyQ" id="z65-dE-z03"/>
                         <outlet property="todayDate" destination="v9v-tb-MKn" id="R3g-4c-PpC"/>
                         <outlet property="todayPrice" destination="2sV-dp-50j" id="agA-g0-oY3"/>
                         <outlet property="weekButton0" destination="XZU-Dl-rdH" id="K94-YY-hrK"/>
@@ -352,6 +352,7 @@
                         <outlet property="weekLabel7" destination="aSl-gU-Bpq" id="7Cz-aG-kEP"/>
                         <outlet property="weekPrice" destination="ixQ-uw-mev" id="HiS-pP-N4A"/>
                         <segue destination="cI2-rQ-yc0" kind="push" identifier="toDetailSegue" id="fRQ-ia-2iH"/>
+                        <segue destination="LYC-77-dmh" kind="push" identifier="toEatenListSegue" id="Igg-4y-LQj"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3qq-4t-Ow8" sceneMemberID="firstResponder"/>
@@ -385,7 +386,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fS7-Ry-kz2" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1353" y="549"/>
+            <point key="canvasLocation" x="1171" y="549"/>
         </scene>
         <!--other-->
         <scene sceneID="WPk-Yc-Sjr">

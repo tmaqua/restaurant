@@ -7,24 +7,13 @@
 //
 
 #import "EatenFoodViewController.h"
-#import "TableViewConst.h"
-#import "CustomTableViewCell.h"
-#import "Menu.h"
+
 
 @interface EatenFoodViewController ()<UITableViewDelegate, UITableViewDataSource>
 
 @end
 
 @implementation EatenFoodViewController
-
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
-{
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
-        // Custom initialization
-    }
-    return self;
-}
 
 - (void)viewDidLoad
 {
@@ -33,16 +22,12 @@
     _foodTable.delegate = self;
     _foodTable.dataSource = self;
     
-    UINib *nib = [UINib nibWithNibName:TableViewCustomCellIdentifier bundle:nil];
-    [_foodTable registerNib:nib forCellReuseIdentifier:@"Cell"];
-    [self.searchDisplayController.searchResultsTableView registerNib:nib forCellReuseIdentifier:@"Cell"];
+    // navbar change color
+    self.navigationController.navigationBar.barTintColor = [UIColor colorWithRed:1.00 green:0.66 blue:0.27 alpha:1.0];
     
-    _eatenFoods = [NSArray arrayWithObjects:
-                  [Menu initMenu:0 title:@"title0" type:@"type0" price:100 isSoldout:YES isSelect:YES],
-                  [Menu initMenu:1 title:@"title1" type:@"type1" price:200 isSoldout:YES isSelect:NO],
-                  [Menu initMenu:2 title:@"title2" type:@"type2" price:300 isSoldout:NO isSelect:YES],
-                  [Menu initMenu:3 title:@"title3" type:@"type3" price:400 isSoldout:NO isSelect:NO],
-                  nil];
+    UINib *nib = [UINib nibWithNibName:@"MenuTableCell" bundle:nil];
+    [_foodTable registerNib:nib forCellReuseIdentifier:@"Cell"];
+//    [self.searchDisplayController.searchResultsTableView registerNib:nib forCellReuseIdentifier:@"Cell"];
     
     [_foodTable reloadData];
 }
@@ -61,23 +46,6 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     static NSString *CellIdentifier = @"Cell";
     CustomTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-    
-    Menu *menu = nil;
-    menu = [_eatenFoods objectAtIndex:indexPath.row];
-    
-    cell.menuTitle.text = menu.title;
-    
-    // get picture
-    UIImage *srcImage = [UIImage imageNamed:@"image.jpg"];
-    [cell.menuImageButton setBackgroundImage:srcImage forState:UIControlStateNormal];
-    [cell.menuImageButton addTarget:self action:@selector(transToDetail:event:) forControlEvents:UIControlEventTouchUpInside];
-    
-    cell.menuType.text = menu.type;
-    cell.menuType.backgroundColor = [UIColor blueColor];
-    cell.menuType.textColor = [UIColor whiteColor];
-    cell.menuType.layer.cornerRadius = 6;
-    
-    cell.menuPrice.text = [NSString stringWithFormat:@"%ld", (long)menu.price];
     
     return cell;
 }

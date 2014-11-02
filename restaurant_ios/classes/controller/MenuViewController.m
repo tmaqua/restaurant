@@ -7,7 +7,6 @@
 //
 
 #import "MenuViewController.h"
-#import "TableViewConst.h"
 #import "CustomTableViewCell.h"
 #import "GPUImage.h"
 #import "Menu.h"
@@ -19,31 +18,21 @@
 
 @implementation MenuViewController
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
-{
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
-        // Custom initialization
-    }
-    return self;
-}
-
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
     // navbar change color
-    [UINavigationBar appearance].barTintColor = [UIColor colorWithRed:1.00 green:0.66 blue:0.27 alpha:1.0];
+    self.navigationController.navigationBar.barTintColor = [UIColor colorWithRed:1.00 green:0.66 blue:0.27 alpha:1.0];
     
     [self initHeaderButton];
     
     _menuTable.delegate = self;
     _menuTable.dataSource = self;
     
-    UINib *nib = [UINib nibWithNibName:TableViewCustomCellIdentifier bundle:nil];
+    UINib *nib = [UINib nibWithNibName:@"MenuTableCell" bundle:nil];
     [_menuTable registerNib:nib forCellReuseIdentifier:@"Cell"];
-    [self.searchDisplayController.searchResultsTableView registerNib:nib forCellReuseIdentifier:@"Cell"];
     
     _srcArray = [NSArray arrayWithObjects:
                   [Menu initMenu:0 title:@"title0" type:@"type0" price:100 isSoldout:YES isSelect:NO],
@@ -61,49 +50,42 @@
     _menuArray = _srcArray;
     
     [self reloadViewAll];
-//    [_menuTable reloadData];
 }
 
 - (void)initHeaderButton {
     // shopping button
     [_shoppingButton setBackgroundImage:[UIImage imageNamed:@"shoppingcart128.png"] forState:UIControlStateNormal];
     [_shoppingButton setBackgroundColor:[UIColor whiteColor]];
-//    _shoppingButton.layer.cornerRadius = 3.0;
     _shoppingButton.tag = 6;
     [_shoppingButton addTarget:self action:@selector(selectCategory:) forControlEvents:UIControlEventTouchUpInside];
     
     // all button
     // FFA846
     [_allButton setBackgroundColor:[UIColor colorWithRed:1.0 green:0.659 blue:0.275 alpha:1.0]];
-//    _allButton.layer.cornerRadius = 3.0;
     _allButton.tag = 1;
     [_allButton addTarget:self action:@selector(selectCategory:) forControlEvents:UIControlEventTouchUpInside];
     
     // don button
     // DB766F
     [_donButton setBackgroundColor:[UIColor colorWithRed:0.859 green:0.463 blue:0.435 alpha:1.0]];
-//    _donButton.layer.cornerRadius = 3.0;
     _donButton.tag = 2;
     [_donButton addTarget:self action:@selector(selectCategory:) forControlEvents:UIControlEventTouchUpInside];
     
     // maindish button
     // A8E06E
     [_maindishButton setBackgroundColor:[UIColor colorWithRed:0.659 green:0.878 blue:0.431 alpha:1.0]];
-//    _maindishButton.layer.cornerRadius = 3.0;
     _maindishButton.tag = 3;
     [_maindishButton addTarget:self action:@selector(selectCategory:) forControlEvents:UIControlEventTouchUpInside];
     
     // sidedish button
     // DB766F
     [_sidedishButton setBackgroundColor:[UIColor colorWithRed:0.859 green:0.463 blue:0.435 alpha:1.0]];
-//    _sidedishButton.layer.cornerRadius = 3.0;
     _sidedishButton.tag = 4;
     [_sidedishButton addTarget:self action:@selector(selectCategory:) forControlEvents:UIControlEventTouchUpInside];
     
     // other button
     // 6E7EDB
     [_otherButton setBackgroundColor:[UIColor colorWithRed:0.431 green:0.494 blue:0.859 alpha:1.0]];
-//    _otherButton.layer.cornerRadius = 3.0;
     _otherButton.tag = 5;
     [_otherButton addTarget:self action:@selector(selectCategory:) forControlEvents:UIControlEventTouchUpInside];
 }
@@ -123,11 +105,12 @@
     static NSString *CellIdentifier = @"Cell";
     CustomTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     
-    Menu *menu = nil;
-    menu = [_menuArray objectAtIndex:indexPath.row];
+    Menu *menu = [_menuArray objectAtIndex:indexPath.row];
+    
+    // set menu title
     cell.menuTitle.text = menu.title;
     
-    // get picture
+    // set menu picture
     UIImage *srcImage = [UIImage imageNamed:@"image.jpg"];
     
     if (menu.isSoldout) {
@@ -137,21 +120,20 @@
     }else {
         [cell.menuImageButton setBackgroundImage:srcImage forState:UIControlStateNormal];
     }
-    
     [cell.menuImageButton addTarget:self action:@selector(transToDetail:event:) forControlEvents:UIControlEventTouchUpInside];
     
+    // set menu type
     cell.menuType.text = menu.type;
     cell.menuType.backgroundColor = [UIColor blueColor];
     cell.menuType.textColor = [UIColor whiteColor];
     cell.menuType.layer.cornerRadius = 6;
     
+    // set menu price
     NSString *price = [NSString stringWithFormat:@"%ld", (long)menu.price];
     cell.menuPrice.text = [NSString stringWithFormat:@"%@%@",@"￥",price];
     
     [cell.menuSelectButton addTarget:self action:@selector(selectMenuItem:event:) forControlEvents:UIControlEventTouchUpInside];
-    
 
-    
     if (menu.isSelect) {
         [cell.menuSelectButton setBackgroundImage:[UIImage imageNamed:@"minus.png"] forState:UIControlStateNormal];
     } else {
@@ -213,9 +195,7 @@
 
 - (void)selectMenuItem:(UIButton *)sender event:(UIEvent *)event {
     NSIndexPath *indexPath = [self indexPathForControlEvent:event];
-    Menu *menu = nil;
-    menu = [_menuArray objectAtIndex:indexPath.row];
-    
+    Menu *menu = [_menuArray objectAtIndex:indexPath.row];
     menu.isSelect = !menu.isSelect;
     
     [self reloadViewAll];
@@ -272,5 +252,9 @@
 }
 
 
-
+- (IBAction)saveButton:(id)sender {
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"isSelect = YES"];
+    NSArray *selectedArray = [_menuArray filteredArrayUsingPredicate:predicate];
+    NSLog(@"%@", selectedArray);
+}
 @end

@@ -9,6 +9,10 @@
 /* Begin PBXBuildFile section */
 		2E169E1A19FF79FA0048FA88 /* selected.png in Resources */ = {isa = PBXBuildFile; fileRef = 2E169E1919FF79FA0048FA88 /* selected.png */; };
 		2E169E1C19FF7B950048FA88 /* nonselect.png in Resources */ = {isa = PBXBuildFile; fileRef = 2E169E1B19FF7B950048FA88 /* nonselect.png */; };
+		2E646D3E1A05F4E100D9CBE9 /* _EatList.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E646D3B1A05F4E100D9CBE9 /* _EatList.m */; };
+		2E646D3F1A05F4E100D9CBE9 /* EatList.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E646D3D1A05F4E100D9CBE9 /* EatList.m */; };
+		2E646D451A05F4F500D9CBE9 /* _Food.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E646D421A05F4F500D9CBE9 /* _Food.m */; };
+		2E646D461A05F4F500D9CBE9 /* Food.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E646D441A05F4F500D9CBE9 /* Food.m */; };
 		2E72B47B19FA5918001A0DE3 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E72B47A19FA5918001A0DE3 /* main.m */; };
 		2E72B47E19FA5918001A0DE3 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E72B47D19FA5918001A0DE3 /* AppDelegate.m */; };
 		2E72B48119FA5918001A0DE3 /* restaurant_ios.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 2E72B47F19FA5918001A0DE3 /* restaurant_ios.xcdatamodeld */; };
@@ -30,8 +34,6 @@
 		2E72B4F819FA59D7001A0DE3 /* minus.png in Resources */ = {isa = PBXBuildFile; fileRef = 2E72B4E919FA59D7001A0DE3 /* minus.png */; };
 		2E72B4F919FA59D7001A0DE3 /* plus.png in Resources */ = {isa = PBXBuildFile; fileRef = 2E72B4EA19FA59D7001A0DE3 /* plus.png */; };
 		2E72B4FA19FA59D7001A0DE3 /* shoppingcart128.png in Resources */ = {isa = PBXBuildFile; fileRef = 2E72B4EB19FA59D7001A0DE3 /* shoppingcart128.png */; };
-		2EC6832E19FFE46300CDCFE8 /* _EatList.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EC6832B19FFE46300CDCFE8 /* _EatList.m */; };
-		2EC6832F19FFE46300CDCFE8 /* EatList.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EC6832D19FFE46300CDCFE8 /* EatList.m */; };
 		41BF5B982A124FC0CD710039 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 33F1BAED38403A5C1E000737 /* libPods.a */; };
 /* End PBXBuildFile section */
 
@@ -48,6 +50,14 @@
 /* Begin PBXFileReference section */
 		2E169E1919FF79FA0048FA88 /* selected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = selected.png; sourceTree = "<group>"; };
 		2E169E1B19FF7B950048FA88 /* nonselect.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = nonselect.png; sourceTree = "<group>"; };
+		2E646D3A1A05F4E100D9CBE9 /* _EatList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = _EatList.h; path = restaurant_ios/CoreData/_EatList.h; sourceTree = SOURCE_ROOT; };
+		2E646D3B1A05F4E100D9CBE9 /* _EatList.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = _EatList.m; path = restaurant_ios/CoreData/_EatList.m; sourceTree = SOURCE_ROOT; };
+		2E646D3C1A05F4E100D9CBE9 /* EatList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EatList.h; path = restaurant_ios/CoreData/EatList.h; sourceTree = SOURCE_ROOT; };
+		2E646D3D1A05F4E100D9CBE9 /* EatList.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EatList.m; path = restaurant_ios/CoreData/EatList.m; sourceTree = SOURCE_ROOT; };
+		2E646D411A05F4F500D9CBE9 /* _Food.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = _Food.h; path = restaurant_ios/CoreData/_Food.h; sourceTree = SOURCE_ROOT; };
+		2E646D421A05F4F500D9CBE9 /* _Food.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = _Food.m; path = restaurant_ios/CoreData/_Food.m; sourceTree = SOURCE_ROOT; };
+		2E646D431A05F4F500D9CBE9 /* Food.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Food.h; path = restaurant_ios/CoreData/Food.h; sourceTree = SOURCE_ROOT; };
+		2E646D441A05F4F500D9CBE9 /* Food.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Food.m; path = restaurant_ios/CoreData/Food.m; sourceTree = SOURCE_ROOT; };
 		2E72B47519FA5918001A0DE3 /* restaurant_ios.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = restaurant_ios.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2E72B47919FA5918001A0DE3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2E72B47A19FA5918001A0DE3 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -77,16 +87,11 @@
 		2E72B4E119FA59D7001A0DE3 /* Menu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Menu.h; sourceTree = "<group>"; };
 		2E72B4E219FA59D7001A0DE3 /* Menu.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Menu.m; sourceTree = "<group>"; };
 		2E72B4E419FA59D7001A0DE3 /* MenuTableCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MenuTableCell.xib; sourceTree = "<group>"; };
-		2E72B4E519FA59D7001A0DE3 /* TableViewConst.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TableViewConst.h; sourceTree = "<group>"; };
 		2E72B4E719FA59D7001A0DE3 /* image.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = image.jpg; sourceTree = "<group>"; };
 		2E72B4E819FA59D7001A0DE3 /* list.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = list.png; sourceTree = "<group>"; };
 		2E72B4E919FA59D7001A0DE3 /* minus.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = minus.png; sourceTree = "<group>"; };
 		2E72B4EA19FA59D7001A0DE3 /* plus.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = plus.png; sourceTree = "<group>"; };
 		2E72B4EB19FA59D7001A0DE3 /* shoppingcart128.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = shoppingcart128.png; sourceTree = "<group>"; };
-		2EC6832A19FFE46300CDCFE8 /* _EatList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = _EatList.h; path = restaurant_ios/CoreData/_EatList.h; sourceTree = SOURCE_ROOT; };
-		2EC6832B19FFE46300CDCFE8 /* _EatList.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = _EatList.m; path = restaurant_ios/CoreData/_EatList.m; sourceTree = SOURCE_ROOT; };
-		2EC6832C19FFE46300CDCFE8 /* EatList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EatList.h; path = restaurant_ios/CoreData/EatList.h; sourceTree = SOURCE_ROOT; };
-		2EC6832D19FFE46300CDCFE8 /* EatList.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EatList.m; path = restaurant_ios/CoreData/EatList.m; sourceTree = SOURCE_ROOT; };
 		33F1BAED38403A5C1E000737 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		845566288663813A65F48980 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		8F4C5E43EA477457433FADAB /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
@@ -111,6 +116,59 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		2E31AFD91A057BC000E580F0 /* menu view */ = {
+			isa = PBXGroup;
+			children = (
+				2E72B4D819FA59D7001A0DE3 /* MenuViewController.h */,
+				2E72B4D919FA59D7001A0DE3 /* MenuViewController.m */,
+			);
+			name = "menu view";
+			sourceTree = "<group>";
+		};
+		2E31AFDA1A057BEE00E580F0 /* eat list view */ = {
+			isa = PBXGroup;
+			children = (
+				2E72B4D419FA59D7001A0DE3 /* EatenFoodViewController.h */,
+				2E72B4D519FA59D7001A0DE3 /* EatenFoodViewController.m */,
+				2E72B4D619FA59D7001A0DE3 /* EatListViewController.h */,
+				2E72B4D719FA59D7001A0DE3 /* EatListViewController.m */,
+			);
+			name = "eat list view";
+			sourceTree = "<group>";
+		};
+		2E31AFDB1A057C3300E580F0 /* other view */ = {
+			isa = PBXGroup;
+			children = (
+				2E72B4DA19FA59D7001A0DE3 /* OtherDetailViewController.h */,
+				2E72B4DB19FA59D7001A0DE3 /* OtherDetailViewController.m */,
+				2E72B4DC19FA59D7001A0DE3 /* OtherViewController.h */,
+				2E72B4DD19FA59D7001A0DE3 /* OtherViewController.m */,
+			);
+			name = "other view";
+			sourceTree = "<group>";
+		};
+		2E646D391A05F4CC00D9CBE9 /* EatList Model */ = {
+			isa = PBXGroup;
+			children = (
+				2E646D3A1A05F4E100D9CBE9 /* _EatList.h */,
+				2E646D3B1A05F4E100D9CBE9 /* _EatList.m */,
+				2E646D3C1A05F4E100D9CBE9 /* EatList.h */,
+				2E646D3D1A05F4E100D9CBE9 /* EatList.m */,
+			);
+			name = "EatList Model";
+			sourceTree = "<group>";
+		};
+		2E646D401A05F4E700D9CBE9 /* Food Model */ = {
+			isa = PBXGroup;
+			children = (
+				2E646D411A05F4F500D9CBE9 /* _Food.h */,
+				2E646D421A05F4F500D9CBE9 /* _Food.m */,
+				2E646D431A05F4F500D9CBE9 /* Food.h */,
+				2E646D441A05F4F500D9CBE9 /* Food.m */,
+			);
+			name = "Food Model";
+			sourceTree = "<group>";
+		};
 		2E72B46C19FA5918001A0DE3 = {
 			isa = PBXGroup;
 			children = (
@@ -138,10 +196,7 @@
 				2E72B4E619FA59D7001A0DE3 /* picture */,
 				2E72B47C19FA5918001A0DE3 /* AppDelegate.h */,
 				2E72B47D19FA5918001A0DE3 /* AppDelegate.m */,
-				2E72B48519FA5918001A0DE3 /* Main.storyboard */,
 				2E72B48819FA5918001A0DE3 /* Images.xcassets */,
-				2E72B48A19FA5918001A0DE3 /* LaunchScreen.xib */,
-				2E72B47F19FA5918001A0DE3 /* restaurant_ios.xcdatamodeld */,
 				2E72B47819FA5918001A0DE3 /* Supporting Files */,
 			);
 			path = restaurant_ios;
@@ -186,20 +241,13 @@
 		2E72B4CF19FA59D7001A0DE3 /* controller */ = {
 			isa = PBXGroup;
 			children = (
+				2E31AFDB1A057C3300E580F0 /* other view */,
+				2E31AFDA1A057BEE00E580F0 /* eat list view */,
+				2E31AFD91A057BC000E580F0 /* menu view */,
 				2E72B4D019FA59D7001A0DE3 /* CustomTableViewCell.h */,
 				2E72B4D119FA59D7001A0DE3 /* CustomTableViewCell.m */,
 				2E72B4D219FA59D7001A0DE3 /* DetailViewController.h */,
 				2E72B4D319FA59D7001A0DE3 /* DetailViewController.m */,
-				2E72B4D419FA59D7001A0DE3 /* EatenFoodViewController.h */,
-				2E72B4D519FA59D7001A0DE3 /* EatenFoodViewController.m */,
-				2E72B4D619FA59D7001A0DE3 /* EatListViewController.h */,
-				2E72B4D719FA59D7001A0DE3 /* EatListViewController.m */,
-				2E72B4D819FA59D7001A0DE3 /* MenuViewController.h */,
-				2E72B4D919FA59D7001A0DE3 /* MenuViewController.m */,
-				2E72B4DA19FA59D7001A0DE3 /* OtherDetailViewController.h */,
-				2E72B4DB19FA59D7001A0DE3 /* OtherDetailViewController.m */,
-				2E72B4DC19FA59D7001A0DE3 /* OtherViewController.h */,
-				2E72B4DD19FA59D7001A0DE3 /* OtherViewController.m */,
 			);
 			path = controller;
 			sourceTree = "<group>";
@@ -207,12 +255,11 @@
 		2E72B4E019FA59D7001A0DE3 /* model */ = {
 			isa = PBXGroup;
 			children = (
+				2E646D401A05F4E700D9CBE9 /* Food Model */,
+				2E646D391A05F4CC00D9CBE9 /* EatList Model */,
+				2E72B47F19FA5918001A0DE3 /* restaurant_ios.xcdatamodeld */,
 				2E72B4E119FA59D7001A0DE3 /* Menu.h */,
 				2E72B4E219FA59D7001A0DE3 /* Menu.m */,
-				2EC6832A19FFE46300CDCFE8 /* _EatList.h */,
-				2EC6832B19FFE46300CDCFE8 /* _EatList.m */,
-				2EC6832C19FFE46300CDCFE8 /* EatList.h */,
-				2EC6832D19FFE46300CDCFE8 /* EatList.m */,
 			);
 			path = model;
 			sourceTree = "<group>";
@@ -221,7 +268,8 @@
 			isa = PBXGroup;
 			children = (
 				2E72B4E419FA59D7001A0DE3 /* MenuTableCell.xib */,
-				2E72B4E519FA59D7001A0DE3 /* TableViewConst.h */,
+				2E72B48519FA5918001A0DE3 /* Main.storyboard */,
+				2E72B48A19FA5918001A0DE3 /* LaunchScreen.xib */,
 			);
 			path = view;
 			sourceTree = "<group>";
@@ -400,18 +448,20 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2E646D461A05F4F500D9CBE9 /* Food.m in Sources */,
 				2E72B4F119FA59D7001A0DE3 /* OtherDetailViewController.m in Sources */,
 				2E72B4F219FA59D7001A0DE3 /* OtherViewController.m in Sources */,
-				2EC6832F19FFE46300CDCFE8 /* EatList.m in Sources */,
+				2E646D3F1A05F4E100D9CBE9 /* EatList.m in Sources */,
 				2E72B4F419FA59D7001A0DE3 /* Menu.m in Sources */,
 				2E72B4EE19FA59D7001A0DE3 /* EatenFoodViewController.m in Sources */,
 				2E72B4ED19FA59D7001A0DE3 /* DetailViewController.m in Sources */,
 				2E72B47E19FA5918001A0DE3 /* AppDelegate.m in Sources */,
+				2E646D451A05F4F500D9CBE9 /* _Food.m in Sources */,
 				2E72B4F019FA59D7001A0DE3 /* MenuViewController.m in Sources */,
 				2E72B48119FA5918001A0DE3 /* restaurant_ios.xcdatamodeld in Sources */,
 				2E72B4EC19FA59D7001A0DE3 /* CustomTableViewCell.m in Sources */,
 				2E72B47B19FA5918001A0DE3 /* main.m in Sources */,
-				2EC6832E19FFE46300CDCFE8 /* _EatList.m in Sources */,
+				2E646D3E1A05F4E100D9CBE9 /* _EatList.m in Sources */,
 				2E72B4EF19FA59D7001A0DE3 /* EatListViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -441,6 +491,7 @@
 				2E72B48619FA5918001A0DE3 /* Base */,
 			);
 			name = Main.storyboard;
+			path = ../..;
 			sourceTree = "<group>";
 		};
 		2E72B48A19FA5918001A0DE3 /* LaunchScreen.xib */ = {
@@ -449,6 +500,7 @@
 				2E72B48B19FA5918001A0DE3 /* Base */,
 			);
 			name = LaunchScreen.xib;
+			path = ../..;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -627,7 +679,8 @@
 				2E72B48019FA5918001A0DE3 /* restaurant_ios.xcdatamodel */,
 			);
 			currentVersion = 2E72B48019FA5918001A0DE3 /* restaurant_ios.xcdatamodel */;
-			path = restaurant_ios.xcdatamodeld;
+			name = restaurant_ios.xcdatamodeld;
+			path = ../../restaurant_ios.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;
 		};

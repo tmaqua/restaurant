@@ -21,8 +21,9 @@
 @property (weak, nonatomic) IBOutlet UIButton *otherButton;
 
 @property (weak, nonatomic) IBOutlet UILabel *sumPriceLabel;
-@property (nonatomic) NSInteger selectedMenu;
+- (IBAction)saveButton:(id)sender;
 
+@property (nonatomic) NSInteger selectedMenu;
 @property (nonatomic) NSArray *menuArray;
 @property (nonatomic) NSArray *srcArray;
 

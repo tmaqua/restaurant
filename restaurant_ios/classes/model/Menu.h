@@ -18,8 +18,8 @@
 }
 
 @property (nonatomic) NSInteger id;
-@property (nonatomic, copy) NSString *title;
-@property (nonatomic, copy) NSString *type;
+@property (nonatomic) NSString *title;
+@property (nonatomic) NSString *type;
 @property (nonatomic) NSInteger price;
 @property (nonatomic) BOOL isSoldout;
 @property (nonatomic) BOOL isSelect;

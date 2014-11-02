@@ -10,5 +10,6 @@
 
 @interface OtherViewController : UIViewController
 @property (weak, nonatomic) IBOutlet UITableView *otherTable;
+@property (nonatomic) NSMutableArray *dataArray;
 
 @end

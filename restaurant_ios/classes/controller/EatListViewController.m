@@ -14,24 +14,22 @@
 
 @implementation EatListViewController
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
-{
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
-        // Custom initialization
-    }
-    return self;
-}
-
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    // navbar change color
+    self.navigationController.navigationBar.barTintColor = [UIColor colorWithRed:1.00 green:0.66 blue:0.27 alpha:1.0];
     
     _weekSelectNum = 0;
     _selectedImage = [UIImage imageNamed:@"selected.png"];
     _nonselectImage = [UIImage imageNamed:@"nonselect.png"];
     
-    [_listButton setBackgroundImage:[UIImage imageNamed:@"list.png"] forState:UIControlStateNormal];
+    [_listDayButton setBackgroundImage:[UIImage imageNamed:@"list.png"] forState:UIControlStateNormal];
+    [_listDayButton addTarget:self action:@selector(ListButtonTap:) forControlEvents:UIControlEventTouchUpInside];
+    [_listWeekButton setBackgroundImage:[UIImage imageNamed:@"list.png"] forState:UIControlStateNormal];
+    [_listWeekButton addTarget:self action:@selector(ListButtonTap:) forControlEvents:UIControlEventTouchUpInside];
+    
     _dateUnderBar1.backgroundColor = [UIColor colorWithRed:1.00 green:0.66 blue:0.27 alpha:1.0];
     _dateUnderBar2.backgroundColor = [UIColor colorWithRed:1.00 green:0.66 blue:0.27 alpha:1.0];
     _todayPrice.textColor = [UIColor whiteColor];
@@ -47,6 +45,28 @@
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void)ListButtonTap:(UIButton*)button{
+    NSInteger eventType = button.tag;
+    switch (eventType) {
+        case 10: // serch 1day
+            _eatlists = @[@"day"];
+            break;
+        case 20: // serch 1week
+            _eatlists = @[@"week"];
+            break;
+        default:
+            break;
+    }
+    [self performSegueWithIdentifier:@"toEatenListSegue" sender:self];
+}
+
+- (void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
+    if ([[segue identifier] isEqualToString:@"toEatenListSegue"]) {
+        EatenFoodViewController *vc = (EatenFoodViewController*)[segue destinationViewController];
+        vc.eatenFoods = _eatlists;
+    }
 }
 
 - (void)buttonDidTap:(UIButton *)button
@@ -246,9 +266,7 @@
     
     NSDate *today = [NSDate date];
     NSCalendar *calendar = [NSCalendar currentCalendar];
-    NSDateComponents *comps = [calendar components:(NSWeekCalendarUnit | NSWeekdayCalendarUnit | NSWeekdayOrdinalCalendarUnit)fromDate:today];
-    
-    
+    NSDateComponents *comps = [calendar components:(NSCalendarUnitWeekOfMonth | NSCalendarUnitWeekday | NSCalendarUnitWeekdayOrdinal)fromDate:today];
     NSDate *tempDate = [today initWithTimeInterval:-1*(comps.weekday-1+_weekSelectNum)*24*60*60 sinceDate:today];
     NSMutableArray *weeks = [NSMutableArray array];
 
@@ -256,9 +274,6 @@
     for (int i = 1; i < 7; i++) {
         [weeks addObject:[tempDate initWithTimeInterval:(i)*24*60*60 sinceDate:tempDate]];
     }
-    
-//    NSLog(@"%@", weeks);
-    
     return weeks;
 }
 
@@ -286,7 +301,7 @@
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event{
     UITouch *touch = [[event allTouches] anyObject];
 //    NSLog(@"%ld", (long)touch.view.tag);
-    if(touch.view.tag >= 1){
+    if(touch.view.tag >= 1 && touch.view.tag < 10){
         [self performSegueWithIdentifier:@"toDetailSegue" sender:self];
     }
 }
