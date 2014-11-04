@@ -7,10 +7,6 @@
 //
 
 #import "MenuViewController.h"
-#import "CustomTableViewCell.h"
-#import "GPUImage.h"
-#import "Menu.h"
-#import "DetailViewController.h"
 
 @interface MenuViewController ()<UITableViewDelegate, UITableViewDataSource>
 
@@ -251,10 +247,31 @@
     }
 }
 
-
 - (IBAction)saveButton:(id)sender {
     NSPredicate *predicate = [NSPredicate predicateWithFormat:@"isSelect = YES"];
     NSArray *selectedArray = [_menuArray filteredArrayUsingPredicate:predicate];
     NSLog(@"%@", selectedArray);
 }
+
+- (void)getDataFromServer {
+    
+    if (![PDUtils isConnectNetwork]) {
+        [PDUtils alertDialog:NOT_CONNECT_NETWORK delegate:self];
+        return;
+    }
+    
+    [ExtendedPDAPIConnection getMessages:10.0f completeBlock:^(NSArray *messages) {
+        _messageArray = messages;
+        MenuList *menus = _messageArray[0];
+        NSLog(@"%@", menus);
+        
+        
+
+    } errorBlock:^(int errorCode, NSString *errorMessage) {
+        
+    } cancelBlock:^{
+        
+    }];
+}
+
 @end

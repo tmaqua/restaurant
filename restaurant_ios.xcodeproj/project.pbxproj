@@ -34,6 +34,12 @@
 		2E72B4F819FA59D7001A0DE3 /* minus.png in Resources */ = {isa = PBXBuildFile; fileRef = 2E72B4E919FA59D7001A0DE3 /* minus.png */; };
 		2E72B4F919FA59D7001A0DE3 /* plus.png in Resources */ = {isa = PBXBuildFile; fileRef = 2E72B4EA19FA59D7001A0DE3 /* plus.png */; };
 		2E72B4FA19FA59D7001A0DE3 /* shoppingcart128.png in Resources */ = {isa = PBXBuildFile; fileRef = 2E72B4EB19FA59D7001A0DE3 /* shoppingcart128.png */; };
+		2EAB54581A07FDAE00FF5AE4 /* PDAPIConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EAB54511A07FDAE00FF5AE4 /* PDAPIConnection.m */; };
+		2EAB54591A07FDAE00FF5AE4 /* PDAsyncURLConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EAB54531A07FDAE00FF5AE4 /* PDAsyncURLConnection.m */; };
+		2EAB545A1A07FDAE00FF5AE4 /* PDUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EAB54551A07FDAE00FF5AE4 /* PDUtils.m */; };
+		2EAB545B1A07FDAE00FF5AE4 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EAB54571A07FDAE00FF5AE4 /* Reachability.m */; };
+		2ECBCC411A09069C00795EDC /* ExtendedPDAPIConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = 2ECBCC401A09069C00795EDC /* ExtendedPDAPIConnection.m */; };
+		2ECBCC441A09080700795EDC /* MenuList.m in Sources */ = {isa = PBXBuildFile; fileRef = 2ECBCC431A09080700795EDC /* MenuList.m */; };
 		41BF5B982A124FC0CD710039 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 33F1BAED38403A5C1E000737 /* libPods.a */; };
 /* End PBXBuildFile section */
 
@@ -92,6 +98,18 @@
 		2E72B4E919FA59D7001A0DE3 /* minus.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = minus.png; sourceTree = "<group>"; };
 		2E72B4EA19FA59D7001A0DE3 /* plus.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = plus.png; sourceTree = "<group>"; };
 		2E72B4EB19FA59D7001A0DE3 /* shoppingcart128.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = shoppingcart128.png; sourceTree = "<group>"; };
+		2EAB54501A07FDAE00FF5AE4 /* PDAPIConnection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PDAPIConnection.h; sourceTree = "<group>"; };
+		2EAB54511A07FDAE00FF5AE4 /* PDAPIConnection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PDAPIConnection.m; sourceTree = "<group>"; };
+		2EAB54521A07FDAE00FF5AE4 /* PDAsyncURLConnection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PDAsyncURLConnection.h; sourceTree = "<group>"; };
+		2EAB54531A07FDAE00FF5AE4 /* PDAsyncURLConnection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PDAsyncURLConnection.m; sourceTree = "<group>"; };
+		2EAB54541A07FDAE00FF5AE4 /* PDUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PDUtils.h; sourceTree = "<group>"; };
+		2EAB54551A07FDAE00FF5AE4 /* PDUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PDUtils.m; sourceTree = "<group>"; };
+		2EAB54561A07FDAE00FF5AE4 /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
+		2EAB54571A07FDAE00FF5AE4 /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
+		2ECBCC3F1A09069C00795EDC /* ExtendedPDAPIConnection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExtendedPDAPIConnection.h; sourceTree = "<group>"; };
+		2ECBCC401A09069C00795EDC /* ExtendedPDAPIConnection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExtendedPDAPIConnection.m; sourceTree = "<group>"; };
+		2ECBCC421A09080700795EDC /* MenuList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MenuList.h; path = ../controller/MenuList.h; sourceTree = "<group>"; };
+		2ECBCC431A09080700795EDC /* MenuList.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MenuList.m; path = ../controller/MenuList.m; sourceTree = "<group>"; };
 		33F1BAED38403A5C1E000737 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		845566288663813A65F48980 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		8F4C5E43EA477457433FADAB /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
@@ -121,6 +139,8 @@
 			children = (
 				2E72B4D819FA59D7001A0DE3 /* MenuViewController.h */,
 				2E72B4D919FA59D7001A0DE3 /* MenuViewController.m */,
+				2ECBCC3F1A09069C00795EDC /* ExtendedPDAPIConnection.h */,
+				2ECBCC401A09069C00795EDC /* ExtendedPDAPIConnection.m */,
 			);
 			name = "menu view";
 			sourceTree = "<group>";
@@ -192,6 +212,7 @@
 		2E72B47719FA5918001A0DE3 /* restaurant_ios */ = {
 			isa = PBXGroup;
 			children = (
+				2EAB544F1A07FDAE00FF5AE4 /* Utility */,
 				2E72B4CE19FA59D7001A0DE3 /* classes */,
 				2E72B4E619FA59D7001A0DE3 /* picture */,
 				2E72B47C19FA5918001A0DE3 /* AppDelegate.h */,
@@ -258,6 +279,8 @@
 				2E646D401A05F4E700D9CBE9 /* Food Model */,
 				2E646D391A05F4CC00D9CBE9 /* EatList Model */,
 				2E72B47F19FA5918001A0DE3 /* restaurant_ios.xcdatamodeld */,
+				2ECBCC421A09080700795EDC /* MenuList.h */,
+				2ECBCC431A09080700795EDC /* MenuList.m */,
 				2E72B4E119FA59D7001A0DE3 /* Menu.h */,
 				2E72B4E219FA59D7001A0DE3 /* Menu.m */,
 			);
@@ -286,6 +309,21 @@
 				2E72B4EB19FA59D7001A0DE3 /* shoppingcart128.png */,
 			);
 			path = picture;
+			sourceTree = "<group>";
+		};
+		2EAB544F1A07FDAE00FF5AE4 /* Utility */ = {
+			isa = PBXGroup;
+			children = (
+				2EAB54501A07FDAE00FF5AE4 /* PDAPIConnection.h */,
+				2EAB54511A07FDAE00FF5AE4 /* PDAPIConnection.m */,
+				2EAB54521A07FDAE00FF5AE4 /* PDAsyncURLConnection.h */,
+				2EAB54531A07FDAE00FF5AE4 /* PDAsyncURLConnection.m */,
+				2EAB54541A07FDAE00FF5AE4 /* PDUtils.h */,
+				2EAB54551A07FDAE00FF5AE4 /* PDUtils.m */,
+				2EAB54561A07FDAE00FF5AE4 /* Reachability.h */,
+				2EAB54571A07FDAE00FF5AE4 /* Reachability.m */,
+			);
+			path = Utility;
 			sourceTree = "<group>";
 		};
 		434C1DE59E1C3DFA0DFFEA9A /* Frameworks */ = {
@@ -449,6 +487,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				2E646D461A05F4F500D9CBE9 /* Food.m in Sources */,
+				2EAB545A1A07FDAE00FF5AE4 /* PDUtils.m in Sources */,
 				2E72B4F119FA59D7001A0DE3 /* OtherDetailViewController.m in Sources */,
 				2E72B4F219FA59D7001A0DE3 /* OtherViewController.m in Sources */,
 				2E646D3F1A05F4E100D9CBE9 /* EatList.m in Sources */,
@@ -457,10 +496,15 @@
 				2E72B4ED19FA59D7001A0DE3 /* DetailViewController.m in Sources */,
 				2E72B47E19FA5918001A0DE3 /* AppDelegate.m in Sources */,
 				2E646D451A05F4F500D9CBE9 /* _Food.m in Sources */,
+				2EAB545B1A07FDAE00FF5AE4 /* Reachability.m in Sources */,
 				2E72B4F019FA59D7001A0DE3 /* MenuViewController.m in Sources */,
+				2ECBCC441A09080700795EDC /* MenuList.m in Sources */,
+				2EAB54581A07FDAE00FF5AE4 /* PDAPIConnection.m in Sources */,
 				2E72B48119FA5918001A0DE3 /* restaurant_ios.xcdatamodeld in Sources */,
 				2E72B4EC19FA59D7001A0DE3 /* CustomTableViewCell.m in Sources */,
+				2ECBCC411A09069C00795EDC /* ExtendedPDAPIConnection.m in Sources */,
 				2E72B47B19FA5918001A0DE3 /* main.m in Sources */,
+				2EAB54591A07FDAE00FF5AE4 /* PDAsyncURLConnection.m in Sources */,
 				2E646D3E1A05F4E100D9CBE9 /* _EatList.m in Sources */,
 				2E72B4EF19FA59D7001A0DE3 /* EatListViewController.m in Sources */,
 			);

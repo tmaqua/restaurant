@@ -7,6 +7,14 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "CustomTableViewCell.h"
+#import "GPUImage.h"
+#import "DetailViewController.h"
+
+#import "PDUtils.h"
+#import "ExtendedPDAPIConnection.h"
+#import "MenuList.h"
+#import "Menu.h"
 
 
 @interface MenuViewController : UIViewController
@@ -26,6 +34,7 @@
 @property (nonatomic) NSInteger selectedMenu;
 @property (nonatomic) NSArray *menuArray;
 @property (nonatomic) NSArray *srcArray;
+@property (nonatomic) NSArray *messageArray;
 
 
 @end
