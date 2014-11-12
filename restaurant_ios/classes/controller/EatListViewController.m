@@ -36,9 +36,60 @@
     _weekPrice.textColor = [UIColor whiteColor];
     
     [self initButton];
-    
     [self generateImageView];
     
+    [_eatListsFromDay removeAllObjects];
+    [_eatListsFromWeek removeAllObjects];
+    
+    NSDate *today = [self getDateSZero:[NSDate date]];
+    int unixtime = [today timeIntervalSince1970];
+    NSLog(@"UNIXTIME: %d", unixtime);
+    
+    [self getEatListsFromDay:[NSNumber numberWithInt:unixtime]];
+    
+}
+
+- (void)getEatListsFromDay:(NSNumber*)day{
+    NSMutableArray *tempArray = [NSMutableArray array];
+    NSArray *eatLists = [self findDataInDay:day];
+    
+//    NSLog(@"\n\n\nEATLIST: \n\n%@", eatLists);
+//    NSLog(@"Eatlist Count: %d", [eatLists count]);
+    for (int i=0; i < [eatLists count]; i++) {
+        EatList *foods = eatLists[i];
+        NSSortDescriptor *sort = [NSSortDescriptor sortDescriptorWithKey:@"food_id" ascending:YES];
+        NSArray *sortDescriptor = [NSArray arrayWithObject:sort];
+        NSArray *food = [[foods.food sortedArrayUsingDescriptors:sortDescriptor]mutableCopy];
+        
+//        NSLog(@"\n\n\nFOOD: \n\n%@", food);
+//        NSLog(@"Food Count: %d", [food count]);
+        [tempArray addObjectsFromArray:food];
+//        for (int j=0; j < [food count]; j++) {
+//            NSLog(@"\n\n\nFOOD %d: %@", j, [food objectAtIndex:j]);
+//            
+//            [_eatListsFromDay addObject:[food objectAtIndex:j]];
+//            
+//            NSLog(@"\n\n\nLIST %d: %@", j, [_eatListsFromDay objectAtIndex:j]);
+//            
+//        }
+    }
+    
+    _eatListsFromDay = tempArray;
+//    NSLog(@"\n\n\nLIST: %@", _eatListsFromDay);
+    
+}
+
+- (void)getEatListsFromDay:(NSNumber*)weekStart weekEnd:(NSNumber*)weekEnd{
+    NSArray *eatLists = [self findDataInWeek:weekStart weekEnd:weekEnd];
+    for (int i=0; i < [eatLists count]; i++) {
+        EatList *foods = eatLists[i];
+        NSSortDescriptor *sort = [NSSortDescriptor sortDescriptorWithKey:@"food_id" ascending:YES];
+        NSArray *sortDescriptor = [NSArray arrayWithObject:sort];
+        NSArray *food = [[foods.food sortedArrayUsingDescriptors:sortDescriptor]mutableCopy];
+        for (int j=0; j < [food count]; j++) {
+            [_eatListsFromDay addObject:[food objectAtIndex:j]];
+        }
+    }
 }
 
 - (void)didReceiveMemoryWarning
@@ -51,7 +102,8 @@
     NSInteger eventType = button.tag;
     switch (eventType) {
         case 10: // serch 1day
-            _eatlists = @[@"day"];
+//            _eatlists = @[@"day"];
+            _eatlists = _eatListsFromDay;
             break;
         case 20: // serch 1week
             _eatlists = @[@"week"];
@@ -340,4 +392,24 @@
     [_weekButton6 setBackgroundImage:_nonselectImage forState:UIControlStateNormal];
     [self calcDate];
 }
+
+- (NSArray*)findDataInDay:(NSNumber*)day{
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"ate_at == %@", day];
+    return [EatList MR_findAllWithPredicate:predicate];
+}
+
+- (NSArray*)findDataInWeek:(NSNumber*)weekStart weekEnd:(NSNumber*)weekEnd{
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"(ate_at >= %@) AND (ate_at <= %@)",weekStart, weekEnd];
+    NSArray *temp = [EatList MR_findAllSortedBy:@"foods" ascending:YES withPredicate:predicate];
+    return temp;
+}
+
+- (NSDate*)getDateSZero:(NSDate*)date{
+    NSCalendar *calendar = [NSCalendar currentCalendar];
+    NSUInteger flags = NSCalendarUnitYear | NSCalendarUnitMonth | NSCalendarUnitDay;
+    NSDateComponents *components = [calendar components:flags fromDate:date];
+    
+    return [calendar dateFromComponents:components];
+}
+
 @end

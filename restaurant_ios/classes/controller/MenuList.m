@@ -12,6 +12,10 @@
 
 - (void)setMessageInfo:(NSDictionary *)dict {
     _menus = [dict objectForKey:@"menus"];
+    
+//    for (int i =0; i<[_menus count]; i++) {
+//        NSLog(@"\n\nName: %@\n\n", _menus[i][@"food"][@"name"]);
+//    }
 }
 
 @end

@@ -9,6 +9,9 @@
 #import <UIKit/UIKit.h>
 #import "UIButton+SelectDateButton.h"
 #import "EatenFoodViewController.h"
+#import "Food.h"
+#import "EatList.h"
+
 
 @interface EatListViewController : UIViewController
 
@@ -36,6 +39,9 @@
 @property (nonatomic) UIImage *selectedImage;
 @property (nonatomic) UIImage *nonselectImage;
 @property (nonatomic) NSArray *eatlists;
+
+@property (nonatomic) NSMutableArray *eatListsFromDay;
+@property (nonatomic) NSMutableArray *eatListsFromWeek;
 
 - (IBAction)backButton:(id)sender;
 - (IBAction)newxtButton:(id)sender;

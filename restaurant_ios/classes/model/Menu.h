@@ -8,22 +8,23 @@
 
 #import <Foundation/Foundation.h>
 
-@interface Menu : NSObject{
-    NSInteger id;
-    NSString *title;
-    NSString *type;
-    NSInteger price;
-    BOOL isSoldout;
-    BOOL isSelect;
-}
+@interface Menu : NSObject
 
 @property (nonatomic) NSInteger id;
-@property (nonatomic) NSString *title;
-@property (nonatomic) NSString *type;
+@property (nonatomic) NSString *name;
 @property (nonatomic) NSInteger price;
+@property (nonatomic) NSString *image_path;
+@property (nonatomic) NSInteger category;
+@property (nonatomic) float green;
+@property (nonatomic) float red;
+@property (nonatomic) float yellow;
 @property (nonatomic) BOOL isSoldout;
 @property (nonatomic) BOOL isSelect;
+//@property (nonatomic) NSString *title;
+//@property (nonatomic) NSString *type;
 
-+ (id)initMenu:(NSInteger)id title:(NSString*)title type:(NSString*)type price:(NSInteger)price isSoldout:(BOOL)isSoldout isSelect:(BOOL)isSelect;
+//+ (id)initMenu:(NSInteger)id title:(NSString*)title type:(NSString*)type price:(NSInteger)price isSoldout:(BOOL)isSoldout isSelect:(BOOL)isSelect;
+
+- (NSString*)getCategoryName:(NSInteger)category;
 
 @end

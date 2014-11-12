@@ -17,10 +17,14 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+    
+    // CoreData All Delete
+    [EatList MR_truncateAll];
+    [Food MR_truncateAll];
     
     // navbar change color
-    self.navigationController.navigationBar.barTintColor = [UIColor colorWithRed:1.00 green:0.66 blue:0.27 alpha:1.0];
+    self.navigationController.navigationBar.barTintColor =
+        [UIColor colorWithRed:1.00 green:0.66 blue:0.27 alpha:1.0];
     
     [self initHeaderButton];
     
@@ -30,22 +34,12 @@
     UINib *nib = [UINib nibWithNibName:@"MenuTableCell" bundle:nil];
     [_menuTable registerNib:nib forCellReuseIdentifier:@"Cell"];
     
-    _srcArray = [NSArray arrayWithObjects:
-                  [Menu initMenu:0 title:@"title0" type:@"type0" price:100 isSoldout:YES isSelect:NO],
-                  [Menu initMenu:1 title:@"title1" type:@"type1" price:200 isSoldout:YES isSelect:NO],
-                  [Menu initMenu:2 title:@"title2" type:@"type2" price:300 isSoldout:NO isSelect:NO],
-                  [Menu initMenu:3 title:@"title3" type:@"type3" price:400 isSoldout:NO isSelect:NO],
-                  [Menu initMenu:4 title:@"title4" type:@"type0" price:500 isSoldout:NO isSelect:NO],
-                  [Menu initMenu:5 title:@"title5" type:@"type1" price:600 isSoldout:NO isSelect:NO],
-                  [Menu initMenu:6 title:@"title6" type:@"type2" price:700 isSoldout:NO isSelect:NO],
-                  [Menu initMenu:7 title:@"title7" type:@"type3" price:800 isSoldout:NO isSelect:NO],
-                  [Menu initMenu:8 title:@"title8" type:@"type0" price:900 isSoldout:NO isSelect:NO],
-                  [Menu initMenu:9 title:@"title9" type:@"type1" price:1000 isSoldout:NO isSelect:NO],
-                  [Menu initMenu:10 title:@"title10" type:@"type2" price:1100 isSoldout:NO isSelect:NO],
-                  nil];
-    _menuArray = _srcArray;
+    _refreshControl = [UIRefreshControl new];
+    [_menuTable addSubview:_refreshControl];
+    [_refreshControl addTarget:self action:@selector(refreshOccured:) forControlEvents:UIControlEventValueChanged];
+    _menuTable.alwaysBounceVertical = YES;
     
-    [self reloadViewAll];
+    [self getDataFromServer];
 }
 
 - (void)initHeaderButton {
@@ -104,22 +98,47 @@
     Menu *menu = [_menuArray objectAtIndex:indexPath.row];
     
     // set menu title
-    cell.menuTitle.text = menu.title;
+    cell.menuTitle.text = menu.name;
     
     // set menu picture
-    UIImage *srcImage = [UIImage imageNamed:@"image.jpg"];
-    
-    if (menu.isSoldout) {
-        [cell.menuImageButton setBackgroundImage:[self getBrightnessImage:srcImage] forState:UIControlStateNormal];
-        [cell.menuImageButton setTitle:@"売り切れ" forState:UIControlStateNormal];
-        [cell.menuImageButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    }else {
-        [cell.menuImageButton setBackgroundImage:srcImage forState:UIControlStateNormal];
+    NSString *image_path = menu.image_path;
+    UIImage *srcImage;
+    if ([image_path  isEqual: @""]) {
+        srcImage = [UIImage imageNamed:@"image.jpg"];
+        if (menu.isSoldout) {
+            [cell.menuImageButton setBackgroundImage:[self getBrightnessImage:srcImage] forState:UIControlStateNormal];
+            [cell.menuImageButton setTitle:@"売り切れ" forState:UIControlStateNormal];
+            [cell.menuImageButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+        }else {
+            [cell.menuImageButton setBackgroundImage:srcImage forState:UIControlStateNormal];
+        }
+        [cell.menuImageButton addTarget:self action:@selector(transToDetail:event:) forControlEvents:UIControlEventTouchUpInside];
+    } else {
+        NSString *urlString = @"http://airan-tamago.up.n.seesaa.net/airan-tamago/image/gazou201556.jpg";
+        NSURL *url = [NSURL URLWithString:urlString];
+        
+        NSURLSessionConfiguration *config = [NSURLSessionConfiguration defaultSessionConfiguration];
+        NSURLSession *session = [NSURLSession sessionWithConfiguration:config];
+        
+        NSURLSessionDownloadTask *getImageTask = [session downloadTaskWithURL:url completionHandler:^(NSURL *location, NSURLResponse *response, NSError *error) {
+            UIImage *downloadedImage = [UIImage imageWithData:[NSData dataWithContentsOfURL:location]];
+            dispatch_async(dispatch_get_main_queue(), ^{
+                if (menu.isSoldout) {
+                    [cell.menuImageButton setBackgroundImage:[self getBrightnessImage:downloadedImage] forState:UIControlStateNormal];
+                    [cell.menuImageButton setTitle:@"売り切れ" forState:UIControlStateNormal];
+                    [cell.menuImageButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+                }else {
+                    [cell.menuImageButton setBackgroundImage:downloadedImage forState:UIControlStateNormal];
+                }
+                [cell.menuImageButton addTarget:self action:@selector(transToDetail:event:) forControlEvents:UIControlEventTouchUpInside];
+            });
+        }];
+        [getImageTask resume];
+//        srcImage = [UIImage imageNamed:@"image.jpg"];
     }
-    [cell.menuImageButton addTarget:self action:@selector(transToDetail:event:) forControlEvents:UIControlEventTouchUpInside];
     
     // set menu type
-    cell.menuType.text = menu.type;
+    cell.menuType.text = [menu getCategoryName:menu.category];
     cell.menuType.backgroundColor = [UIColor blueColor];
     cell.menuType.textColor = [UIColor whiteColor];
     cell.menuType.layer.cornerRadius = 6;
@@ -212,19 +231,19 @@
         case 1:
             break;
         case 2:
-            predicate = [NSPredicate predicateWithFormat:@"%K = %@", @"type", @"type0"];
+            predicate = [NSPredicate predicateWithFormat:@"%K = %@", @"category", @0];
             _menuArray = [_menuArray filteredArrayUsingPredicate:predicate];
             break;
         case 3:
-            predicate = [NSPredicate predicateWithFormat:@"%K = %@", @"type", @"type1"];
+            predicate = [NSPredicate predicateWithFormat:@"%K = %@", @"category", @1];
             _menuArray = [_menuArray filteredArrayUsingPredicate:predicate];
             break;
         case 4:
-            predicate = [NSPredicate predicateWithFormat:@"%K = %@", @"type", @"type2"];
+            predicate = [NSPredicate predicateWithFormat:@"%K = %@", @"category", @2];
             _menuArray = [_menuArray filteredArrayUsingPredicate:predicate];
             break;
         case 5:
-            predicate = [NSPredicate predicateWithFormat:@"%K = %@", @"type", @"type3"];
+            predicate = [NSPredicate predicateWithFormat:@"%K = %@", @"category", @3];
             _menuArray = [_menuArray filteredArrayUsingPredicate:predicate];
             break;
         case 6:
@@ -251,6 +270,58 @@
     NSPredicate *predicate = [NSPredicate predicateWithFormat:@"isSelect = YES"];
     NSArray *selectedArray = [_menuArray filteredArrayUsingPredicate:predicate];
     NSLog(@"%@", selectedArray);
+    
+    if ([selectedArray count] == 0) {
+        NSLog(@"\n***** No Select *****");
+    } else {
+        NSDate *today = [self getDateSZero:[NSDate date]];
+        int unixtime = [today timeIntervalSince1970];
+        
+        NSLog(@"UNIXTIME: %d", unixtime);
+        
+        EatList *eatList = [EatList MR_createEntity];
+        eatList.ate_at = [NSNumber numberWithInteger:unixtime];
+        for (int i = 0; i < [selectedArray count]; i++) {
+            Food *food = [Food MR_createEntity];
+            Menu *menu = [selectedArray objectAtIndex:i];
+            food.food_id = [NSNumber numberWithInteger:menu.id];
+            food.name = menu.name;
+            food.category = [NSNumber numberWithInteger:menu.category];
+            food.price = [NSNumber numberWithInteger:menu.price];
+            food.red = [NSNumber numberWithFloat:menu.red];
+            food.green = [NSNumber numberWithFloat:menu.green];
+            food.yellow = [NSNumber numberWithFloat:menu.yellow];
+            food.image_path = menu.image_path;
+            [eatList addFoodObject:food];
+        }
+        [[NSManagedObjectContext MR_defaultContext] MR_saveToPersistentStoreWithCompletion:^(BOOL success, NSError *error) {
+            if (success) {
+                NSLog(@"successfully saved");
+//                NSArray *test = [self findDataInDay:[NSNumber numberWithInt:unixtime]];
+//                EatList *foods = test[0];
+//                NSSortDescriptor *sort = [NSSortDescriptor sortDescriptorWithKey:@"food_id" ascending:YES];
+//                NSArray *sortDescriptor = [NSArray arrayWithObject:sort];
+//                NSArray *food = [[foods.food sortedArrayUsingDescriptors:sortDescriptor]mutableCopy];
+//                NSLog(@"\n\n\nTEST: \n%@", food);
+                
+            } else if (error) {
+                NSLog(@"Error saving context: %@", error.description);
+            }
+        }];
+    }
+}
+
+//- (NSArray*)findDataInDay:(NSNumber*)day{
+//    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"ate_at == %@", day];
+//    return [EatList MR_findAllWithPredicate:predicate];
+//}
+
+- (NSDate*)getDateSZero:(NSDate*)date{
+    NSCalendar *calendar = [NSCalendar currentCalendar];
+    NSUInteger flags = NSCalendarUnitYear | NSCalendarUnitMonth | NSCalendarUnitDay;
+    NSDateComponents *components = [calendar components:flags fromDate:date];
+    
+    return [calendar dateFromComponents:components];
 }
 
 - (void)getDataFromServer {
@@ -259,14 +330,100 @@
         [PDUtils alertDialog:NOT_CONNECT_NETWORK delegate:self];
         return;
     }
-    
-    [ExtendedPDAPIConnection getMessages:10.0f completeBlock:^(NSArray *messages) {
-        _messageArray = messages;
-        MenuList *menus = _messageArray[0];
-        NSLog(@"%@", menus);
+    NSString *params = [@"?date=" stringByAppendingString:@"1398351600"];
+    [ExtendedPDAPIConnection getMessages:10.0f params:params completeBlock:^(NSArray *messages) {
+        MenuList *temp = messages[0];
+        NSDictionary *tempDict = [@{@"menus":temp.menus}mutableCopy];
+        NSMutableArray *tempArray = [NSMutableArray array];
         
+        for (int i=0; i< [tempDict[@"menus"] count]; i++) {
+            Menu *menu = Menu.new;
+            menu.id = [tempDict[@"menus"][i][@"food"][@"id"] intValue];
+            menu.name = tempDict[@"menus"][i][@"food"][@"name"];
+            menu.price = [tempDict[@"menus"][i][@"food"][@"price"] intValue];
+            menu.image_path = tempDict[@"menus"][i][@"food"][@"image_path"];
+            menu.category = [tempDict[@"menus"][i][@"food"][@"category"] intValue];
+            menu.green = [tempDict[@"menus"][i][@"food"][@"green"] floatValue];
+            menu.red = [tempDict[@"menus"][i][@"food"][@"red"] floatValue];
+            menu.yellow = [tempDict[@"menus"][i][@"food"][@"yellow"] floatValue];
+            menu.isSoldout = [tempDict[@"menus"][i][@"is_soldout"] intValue];
+            menu.isSelect = NO;
+            
+//            NSLog(@"id: %ld", (long)menu.id);
+//            NSLog(@"name: %@", menu.name);
+//            NSLog(@"price: %ld", (long)menu.price);
+//            NSLog(@"image_path: %@", menu.image_path);
+//            NSLog(@"category: %ld", (long)menu.category);
+//            NSLog(@"categoryName: %@", [menu getCategoryName:menu.category]);
+//            NSLog(@"green: %f", menu.green);
+//            NSLog(@"red: %f", menu.red);
+//            NSLog(@"yellow: %f", menu.yellow);
+//            NSLog(@"isSoldout: %hhd", menu.isSoldout);
+//            NSLog(@"isSelect: %hhd", menu.isSelect);
+            [tempArray addObject:menu];
+        }
         
+        _srcArray = [tempArray mutableCopy];
+        _menuArray = _srcArray;
+        [self reloadViewAll];
+        
+    } errorBlock:^(int errorCode, NSString *errorMessage) {
+        NSLog(@"\nERROR! :%@", errorMessage);
+        NSMutableArray *dummyArray = [NSMutableArray array];
+        for (int i=0; i< 3; i++) {
+            Menu *menu = Menu.new;
+            menu.id = i;
+            menu.name = @"DUMMY";
+            menu.price = (i+1)*100;
+            menu.image_path = @"";
+            menu.category = i;
+            menu.green = 0.1;
+            menu.red = 0.2;
+            menu.yellow = 0.3;
+            menu.isSoldout = NO;
+            menu.isSelect = NO;
+            [dummyArray addObject:menu];
+        }
+        _srcArray = [dummyArray mutableCopy];
+        _menuArray = _srcArray;
+        [self reloadViewAll];
+        
+    } cancelBlock:^{
+        
+    }];
+}
 
+- (void)refreshOccured:(id)sender
+{
+    if (![PDUtils isConnectNetwork]) {
+        [PDUtils alertDialog:NOT_CONNECT_NETWORK delegate:self];
+        return;
+    }
+    NSString *params = [@"?date=" stringByAppendingString:@"1398351600"];
+    [ExtendedPDAPIConnection getMessages:10.0f params:params completeBlock:^(NSArray *messages) {
+        MenuList *temp = messages[0];
+        NSDictionary *tempDict = [@{@"menus":temp.menus}mutableCopy];
+        NSMutableArray *tempArray = [NSMutableArray array];
+        
+        for (int i=0; i< [tempDict[@"menus"] count]; i++) {
+            Menu *menu = Menu.new;
+            menu.id = [tempDict[@"menus"][i][@"food"][@"id"] intValue];
+            menu.name = tempDict[@"menus"][i][@"food"][@"name"];
+            menu.price = [tempDict[@"menus"][i][@"food"][@"price"] intValue];
+            menu.image_path = tempDict[@"menus"][i][@"food"][@"image_path"];
+            menu.category = [tempDict[@"menus"][i][@"food"][@"category"] intValue];
+            menu.green = [tempDict[@"menus"][i][@"food"][@"green"] floatValue];
+            menu.red = [tempDict[@"menus"][i][@"food"][@"red"] floatValue];
+            menu.yellow = [tempDict[@"menus"][i][@"food"][@"yellow"] floatValue];
+            menu.isSoldout = [tempDict[@"menus"][i][@"is_soldout"] intValue];
+            menu.isSelect = NO;
+            [tempArray addObject:menu];
+        }
+        _srcArray = [tempArray mutableCopy];
+        _menuArray = _srcArray;
+        [_refreshControl endRefreshing];
+        [self reloadViewAll];
+        
     } errorBlock:^(int errorCode, NSString *errorMessage) {
         
     } cancelBlock:^{

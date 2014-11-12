@@ -18,6 +18,6 @@ typedef void (^cancelBlock)(void);
 typedef void (^errorBlock)(int errorCode,NSString *errorMessage);
 typedef void (^getMessagesCompleteBlock)(NSArray *messages);
 
-+(void)getMessages:(CGFloat)sec completeBlock:(getMessagesCompleteBlock)cp_block errorBlock:(errorBlock)e_block cancelBlock:(cancelBlock)cc_block;
++(void)getMessages:(CGFloat)sec params:(NSString*)params completeBlock:(getMessagesCompleteBlock)cp_block errorBlock:(errorBlock)e_block cancelBlock:(cancelBlock)cc_block;
 
 @end

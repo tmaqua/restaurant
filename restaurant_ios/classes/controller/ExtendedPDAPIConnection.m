@@ -10,9 +10,12 @@
 
 @implementation ExtendedPDAPIConnection
 
-+(void)getMessages:(CGFloat)sec completeBlock:(getMessagesCompleteBlock)cp_block errorBlock:(errorBlock)e_block cancelBlock:(cancelBlock)cc_block{
++(void)getMessages:(CGFloat)sec params:(NSString*)params completeBlock:(getMessagesCompleteBlock)cp_block errorBlock:(errorBlock)e_block cancelBlock:(cancelBlock)cc_block{
     
-    NSMutableURLRequest *req = [ExtendedPDAPIConnection createGetRequest:API_MESSEAGE_GET];
+    NSString *requestMessage = [API_MESSEAGE_GET stringByAppendingString:params];
+    NSLog(@"requestMessage: %@", requestMessage);
+    
+    NSMutableURLRequest *req = [ExtendedPDAPIConnection createGetRequest:requestMessage];
     [ExtendedPDAPIConnection asyncConnect:req timeoutSec:sec
                   completeBlock:^(PDAsyncURLConnection *conn, NSData *data){
                       if([[conn response] statusCode] == 200){
@@ -23,7 +26,7 @@
                           MenuList *menuModel = MenuList.new;
                           [menuModel setMessageInfo:messagesDict];
                           [messageArray addObject:menuModel];
-                          
+                                                    
                           if(cp_block){
                               cp_block(messageArray);
                           }

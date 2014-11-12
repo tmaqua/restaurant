@@ -11,7 +11,12 @@
 
 @interface DetailViewController : UIViewController
 @property (weak, nonatomic) IBOutlet UILabel *titleLabel;
-@property (weak, nonatomic) IBOutlet UILabel *typeLabel;
+@property (weak, nonatomic) IBOutlet UILabel *categoryLabel;
+@property (weak, nonatomic) IBOutlet UILabel *priceLabel;
+@property (weak, nonatomic) IBOutlet UILabel *redLabel;
+@property (weak, nonatomic) IBOutlet UILabel *greenLabel;
+@property (weak, nonatomic) IBOutlet UILabel *yellowLabel;
+@property (weak, nonatomic) IBOutlet UIImageView *foodImageView;
 
 @property (nonatomic) Menu *detailMenu;
 

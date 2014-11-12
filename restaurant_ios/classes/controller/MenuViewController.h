@@ -15,6 +15,8 @@
 #import "ExtendedPDAPIConnection.h"
 #import "MenuList.h"
 #import "Menu.h"
+#import "Food.h"
+#import "EatList.h"
 
 
 @interface MenuViewController : UIViewController
@@ -35,6 +37,8 @@
 @property (nonatomic) NSArray *menuArray;
 @property (nonatomic) NSArray *srcArray;
 @property (nonatomic) NSArray *messageArray;
+
+@property (nonatomic) UIRefreshControl *refreshControl;
 
 
 @end
