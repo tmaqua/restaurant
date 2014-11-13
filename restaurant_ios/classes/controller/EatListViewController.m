@@ -36,60 +36,57 @@
     _weekPrice.textColor = [UIColor whiteColor];
     
     [self initButton];
-    [self generateImageView];
     
     [_eatListsFromDay removeAllObjects];
     [_eatListsFromWeek removeAllObjects];
     
     NSDate *today = [self getDateSZero:[NSDate date]];
     int unixtime = [today timeIntervalSince1970];
-    NSLog(@"UNIXTIME: %d", unixtime);
-    
     [self getEatListsFromDay:[NSNumber numberWithInt:unixtime]];
+    
+    NSDate *weekStart = _selectedWeeks[0];
+    NSDate *weekEnd = _selectedWeeks[6];
+    int weekStartNum = [weekStart timeIntervalSince1970];
+    int weekEndNum = [weekEnd timeIntervalSince1970];
+    
+    [self getEatListsFromWeek:[NSNumber numberWithInt:weekStartNum] weekEnd:[NSNumber numberWithInt:weekEndNum]];
+    
+    [self generateImageView];
     
 }
 
 - (void)getEatListsFromDay:(NSNumber*)day{
     NSMutableArray *tempArray = [NSMutableArray array];
     NSArray *eatLists = [self findDataInDay:day];
+
+    for (int i=0; i < [eatLists count]; i++) {
+        EatList *foods = eatLists[i];
+        NSSortDescriptor *sort = [NSSortDescriptor sortDescriptorWithKey:@"food_id" ascending:YES];
+        NSArray *sortDescriptor = [NSArray arrayWithObject:sort];
+        NSArray *food = [[foods.food sortedArrayUsingDescriptors:sortDescriptor]mutableCopy];
+
+        [tempArray addObjectsFromArray:food];
+    }
     
-//    NSLog(@"\n\n\nEATLIST: \n\n%@", eatLists);
-//    NSLog(@"Eatlist Count: %d", [eatLists count]);
+    _eatListsFromDay = tempArray;
+    
+}
+
+- (void)getEatListsFromWeek:(NSNumber*)weekStart weekEnd:(NSNumber*)weekEnd{
+    NSMutableArray *tempArray = [NSMutableArray array];
+    
+    NSArray *eatLists = [self findDataInWeek:weekStart weekEnd:weekEnd];
+    
     for (int i=0; i < [eatLists count]; i++) {
         EatList *foods = eatLists[i];
         NSSortDescriptor *sort = [NSSortDescriptor sortDescriptorWithKey:@"food_id" ascending:YES];
         NSArray *sortDescriptor = [NSArray arrayWithObject:sort];
         NSArray *food = [[foods.food sortedArrayUsingDescriptors:sortDescriptor]mutableCopy];
         
-//        NSLog(@"\n\n\nFOOD: \n\n%@", food);
-//        NSLog(@"Food Count: %d", [food count]);
         [tempArray addObjectsFromArray:food];
-//        for (int j=0; j < [food count]; j++) {
-//            NSLog(@"\n\n\nFOOD %d: %@", j, [food objectAtIndex:j]);
-//            
-//            [_eatListsFromDay addObject:[food objectAtIndex:j]];
-//            
-//            NSLog(@"\n\n\nLIST %d: %@", j, [_eatListsFromDay objectAtIndex:j]);
-//            
-//        }
     }
     
-    _eatListsFromDay = tempArray;
-//    NSLog(@"\n\n\nLIST: %@", _eatListsFromDay);
-    
-}
-
-- (void)getEatListsFromDay:(NSNumber*)weekStart weekEnd:(NSNumber*)weekEnd{
-    NSArray *eatLists = [self findDataInWeek:weekStart weekEnd:weekEnd];
-    for (int i=0; i < [eatLists count]; i++) {
-        EatList *foods = eatLists[i];
-        NSSortDescriptor *sort = [NSSortDescriptor sortDescriptorWithKey:@"food_id" ascending:YES];
-        NSArray *sortDescriptor = [NSArray arrayWithObject:sort];
-        NSArray *food = [[foods.food sortedArrayUsingDescriptors:sortDescriptor]mutableCopy];
-        for (int j=0; j < [food count]; j++) {
-            [_eatListsFromDay addObject:[food objectAtIndex:j]];
-        }
-    }
+    _eatListsFromWeek = tempArray;
 }
 
 - (void)didReceiveMemoryWarning
@@ -100,13 +97,28 @@
 
 - (void)ListButtonTap:(UIButton*)button{
     NSInteger eventType = button.tag;
+    
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setLocale:[NSLocale currentLocale]];
+    [dateFormatter setDateFormat:@"yyyy/MM/dd HH:mm:ss"];
+    NSString *todayStr = [_todayDate.text stringByAppendingString:@" 00:00:00"];
+    NSLog(@"%@", todayStr);
+    NSDate* date = [dateFormatter dateFromString:todayStr];
+    int unixtime = [date timeIntervalSince1970];
+    
+    NSDate *weekStart = _selectedWeeks[0];
+    NSDate *weekEnd = _selectedWeeks[6];
+    int weekStartNum = [weekStart timeIntervalSince1970];
+    int weekEndNum = [weekEnd timeIntervalSince1970];
+    
     switch (eventType) {
         case 10: // serch 1day
-//            _eatlists = @[@"day"];
+            [self getEatListsFromDay:[NSNumber numberWithInt:unixtime]];
             _eatlists = _eatListsFromDay;
             break;
         case 20: // serch 1week
-            _eatlists = @[@"week"];
+            [self getEatListsFromWeek:[NSNumber numberWithInt:weekStartNum] weekEnd:[NSNumber numberWithInt:weekEndNum]];
+            _eatlists = _eatListsFromWeek;
             break;
         default:
             break;
@@ -197,14 +209,12 @@
             break;
     }
     _todayDate.text = [dateFormatter stringFromDate:_selectedWeeks[eventType]];
+    [self generateImageView];
     
 }
 
 -(void)initButton {
     // あとでbuttonクラス作ってここらへんをまとめとこう
-    [_weekButton0 addTarget:self
-                     action:@selector(buttonDidTap:)
-           forControlEvents:UIControlEventTouchUpInside];
     
     [_weekButton0 addTarget:self
                      action:@selector(buttonDidTap:)
@@ -331,21 +341,88 @@
 
 
 - (void)generateImageView {
+    int dayImageNum;
+    int weekImageNum;
     
-    for (int i=0; i<3; i++) {
+    if ([_eatListsFromDay count] >= 3) {
+        dayImageNum = 3;
+    }else{
+        dayImageNum = [_eatListsFromDay count];
+    }
+    
+    if ([_eatListsFromWeek count] >= 3) {
+        weekImageNum = 3;
+    }else{
+        weekImageNum = [_eatListsFromWeek count];
+    }
+    
+    
+    for (int i=0; i<dayImageNum; i++) {
         UIImageView *imageView =[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"image.jpg"]];
         imageView.frame = CGRectMake(20+80*i, 155, 60, 60);
         imageView.tag = i+1;
         imageView.userInteractionEnabled = YES;
         [self.view addSubview:imageView];
+//        Food *food = _eatListsFromDay[i];
+//        if ([food.image_path  isEqual: @""]) {
+//            UIImageView *imageView =[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"image.jpg"]];
+//            imageView.frame = CGRectMake(20+80*i, 155, 60, 60);
+//            imageView.tag = i+1;
+//            imageView.userInteractionEnabled = YES;
+//            [self.view addSubview:imageView];
+//        } else {
+//            NSString *urlString = @"http://airan-tamago.up.n.seesaa.net/airan-tamago/image/gazou201556.jpg";
+//            NSURL *url = [NSURL URLWithString:urlString];
+//            
+//            NSURLSessionConfiguration *config = [NSURLSessionConfiguration defaultSessionConfiguration];
+//            NSURLSession *session = [NSURLSession sessionWithConfiguration:config];
+//            
+//            NSURLSessionDownloadTask *getImageTask = [session downloadTaskWithURL:url completionHandler:^(NSURL *location, NSURLResponse *response, NSError *error) {
+//                UIImage *downloadedImage = [UIImage imageWithData:[NSData dataWithContentsOfURL:location]];
+//                dispatch_async(dispatch_get_main_queue(), ^{
+//                    UIImageView *imageView =[[UIImageView alloc] initWithImage:downloadedImage];
+//                    imageView.frame = CGRectMake(20+80*i, 155, 60, 60);
+//                    imageView.tag = i+1;
+//                    imageView.userInteractionEnabled = YES;
+//                    [self.view addSubview:imageView];
+//                });
+//            }];
+//            [getImageTask resume];
+//        }
     }
     
-    for (int i=0; i<3; i++) {
+    for (int i=0; i<weekImageNum; i++) {
         UIImageView *imageView =[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"image.jpg"]];
         imageView.frame = CGRectMake(20+80*i, 275, 60, 60);
         imageView.tag = i+4;
         imageView.userInteractionEnabled = YES;
         [self.view addSubview:imageView];
+//        Food *food = _eatListsFromWeek[i];
+//        if ([food.image_path  isEqual: @""]) {
+//            UIImageView *imageView =[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"image.jpg"]];
+//            imageView.frame = CGRectMake(20+80*i, 275, 60, 60);
+//            imageView.tag = i+4;
+//            imageView.userInteractionEnabled = YES;
+//            [self.view addSubview:imageView];
+//        } else {
+//            NSString *urlString = @"http://airan-tamago.up.n.seesaa.net/airan-tamago/image/gazou201556.jpg";
+//            NSURL *url = [NSURL URLWithString:urlString];
+//            
+//            NSURLSessionConfiguration *config = [NSURLSessionConfiguration defaultSessionConfiguration];
+//            NSURLSession *session = [NSURLSession sessionWithConfiguration:config];
+//            
+//            NSURLSessionDownloadTask *getImageTask = [session downloadTaskWithURL:url completionHandler:^(NSURL *location, NSURLResponse *response, NSError *error) {
+//                UIImage *downloadedImage = [UIImage imageWithData:[NSData dataWithContentsOfURL:location]];
+//                dispatch_async(dispatch_get_main_queue(), ^{
+//                    UIImageView *imageView =[[UIImageView alloc] initWithImage:downloadedImage];
+//                    imageView.frame = CGRectMake(20+80*i, 275, 60, 60);
+//                    imageView.tag = i+4;
+//                    imageView.userInteractionEnabled = YES;
+//                    [self.view addSubview:imageView];
+//                });
+//            }];
+//            [getImageTask resume];
+//        }
     }
 
 }
@@ -400,8 +477,8 @@
 
 - (NSArray*)findDataInWeek:(NSNumber*)weekStart weekEnd:(NSNumber*)weekEnd{
     NSPredicate *predicate = [NSPredicate predicateWithFormat:@"(ate_at >= %@) AND (ate_at <= %@)",weekStart, weekEnd];
-    NSArray *temp = [EatList MR_findAllSortedBy:@"foods" ascending:YES withPredicate:predicate];
-    return temp;
+    NSArray *eatlists = [EatList MR_findAllWithPredicate:predicate];
+    return eatlists;
 }
 
 - (NSDate*)getDateSZero:(NSDate*)date{

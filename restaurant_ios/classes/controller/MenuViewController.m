@@ -297,6 +297,12 @@
         [[NSManagedObjectContext MR_defaultContext] MR_saveToPersistentStoreWithCompletion:^(BOOL success, NSError *error) {
             if (success) {
                 NSLog(@"successfully saved");
+                for (int i=0; i<[_menuArray count]; i++) {
+                    Menu *menu = _menuArray[i];
+                    menu.isSelect = NO;
+                }
+                [self reloadViewAll];
+                
 //                NSArray *test = [self findDataInDay:[NSNumber numberWithInt:unixtime]];
 //                EatList *foods = test[0];
 //                NSSortDescriptor *sort = [NSSortDescriptor sortDescriptorWithKey:@"food_id" ascending:YES];
