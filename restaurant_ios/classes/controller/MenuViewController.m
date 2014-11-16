@@ -24,7 +24,7 @@
     
     // navbar change color
     self.navigationController.navigationBar.barTintColor =
-        [UIColor colorWithRed:1.00 green:0.66 blue:0.27 alpha:1.0];
+        [UIColor colorWithRed:1.00 green:0.56 blue:0.19 alpha:1.0];
     
     [self initHeaderButton];
     
@@ -38,46 +38,48 @@
     [_menuTable addSubview:_refreshControl];
     [_refreshControl addTarget:self action:@selector(refreshOccured:) forControlEvents:UIControlEventValueChanged];
     _menuTable.alwaysBounceVertical = YES;
+
     
     [self getDataFromServer];
 }
 
 - (void)initHeaderButton {
     // shopping button
-    [_shoppingButton setBackgroundImage:[UIImage imageNamed:@"shoppingcart128.png"] forState:UIControlStateNormal];
-    [_shoppingButton setBackgroundColor:[UIColor whiteColor]];
+    [_shoppingButton setBackgroundImage:[UIImage imageNamed:@"cart.png"] forState:UIControlStateNormal];
     _shoppingButton.tag = 6;
     [_shoppingButton addTarget:self action:@selector(selectCategory:) forControlEvents:UIControlEventTouchUpInside];
     
     // all button
-    // FFA846
-    [_allButton setBackgroundColor:[UIColor colorWithRed:1.0 green:0.659 blue:0.275 alpha:1.0]];
+    [_allButton setBackgroundColor:[UIColor colorWithRed:0.54 green:0.41 blue:0.33 alpha:1.0]];
     _allButton.tag = 1;
     [_allButton addTarget:self action:@selector(selectCategory:) forControlEvents:UIControlEventTouchUpInside];
     
     // don button
-    // DB766F
-    [_donButton setBackgroundColor:[UIColor colorWithRed:0.859 green:0.463 blue:0.435 alpha:1.0]];
+    [_donButton setBackgroundColor:[UIColor colorWithRed:0.87 green:0.45 blue:0.40 alpha:1.0]];
     _donButton.tag = 2;
     [_donButton addTarget:self action:@selector(selectCategory:) forControlEvents:UIControlEventTouchUpInside];
     
     // maindish button
-    // A8E06E
-    [_maindishButton setBackgroundColor:[UIColor colorWithRed:0.659 green:0.878 blue:0.431 alpha:1.0]];
+    [_maindishButton setBackgroundColor:[UIColor colorWithRed:1.00 green:0.56 blue:0.19 alpha:1.0]];
     _maindishButton.tag = 3;
     [_maindishButton addTarget:self action:@selector(selectCategory:) forControlEvents:UIControlEventTouchUpInside];
     
     // sidedish button
-    // DB766F
-    [_sidedishButton setBackgroundColor:[UIColor colorWithRed:0.859 green:0.463 blue:0.435 alpha:1.0]];
+    [_sidedishButton setBackgroundColor:[UIColor colorWithRed:0.73 green:0.75 blue:0.00 alpha:1.0]];
     _sidedishButton.tag = 4;
     [_sidedishButton addTarget:self action:@selector(selectCategory:) forControlEvents:UIControlEventTouchUpInside];
     
     // other button
     // 6E7EDB
-    [_otherButton setBackgroundColor:[UIColor colorWithRed:0.431 green:0.494 blue:0.859 alpha:1.0]];
+    [_otherButton setBackgroundColor:[UIColor colorWithRed:0.36 green:0.69 blue:0.56 alpha:1.0]];
     _otherButton.tag = 5;
     [_otherButton addTarget:self action:@selector(selectCategory:) forControlEvents:UIControlEventTouchUpInside];
+    
+    // save button
+    [_saveButton setBackgroundColor:[UIColor colorWithRed:0.43 green:0.49 blue:0.86 alpha:1.0]];
+    [_saveButton addTarget:self action:@selector(saveMenuData:) forControlEvents:UIControlEventTouchUpInside];
+    _saveButton.enabled = NO;
+    _saveButton.alpha = 0.3;
 }
 
 - (void)didReceiveMemoryWarning
@@ -102,20 +104,19 @@
     
     // set menu picture
     NSString *image_path = menu.image_path;
-    UIImage *srcImage;
     if ([image_path  isEqual: @""]) {
-        srcImage = [UIImage imageNamed:@"image.jpg"];
+        UIImage *srcImage = [UIImage imageNamed:@"noimage.jpg"];
         if (menu.isSoldout) {
             [cell.menuImageButton setBackgroundImage:[self getBrightnessImage:srcImage] forState:UIControlStateNormal];
             [cell.menuImageButton setTitle:@"売り切れ" forState:UIControlStateNormal];
             [cell.menuImageButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
         }else {
+            [cell.menuImageButton setTitle:@"" forState:UIControlStateNormal];
             [cell.menuImageButton setBackgroundImage:srcImage forState:UIControlStateNormal];
         }
         [cell.menuImageButton addTarget:self action:@selector(transToDetail:event:) forControlEvents:UIControlEventTouchUpInside];
     } else {
-        NSString *urlString = @"http://airan-tamago.up.n.seesaa.net/airan-tamago/image/gazou201556.jpg";
-        NSURL *url = [NSURL URLWithString:urlString];
+        NSURL *url = [NSURL URLWithString:image_path];
         
         NSURLSessionConfiguration *config = [NSURLSessionConfiguration defaultSessionConfiguration];
         NSURLSession *session = [NSURLSession sessionWithConfiguration:config];
@@ -128,18 +129,33 @@
                     [cell.menuImageButton setTitle:@"売り切れ" forState:UIControlStateNormal];
                     [cell.menuImageButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
                 }else {
+                    [cell.menuImageButton setTitle:@"" forState:UIControlStateNormal];
                     [cell.menuImageButton setBackgroundImage:downloadedImage forState:UIControlStateNormal];
                 }
                 [cell.menuImageButton addTarget:self action:@selector(transToDetail:event:) forControlEvents:UIControlEventTouchUpInside];
             });
         }];
         [getImageTask resume];
-//        srcImage = [UIImage imageNamed:@"image.jpg"];
     }
     
     // set menu type
     cell.menuType.text = [menu getCategoryName:menu.category];
-    cell.menuType.backgroundColor = [UIColor blueColor];
+    switch (menu.category) {
+        case 0:
+            cell.menuType.backgroundColor = [UIColor colorWithRed:0.87 green:0.45 blue:0.40 alpha:1.0];
+            break;
+        case 1:
+            cell.menuType.backgroundColor = [UIColor colorWithRed:1.00 green:0.56 blue:0.19 alpha:1.0];
+            break;
+        case 2:
+            cell.menuType.backgroundColor = [UIColor colorWithRed:0.73 green:0.75 blue:0.00 alpha:1.0];
+            break;
+        case 3:
+            cell.menuType.backgroundColor = [UIColor colorWithRed:0.36 green:0.69 blue:0.56 alpha:1.0];
+            break;
+        default:
+            break;
+    }
     cell.menuType.textColor = [UIColor whiteColor];
     cell.menuType.layer.cornerRadius = 6;
     
@@ -147,13 +163,18 @@
     NSString *price = [NSString stringWithFormat:@"%ld", (long)menu.price];
     cell.menuPrice.text = [NSString stringWithFormat:@"%@%@",@"￥",price];
     
-    [cell.menuSelectButton addTarget:self action:@selector(selectMenuItem:event:) forControlEvents:UIControlEventTouchUpInside];
-
-    if (menu.isSelect) {
-        [cell.menuSelectButton setBackgroundImage:[UIImage imageNamed:@"minus.png"] forState:UIControlStateNormal];
+    if (menu.isSoldout) {
+        [cell.menuSelectButton setBackgroundImage:[UIImage imageNamed:@"nonselect.png"] forState:UIControlStateNormal];
     } else {
-        [cell.menuSelectButton setBackgroundImage:[UIImage imageNamed:@"plus.png"] forState:UIControlStateNormal];
+        [cell.menuSelectButton addTarget:self action:@selector(selectMenuItem:event:) forControlEvents:UIControlEventTouchUpInside];
+        if (menu.isSelect) {
+            [cell.menuSelectButton setBackgroundImage:[UIImage imageNamed:@"subButton.png"] forState:UIControlStateNormal];
+        } else {
+            [cell.menuSelectButton setBackgroundImage:[UIImage imageNamed:@"addButton.png"] forState:UIControlStateNormal];
+        }
     }
+    
+    
     
     return cell;
 }
@@ -199,8 +220,6 @@
     return outputImage;
 }
 
-
-
 - (void)transToDetail:(UIButton *)sender event:(UIEvent *)event {
     NSIndexPath *indexPath = [self indexPathForControlEvent:event];
     _selectedMenu = indexPath.row;
@@ -211,7 +230,9 @@
 - (void)selectMenuItem:(UIButton *)sender event:(UIEvent *)event {
     NSIndexPath *indexPath = [self indexPathForControlEvent:event];
     Menu *menu = [_menuArray objectAtIndex:indexPath.row];
-    menu.isSelect = !menu.isSelect;
+    if (!menu.isSoldout) {
+        menu.isSelect = !menu.isSelect;
+    }
     
     [self reloadViewAll];
 }
@@ -229,24 +250,36 @@
     _menuArray = _srcArray;
     switch (button.tag) {
         case 1:
+            _saveButton.enabled = NO;
+            _saveButton.alpha = 0.3;
             break;
         case 2:
+            _saveButton.enabled = NO;
+            _saveButton.alpha = 0.3;
             predicate = [NSPredicate predicateWithFormat:@"%K = %@", @"category", @0];
             _menuArray = [_menuArray filteredArrayUsingPredicate:predicate];
             break;
         case 3:
+            _saveButton.enabled = NO;
+            _saveButton.alpha = 0.3;
             predicate = [NSPredicate predicateWithFormat:@"%K = %@", @"category", @1];
             _menuArray = [_menuArray filteredArrayUsingPredicate:predicate];
             break;
         case 4:
+            _saveButton.enabled = NO;
+            _saveButton.alpha = 0.3;
             predicate = [NSPredicate predicateWithFormat:@"%K = %@", @"category", @2];
             _menuArray = [_menuArray filteredArrayUsingPredicate:predicate];
             break;
         case 5:
+            _saveButton.enabled = NO;
+            _saveButton.alpha = 0.3;
             predicate = [NSPredicate predicateWithFormat:@"%K = %@", @"category", @3];
             _menuArray = [_menuArray filteredArrayUsingPredicate:predicate];
             break;
         case 6:
+            _saveButton.enabled = YES;
+            _saveButton.alpha = 1.0;
             predicate = [NSPredicate predicateWithFormat:@"isSelect = YES"];
             _menuArray = [_menuArray filteredArrayUsingPredicate:predicate];
             break;
@@ -259,25 +292,22 @@
 
 - (void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
     if ([[segue identifier] isEqualToString:@"toDetailSegue"]) {
-//        Menu *menu = [_srcArray objectAtIndex:_selectedMenu];
         Menu *menu = [_menuArray objectAtIndex:_selectedMenu];
         DetailViewController *vc = (DetailViewController*)[segue destinationViewController];
         vc.detailMenu = menu;
     }
 }
 
-- (IBAction)saveButton:(id)sender {
+- (void)saveMenuData:(id)sender {
     NSPredicate *predicate = [NSPredicate predicateWithFormat:@"isSelect = YES"];
     NSArray *selectedArray = [_menuArray filteredArrayUsingPredicate:predicate];
-    NSLog(@"%@", selectedArray);
     
     if ([selectedArray count] == 0) {
         NSLog(@"\n***** No Select *****");
+        [SVProgressHUD showErrorWithStatus:@"何も選択されていません"];
     } else {
         NSDate *today = [self getDateSZero:[NSDate date]];
         int unixtime = [today timeIntervalSince1970];
-        
-        NSLog(@"UNIXTIME: %d", unixtime);
         
         EatList *eatList = [EatList MR_createEntity];
         eatList.ate_at = [NSNumber numberWithInteger:unixtime];
@@ -301,26 +331,21 @@
                     Menu *menu = _menuArray[i];
                     menu.isSelect = NO;
                 }
+                [SVProgressHUD showSuccessWithStatus:@"保存しました"];
+                _saveButton.enabled = NO;
+                _saveButton.alpha = 0.3;
                 [self reloadViewAll];
-                
-//                NSArray *test = [self findDataInDay:[NSNumber numberWithInt:unixtime]];
-//                EatList *foods = test[0];
-//                NSSortDescriptor *sort = [NSSortDescriptor sortDescriptorWithKey:@"food_id" ascending:YES];
-//                NSArray *sortDescriptor = [NSArray arrayWithObject:sort];
-//                NSArray *food = [[foods.food sortedArrayUsingDescriptors:sortDescriptor]mutableCopy];
-//                NSLog(@"\n\n\nTEST: \n%@", food);
                 
             } else if (error) {
                 NSLog(@"Error saving context: %@", error.description);
+                [SVProgressHUD showErrorWithStatus:@"保存に失敗しました"];
+                _saveButton.enabled = NO;
+                _saveButton.alpha = 0.3;
+                [self reloadViewAll];
             }
         }];
     }
 }
-
-//- (NSArray*)findDataInDay:(NSNumber*)day{
-//    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"ate_at == %@", day];
-//    return [EatList MR_findAllWithPredicate:predicate];
-//}
 
 - (NSDate*)getDateSZero:(NSDate*)date{
     NSCalendar *calendar = [NSCalendar currentCalendar];
@@ -336,8 +361,12 @@
         [PDUtils alertDialog:NOT_CONNECT_NETWORK delegate:self];
         return;
     }
+    
+    
     NSString *params = [@"?date=" stringByAppendingString:@"1398351600"];
     [ExtendedPDAPIConnection getMessages:10.0f params:params completeBlock:^(NSArray *messages) {
+        [SVProgressHUD show];
+        
         MenuList *temp = messages[0];
         NSDictionary *tempDict = [@{@"menus":temp.menus}mutableCopy];
         NSMutableArray *tempArray = [NSMutableArray array];
@@ -354,44 +383,51 @@
             menu.yellow = [tempDict[@"menus"][i][@"food"][@"yellow"] floatValue];
             menu.isSoldout = [tempDict[@"menus"][i][@"is_soldout"] intValue];
             menu.isSelect = NO;
-            
-//            NSLog(@"id: %ld", (long)menu.id);
-//            NSLog(@"name: %@", menu.name);
-//            NSLog(@"price: %ld", (long)menu.price);
-//            NSLog(@"image_path: %@", menu.image_path);
-//            NSLog(@"category: %ld", (long)menu.category);
-//            NSLog(@"categoryName: %@", [menu getCategoryName:menu.category]);
-//            NSLog(@"green: %f", menu.green);
-//            NSLog(@"red: %f", menu.red);
-//            NSLog(@"yellow: %f", menu.yellow);
-//            NSLog(@"isSoldout: %hhd", menu.isSoldout);
-//            NSLog(@"isSelect: %hhd", menu.isSelect);
             [tempArray addObject:menu];
         }
         
         _srcArray = [tempArray mutableCopy];
         _menuArray = _srcArray;
+        
+        [SVProgressHUD dismiss];
         [self reloadViewAll];
         
     } errorBlock:^(int errorCode, NSString *errorMessage) {
+        [SVProgressHUD show];
+        int j = 0;
         NSLog(@"\nERROR! :%@", errorMessage);
         NSMutableArray *dummyArray = [NSMutableArray array];
-        for (int i=0; i< 3; i++) {
+        for (int i=0; i< 15; i++) {
             Menu *menu = Menu.new;
             menu.id = i;
-            menu.name = @"DUMMY";
+            menu.name = [@"DUMMY" stringByAppendingString:[NSString stringWithFormat:@"%d",i]];
             menu.price = (i+1)*100;
-            menu.image_path = @"";
-            menu.category = i;
+            if (i%2 == 0) {
+                menu.image_path = @"";
+            } else {
+                menu.image_path = @"http://food.foto.ne.jp/free/resize.php?image=images/images_big/yos0024-054.jpg";
+            }
+            
+            if (j > 3) {
+                j = 0;
+            }
+            menu.category = j;
             menu.green = 0.1;
             menu.red = 0.2;
             menu.yellow = 0.3;
-            menu.isSoldout = NO;
+            if (i%3 == 0) {
+                menu.isSoldout = YES;
+            } else {
+                menu.isSoldout = NO;
+            }
             menu.isSelect = NO;
             [dummyArray addObject:menu];
+            j++;
         }
         _srcArray = [dummyArray mutableCopy];
         _menuArray = _srcArray;
+        
+        [SVProgressHUD dismiss];
         [self reloadViewAll];
         
     } cancelBlock:^{
@@ -401,40 +437,9 @@
 
 - (void)refreshOccured:(id)sender
 {
-    if (![PDUtils isConnectNetwork]) {
-        [PDUtils alertDialog:NOT_CONNECT_NETWORK delegate:self];
-        return;
-    }
-    NSString *params = [@"?date=" stringByAppendingString:@"1398351600"];
-    [ExtendedPDAPIConnection getMessages:10.0f params:params completeBlock:^(NSArray *messages) {
-        MenuList *temp = messages[0];
-        NSDictionary *tempDict = [@{@"menus":temp.menus}mutableCopy];
-        NSMutableArray *tempArray = [NSMutableArray array];
-        
-        for (int i=0; i< [tempDict[@"menus"] count]; i++) {
-            Menu *menu = Menu.new;
-            menu.id = [tempDict[@"menus"][i][@"food"][@"id"] intValue];
-            menu.name = tempDict[@"menus"][i][@"food"][@"name"];
-            menu.price = [tempDict[@"menus"][i][@"food"][@"price"] intValue];
-            menu.image_path = tempDict[@"menus"][i][@"food"][@"image_path"];
-            menu.category = [tempDict[@"menus"][i][@"food"][@"category"] intValue];
-            menu.green = [tempDict[@"menus"][i][@"food"][@"green"] floatValue];
-            menu.red = [tempDict[@"menus"][i][@"food"][@"red"] floatValue];
-            menu.yellow = [tempDict[@"menus"][i][@"food"][@"yellow"] floatValue];
-            menu.isSoldout = [tempDict[@"menus"][i][@"is_soldout"] intValue];
-            menu.isSelect = NO;
-            [tempArray addObject:menu];
-        }
-        _srcArray = [tempArray mutableCopy];
-        _menuArray = _srcArray;
-        [_refreshControl endRefreshing];
-        [self reloadViewAll];
-        
-    } errorBlock:^(int errorCode, NSString *errorMessage) {
-        
-    } cancelBlock:^{
-        
-    }];
+    [self.refreshControl beginRefreshing];
+    [self getDataFromServer];
+    [self.refreshControl endRefreshing];
 }
 
 @end

@@ -17,6 +17,7 @@
 #import "Menu.h"
 #import "Food.h"
 #import "EatList.h"
+#import "SVProgressHUD.h"
 
 
 @interface MenuViewController : UIViewController
@@ -31,7 +32,7 @@
 @property (weak, nonatomic) IBOutlet UIButton *otherButton;
 
 @property (weak, nonatomic) IBOutlet UILabel *sumPriceLabel;
-- (IBAction)saveButton:(id)sender;
+@property (weak, nonatomic) IBOutlet UIButton *saveButton;
 
 @property (nonatomic) NSInteger selectedMenu;
 @property (nonatomic) NSArray *menuArray;

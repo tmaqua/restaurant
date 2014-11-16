@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "Menu.h"
+#import "SVProgressHUD.h"
 
 @interface DetailViewController : UIViewController
 @property (weak, nonatomic) IBOutlet UILabel *titleLabel;

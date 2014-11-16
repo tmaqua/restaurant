@@ -23,7 +23,7 @@
     _foodTable.dataSource = self;
     
     // navbar change color
-    self.navigationController.navigationBar.barTintColor = [UIColor colorWithRed:1.00 green:0.66 blue:0.27 alpha:1.0];
+    self.navigationController.navigationBar.barTintColor = [UIColor colorWithRed:1.00 green:0.56 blue:0.19 alpha:1.0];
     
     UINib *nib = [UINib nibWithNibName:@"MenuTableCell" bundle:nil];
     [_foodTable registerNib:nib forCellReuseIdentifier:@"Cell"];
@@ -56,12 +56,11 @@
     NSString *image_path = menu.image_path;
     UIImage *srcImage;
     if ([image_path  isEqual: @""]) {
-        srcImage = [UIImage imageNamed:@"image.jpg"];
+        srcImage = [UIImage imageNamed:@"noimage.jpg"];
         [cell.menuImageButton setBackgroundImage:srcImage forState:UIControlStateNormal];
         [cell.menuImageButton addTarget:self action:@selector(transToDetail:event:) forControlEvents:UIControlEventTouchUpInside];
     } else {
-        NSString *urlString = @"http://airan-tamago.up.n.seesaa.net/airan-tamago/image/gazou201556.jpg";
-        NSURL *url = [NSURL URLWithString:urlString];
+        NSURL *url = [NSURL URLWithString:image_path];
         
         NSURLSessionConfiguration *config = [NSURLSessionConfiguration defaultSessionConfiguration];
         NSURLSession *session = [NSURLSession sessionWithConfiguration:config];

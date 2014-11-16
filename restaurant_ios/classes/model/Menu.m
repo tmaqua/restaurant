@@ -32,18 +32,29 @@
     return categoryName;
 }
 
-//+ (id)initMenu:(NSInteger)id title:(NSString*)title type:(NSString*)type price:(NSInteger)price isSoldout:(BOOL)isSoldout isSelect:(BOOL)isSelect{
-//
-//    Menu *newMenu = [[self alloc]init];
-//    newMenu.id = id;
-//    newMenu.title = title;
-//    newMenu.type = type;
-//    newMenu.price = price;
-//    newMenu.isSoldout = isSoldout;
-//    newMenu.isSelect = isSelect;
-//    
-//    return newMenu;
-//}
+- (void)getMenuLog{
+    
+    NSLog(@"id: %ld", (long)_id);
+    NSLog(@"name: %@", _name);
+    NSLog(@"price: %ld", (long)_price);
+    NSLog(@"image_path: %@", _image_path);
+    NSLog(@"category: %ld", (long)_category);
+    NSLog(@"categoryName: %@", [self getCategoryName:_category]);
+    NSLog(@"green: %f", _green);
+    NSLog(@"red: %f", _red);
+    NSLog(@"yellow: %f", _yellow);
+    if (_isSoldout) {
+        NSLog(@"isSoldout: YES");
+    } else {
+        NSLog(@"isSelect: NO");
+    }
+    if (_isSelect) {
+        NSLog(@"isSelect: YES");
+    } else {
+        NSLog(@"isSelect: NO");
+    }
+    
+}
 
 @end
 

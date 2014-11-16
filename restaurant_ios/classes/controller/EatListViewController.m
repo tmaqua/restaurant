@@ -19,15 +19,15 @@
     [super viewDidLoad];
     
     // navbar change color
-    self.navigationController.navigationBar.barTintColor = [UIColor colorWithRed:1.00 green:0.66 blue:0.27 alpha:1.0];
+    self.navigationController.navigationBar.barTintColor = [UIColor colorWithRed:1.00 green:0.56 blue:0.19 alpha:1.0];
     
     _weekSelectNum = 0;
     _selectedImage = [UIImage imageNamed:@"selected.png"];
     _nonselectImage = [UIImage imageNamed:@"nonselect.png"];
     
-    [_listDayButton setBackgroundImage:[UIImage imageNamed:@"list.png"] forState:UIControlStateNormal];
+    [_listDayButton setBackgroundImage:[UIImage imageNamed:@"listButton.png"] forState:UIControlStateNormal];
     [_listDayButton addTarget:self action:@selector(ListButtonTap:) forControlEvents:UIControlEventTouchUpInside];
-    [_listWeekButton setBackgroundImage:[UIImage imageNamed:@"list.png"] forState:UIControlStateNormal];
+    [_listWeekButton setBackgroundImage:[UIImage imageNamed:@"listButton.png"] forState:UIControlStateNormal];
     [_listWeekButton addTarget:self action:@selector(ListButtonTap:) forControlEvents:UIControlEventTouchUpInside];
     
     _dateUnderBar1.backgroundColor = [UIColor colorWithRed:1.00 green:0.66 blue:0.27 alpha:1.0];
@@ -51,8 +51,28 @@
     
     [self getEatListsFromWeek:[NSNumber numberWithInt:weekStartNum] weekEnd:[NSNumber numberWithInt:weekEndNum]];
     
-    [self generateImageView];
     
+    [self generateImageView];
+    [self calcSumPrice];
+    
+}
+
+- (void)calcSumPrice{
+    int daySumPrice = 0;
+    int weekSumPrice = 0;
+    for (Food *food in _eatListsFromDay) {
+        daySumPrice += [food.price intValue];
+    }
+    for (Food *food in _eatListsFromWeek) {
+        weekSumPrice += [food.price intValue];
+    }
+    NSLog(@"%d", daySumPrice);
+    NSLog(@"%d", weekSumPrice);
+    NSString *str1 = [@"￥" stringByAppendingString:[NSString stringWithFormat:@"%d", daySumPrice]];
+    NSString *str2 = [@"￥" stringByAppendingString:[NSString stringWithFormat:@"%d", weekSumPrice]];
+    
+    _todayPrice.text = str1;
+    _weekPrice.text = str2;
 }
 
 - (void)getEatListsFromDay:(NSNumber*)day{
@@ -93,44 +113,6 @@
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
-}
-
-- (void)ListButtonTap:(UIButton*)button{
-    NSInteger eventType = button.tag;
-    
-    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-    [dateFormatter setLocale:[NSLocale currentLocale]];
-    [dateFormatter setDateFormat:@"yyyy/MM/dd HH:mm:ss"];
-    NSString *todayStr = [_todayDate.text stringByAppendingString:@" 00:00:00"];
-    NSLog(@"%@", todayStr);
-    NSDate* date = [dateFormatter dateFromString:todayStr];
-    int unixtime = [date timeIntervalSince1970];
-    
-    NSDate *weekStart = _selectedWeeks[0];
-    NSDate *weekEnd = _selectedWeeks[6];
-    int weekStartNum = [weekStart timeIntervalSince1970];
-    int weekEndNum = [weekEnd timeIntervalSince1970];
-    
-    switch (eventType) {
-        case 10: // serch 1day
-            [self getEatListsFromDay:[NSNumber numberWithInt:unixtime]];
-            _eatlists = _eatListsFromDay;
-            break;
-        case 20: // serch 1week
-            [self getEatListsFromWeek:[NSNumber numberWithInt:weekStartNum] weekEnd:[NSNumber numberWithInt:weekEndNum]];
-            _eatlists = _eatListsFromWeek;
-            break;
-        default:
-            break;
-    }
-    [self performSegueWithIdentifier:@"toEatenListSegue" sender:self];
-}
-
-- (void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
-    if ([[segue identifier] isEqualToString:@"toEatenListSegue"]) {
-        EatenFoodViewController *vc = (EatenFoodViewController*)[segue destinationViewController];
-        vc.eatenFoods = _eatlists;
-    }
 }
 
 - (void)buttonDidTap:(UIButton *)button
@@ -209,7 +191,10 @@
             break;
     }
     _todayDate.text = [dateFormatter stringFromDate:_selectedWeeks[eventType]];
+    
+    [self getSelectedMenuData];
     [self generateImageView];
+    [self calcSumPrice];
     
 }
 
@@ -344,93 +329,137 @@
     int dayImageNum;
     int weekImageNum;
     
+    for (UIView *view in self.view.subviews) {
+        if (view.tag >= 1000 && view.tag <= 1005) {
+            [view removeFromSuperview];
+        }
+    }
+    
     if ([_eatListsFromDay count] >= 3) {
         dayImageNum = 3;
     }else{
-        dayImageNum = [_eatListsFromDay count];
+        dayImageNum = (int)[_eatListsFromDay count];
     }
     
     if ([_eatListsFromWeek count] >= 3) {
         weekImageNum = 3;
     }else{
-        weekImageNum = [_eatListsFromWeek count];
+        weekImageNum = (int)[_eatListsFromWeek count];
     }
     
     
     for (int i=0; i<dayImageNum; i++) {
-        UIImageView *imageView =[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"image.jpg"]];
-        imageView.frame = CGRectMake(20+80*i, 155, 60, 60);
-        imageView.tag = i+1;
-        imageView.userInteractionEnabled = YES;
-        [self.view addSubview:imageView];
-//        Food *food = _eatListsFromDay[i];
-//        if ([food.image_path  isEqual: @""]) {
-//            UIImageView *imageView =[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"image.jpg"]];
-//            imageView.frame = CGRectMake(20+80*i, 155, 60, 60);
-//            imageView.tag = i+1;
-//            imageView.userInteractionEnabled = YES;
-//            [self.view addSubview:imageView];
-//        } else {
-//            NSString *urlString = @"http://airan-tamago.up.n.seesaa.net/airan-tamago/image/gazou201556.jpg";
-//            NSURL *url = [NSURL URLWithString:urlString];
-//            
-//            NSURLSessionConfiguration *config = [NSURLSessionConfiguration defaultSessionConfiguration];
-//            NSURLSession *session = [NSURLSession sessionWithConfiguration:config];
-//            
-//            NSURLSessionDownloadTask *getImageTask = [session downloadTaskWithURL:url completionHandler:^(NSURL *location, NSURLResponse *response, NSError *error) {
-//                UIImage *downloadedImage = [UIImage imageWithData:[NSData dataWithContentsOfURL:location]];
-//                dispatch_async(dispatch_get_main_queue(), ^{
-//                    UIImageView *imageView =[[UIImageView alloc] initWithImage:downloadedImage];
-//                    imageView.frame = CGRectMake(20+80*i, 155, 60, 60);
-//                    imageView.tag = i+1;
-//                    imageView.userInteractionEnabled = YES;
-//                    [self.view addSubview:imageView];
-//                });
-//            }];
-//            [getImageTask resume];
-//        }
+        Food *food = _eatListsFromDay[i];
+        if ([food.image_path  isEqual:@""]) {
+            UIImageView *imageView =[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"noimage.jpg"]];
+            imageView.frame = CGRectMake(20+80*i, 155, 60, 60);
+            imageView.tag = i+1000;
+            imageView.userInteractionEnabled = YES;
+            [self.view addSubview:imageView];
+        } else {
+            NSURL *url = [NSURL URLWithString:food.image_path];
+            NSURLSessionConfiguration *config = [NSURLSessionConfiguration defaultSessionConfiguration];
+            NSURLSession *session = [NSURLSession sessionWithConfiguration:config];
+            
+            NSURLSessionDownloadTask *getImageTask = [session downloadTaskWithURL:url completionHandler:^(NSURL *location, NSURLResponse *response, NSError *error) {
+                UIImage *downloadedImage = [UIImage imageWithData:[NSData dataWithContentsOfURL:location]];
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    UIImageView *imageView =[[UIImageView alloc] initWithImage:downloadedImage];
+                    imageView.frame = CGRectMake(20+80*i, 155, 60, 60);
+                    imageView.tag = i+1000;
+                    imageView.userInteractionEnabled = YES;
+                    [self.view addSubview:imageView];
+                });
+            }];
+            [getImageTask resume];
+        }
     }
     
     for (int i=0; i<weekImageNum; i++) {
-        UIImageView *imageView =[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"image.jpg"]];
-        imageView.frame = CGRectMake(20+80*i, 275, 60, 60);
-        imageView.tag = i+4;
-        imageView.userInteractionEnabled = YES;
-        [self.view addSubview:imageView];
-//        Food *food = _eatListsFromWeek[i];
-//        if ([food.image_path  isEqual: @""]) {
-//            UIImageView *imageView =[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"image.jpg"]];
-//            imageView.frame = CGRectMake(20+80*i, 275, 60, 60);
-//            imageView.tag = i+4;
-//            imageView.userInteractionEnabled = YES;
-//            [self.view addSubview:imageView];
-//        } else {
-//            NSString *urlString = @"http://airan-tamago.up.n.seesaa.net/airan-tamago/image/gazou201556.jpg";
-//            NSURL *url = [NSURL URLWithString:urlString];
-//            
-//            NSURLSessionConfiguration *config = [NSURLSessionConfiguration defaultSessionConfiguration];
-//            NSURLSession *session = [NSURLSession sessionWithConfiguration:config];
-//            
-//            NSURLSessionDownloadTask *getImageTask = [session downloadTaskWithURL:url completionHandler:^(NSURL *location, NSURLResponse *response, NSError *error) {
-//                UIImage *downloadedImage = [UIImage imageWithData:[NSData dataWithContentsOfURL:location]];
-//                dispatch_async(dispatch_get_main_queue(), ^{
-//                    UIImageView *imageView =[[UIImageView alloc] initWithImage:downloadedImage];
-//                    imageView.frame = CGRectMake(20+80*i, 275, 60, 60);
-//                    imageView.tag = i+4;
-//                    imageView.userInteractionEnabled = YES;
-//                    [self.view addSubview:imageView];
-//                });
-//            }];
-//            [getImageTask resume];
-//        }
+        Food *food = _eatListsFromWeek[i];
+        if ([food.image_path  isEqual: @""]) {
+            UIImageView *imageView =[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"noimage.jpg"]];
+            imageView.frame = CGRectMake(20+80*i, 275, 60, 60);
+            imageView.tag = i+1003;
+            imageView.userInteractionEnabled = YES;
+            [self.view addSubview:imageView];
+        } else {
+            NSURL *url = [NSURL URLWithString:food.image_path];
+            
+            NSURLSessionConfiguration *config = [NSURLSessionConfiguration defaultSessionConfiguration];
+            NSURLSession *session = [NSURLSession sessionWithConfiguration:config];
+            
+            NSURLSessionDownloadTask *getImageTask = [session downloadTaskWithURL:url completionHandler:^(NSURL *location, NSURLResponse *response, NSError *error) {
+                UIImage *downloadedImage = [UIImage imageWithData:[NSData dataWithContentsOfURL:location]];
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    UIImageView *imageView =[[UIImageView alloc] initWithImage:downloadedImage];
+                    imageView.frame = CGRectMake(20+80*i, 275, 60, 60);
+                    imageView.tag = i+1003;
+                    imageView.userInteractionEnabled = YES;
+                    [self.view addSubview:imageView];
+                });
+            }];
+            [getImageTask resume];
+        }
     }
 
 }
 
+- (void)ListButtonTap:(UIButton*)button{
+    NSInteger eventType = button.tag;
+    
+    [self getSelectedMenuData];
+    
+    switch (eventType) {
+        case 10: // serch 1day
+            _eatlists = _eatListsFromDay;
+            break;
+        case 20: // serch 1week
+            _eatlists = _eatListsFromWeek;
+            break;
+        default:
+            break;
+    }
+    [self performSegueWithIdentifier:@"toEatenListSegue" sender:self];
+}
+
+- (void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
+    if ([[segue identifier] isEqualToString:@"toEatenListSegue"]) {
+        EatenFoodViewController *vc = (EatenFoodViewController*)[segue destinationViewController];
+        vc.eatenFoods = _eatlists;
+    }
+    if ([[segue identifier] isEqualToString:@"toDetailSegue"]) {
+        DetailViewController *vc = (DetailViewController*)[segue destinationViewController];
+        vc.detailMenu = _toDetailMenu;
+    }
+}
+
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event{
     UITouch *touch = [[event allTouches] anyObject];
-//    NSLog(@"%ld", (long)touch.view.tag);
-    if(touch.view.tag >= 1 && touch.view.tag < 10){
+    
+    if(touch.view.tag >= 1000 && touch.view.tag <= 1005){
+        switch (touch.view.tag) {
+            case 1000:
+                _toDetailMenu = [self transFoodModelToMenuModel:_eatListsFromDay[0]];
+                break;
+            case 1001:
+                _toDetailMenu = [self transFoodModelToMenuModel:_eatListsFromDay[1]];
+                break;
+            case 1002:
+                _toDetailMenu = [self transFoodModelToMenuModel:_eatListsFromDay[2]];
+                break;
+            case 1003:
+                _toDetailMenu = [self transFoodModelToMenuModel:_eatListsFromWeek[0]];
+                break;
+            case 1004:
+                _toDetailMenu = [self transFoodModelToMenuModel:_eatListsFromWeek[1]];
+                break;
+            case 1005:
+                _toDetailMenu = [self transFoodModelToMenuModel:_eatListsFromWeek[2]];
+                break;
+            default:
+                break;
+        }
         [self performSegueWithIdentifier:@"toDetailSegue" sender:self];
     }
 }
@@ -456,6 +485,9 @@
     [_weekButton5 setBackgroundImage:_nonselectImage forState:UIControlStateNormal];
     [_weekButton6 setBackgroundImage:_nonselectImage forState:UIControlStateNormal];
     [self calcDate];
+    [self getSelectedMenuData];
+    [self generateImageView];
+    [self calcSumPrice];
 }
 
 - (IBAction)newxtButton:(id)sender {
@@ -468,6 +500,9 @@
     [_weekButton5 setBackgroundImage:_nonselectImage forState:UIControlStateNormal];
     [_weekButton6 setBackgroundImage:_nonselectImage forState:UIControlStateNormal];
     [self calcDate];
+    [self getSelectedMenuData];
+    [self generateImageView];
+    [self calcSumPrice];
 }
 
 - (NSArray*)findDataInDay:(NSNumber*)day{
@@ -487,6 +522,38 @@
     NSDateComponents *components = [calendar components:flags fromDate:date];
     
     return [calendar dateFromComponents:components];
+}
+
+- (void)getSelectedMenuData{
+    NSDateFormatter *dateFormatterZero = [[NSDateFormatter alloc] init];
+    [dateFormatterZero setLocale:[NSLocale currentLocale]];
+    [dateFormatterZero setDateFormat:@"yyyy/MM/dd HH:mm:ss"];
+    NSString *todayStr = [_todayDate.text stringByAppendingString:@" 00:00:00"];
+    NSDate* date = [dateFormatterZero dateFromString:todayStr];
+    int unixtime = [date timeIntervalSince1970];
+    
+    NSDate *weekStart = _selectedWeeks[0];
+    NSDate *weekEnd = _selectedWeeks[6];
+    int weekStartNum = [weekStart timeIntervalSince1970];
+    int weekEndNum = [weekEnd timeIntervalSince1970];
+    [self getEatListsFromDay:[NSNumber numberWithInt:unixtime]];
+    [self getEatListsFromWeek:[NSNumber numberWithInt:weekStartNum] weekEnd:[NSNumber numberWithInt:weekEndNum]];
+}
+
+- (Menu*)transFoodModelToMenuModel:(Food*)food{
+    Menu *menu = Menu.new;
+    menu.id = [food.food_id intValue];
+    menu.name = food.name;
+    menu.price = [food.price intValue];
+    menu.category = [food.category intValue];
+    menu.green = [food.green floatValue];
+    menu.red = [food.red floatValue];
+    menu.yellow = [food.yellow floatValue];
+    menu.image_path = food.image_path;
+    menu.isSelect = NO;
+    menu.isSoldout = NO;
+    
+    return menu;
 }
 
 @end

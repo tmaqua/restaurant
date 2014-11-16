@@ -20,11 +20,9 @@
 @property (nonatomic) float yellow;
 @property (nonatomic) BOOL isSoldout;
 @property (nonatomic) BOOL isSelect;
-//@property (nonatomic) NSString *title;
-//@property (nonatomic) NSString *type;
 
-//+ (id)initMenu:(NSInteger)id title:(NSString*)title type:(NSString*)type price:(NSInteger)price isSoldout:(BOOL)isSoldout isSelect:(BOOL)isSelect;
 
+- (void)getMenuLog;
 - (NSString*)getCategoryName:(NSInteger)category;
 
 @end

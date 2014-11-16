@@ -9,6 +9,11 @@
 /* Begin PBXBuildFile section */
 		2E169E1A19FF79FA0048FA88 /* selected.png in Resources */ = {isa = PBXBuildFile; fileRef = 2E169E1919FF79FA0048FA88 /* selected.png */; };
 		2E169E1C19FF7B950048FA88 /* nonselect.png in Resources */ = {isa = PBXBuildFile; fileRef = 2E169E1B19FF7B950048FA88 /* nonselect.png */; };
+		2E3730081A15F7EA00534A9D /* addButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 2E3730061A15F7EA00534A9D /* addButton.png */; };
+		2E3730091A15F7EA00534A9D /* listButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 2E3730071A15F7EA00534A9D /* listButton.png */; };
+		2E3730131A1638B900534A9D /* cart.png in Resources */ = {isa = PBXBuildFile; fileRef = 2E3730111A1638B900534A9D /* cart.png */; };
+		2E3730141A1638B900534A9D /* subButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 2E3730121A1638B900534A9D /* subButton.png */; };
+		2E4A2D551A195743001B1BD8 /* noimage.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 2E4A2D541A195743001B1BD8 /* noimage.jpg */; };
 		2E646D3E1A05F4E100D9CBE9 /* _EatList.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E646D3B1A05F4E100D9CBE9 /* _EatList.m */; };
 		2E646D3F1A05F4E100D9CBE9 /* EatList.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E646D3D1A05F4E100D9CBE9 /* EatList.m */; };
 		2E646D451A05F4F500D9CBE9 /* _Food.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E646D421A05F4F500D9CBE9 /* _Food.m */; };
@@ -29,11 +34,6 @@
 		2E72B4F219FA59D7001A0DE3 /* OtherViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E72B4DD19FA59D7001A0DE3 /* OtherViewController.m */; };
 		2E72B4F419FA59D7001A0DE3 /* Menu.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E72B4E219FA59D7001A0DE3 /* Menu.m */; };
 		2E72B4F519FA59D7001A0DE3 /* MenuTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2E72B4E419FA59D7001A0DE3 /* MenuTableCell.xib */; };
-		2E72B4F619FA59D7001A0DE3 /* image.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 2E72B4E719FA59D7001A0DE3 /* image.jpg */; };
-		2E72B4F719FA59D7001A0DE3 /* list.png in Resources */ = {isa = PBXBuildFile; fileRef = 2E72B4E819FA59D7001A0DE3 /* list.png */; };
-		2E72B4F819FA59D7001A0DE3 /* minus.png in Resources */ = {isa = PBXBuildFile; fileRef = 2E72B4E919FA59D7001A0DE3 /* minus.png */; };
-		2E72B4F919FA59D7001A0DE3 /* plus.png in Resources */ = {isa = PBXBuildFile; fileRef = 2E72B4EA19FA59D7001A0DE3 /* plus.png */; };
-		2E72B4FA19FA59D7001A0DE3 /* shoppingcart128.png in Resources */ = {isa = PBXBuildFile; fileRef = 2E72B4EB19FA59D7001A0DE3 /* shoppingcart128.png */; };
 		2EAB54581A07FDAE00FF5AE4 /* PDAPIConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EAB54511A07FDAE00FF5AE4 /* PDAPIConnection.m */; };
 		2EAB54591A07FDAE00FF5AE4 /* PDAsyncURLConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EAB54531A07FDAE00FF5AE4 /* PDAsyncURLConnection.m */; };
 		2EAB545A1A07FDAE00FF5AE4 /* PDUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EAB54551A07FDAE00FF5AE4 /* PDUtils.m */; };
@@ -56,6 +56,11 @@
 /* Begin PBXFileReference section */
 		2E169E1919FF79FA0048FA88 /* selected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = selected.png; sourceTree = "<group>"; };
 		2E169E1B19FF7B950048FA88 /* nonselect.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = nonselect.png; sourceTree = "<group>"; };
+		2E3730061A15F7EA00534A9D /* addButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = addButton.png; sourceTree = "<group>"; };
+		2E3730071A15F7EA00534A9D /* listButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = listButton.png; sourceTree = "<group>"; };
+		2E3730111A1638B900534A9D /* cart.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cart.png; sourceTree = "<group>"; };
+		2E3730121A1638B900534A9D /* subButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = subButton.png; sourceTree = "<group>"; };
+		2E4A2D541A195743001B1BD8 /* noimage.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = noimage.jpg; sourceTree = "<group>"; };
 		2E646D3A1A05F4E100D9CBE9 /* _EatList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = _EatList.h; path = restaurant_ios/CoreData/_EatList.h; sourceTree = SOURCE_ROOT; };
 		2E646D3B1A05F4E100D9CBE9 /* _EatList.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = _EatList.m; path = restaurant_ios/CoreData/_EatList.m; sourceTree = SOURCE_ROOT; };
 		2E646D3C1A05F4E100D9CBE9 /* EatList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EatList.h; path = restaurant_ios/CoreData/EatList.h; sourceTree = SOURCE_ROOT; };
@@ -93,11 +98,6 @@
 		2E72B4E119FA59D7001A0DE3 /* Menu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Menu.h; sourceTree = "<group>"; };
 		2E72B4E219FA59D7001A0DE3 /* Menu.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Menu.m; sourceTree = "<group>"; };
 		2E72B4E419FA59D7001A0DE3 /* MenuTableCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MenuTableCell.xib; sourceTree = "<group>"; };
-		2E72B4E719FA59D7001A0DE3 /* image.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = image.jpg; sourceTree = "<group>"; };
-		2E72B4E819FA59D7001A0DE3 /* list.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = list.png; sourceTree = "<group>"; };
-		2E72B4E919FA59D7001A0DE3 /* minus.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = minus.png; sourceTree = "<group>"; };
-		2E72B4EA19FA59D7001A0DE3 /* plus.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = plus.png; sourceTree = "<group>"; };
-		2E72B4EB19FA59D7001A0DE3 /* shoppingcart128.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = shoppingcart128.png; sourceTree = "<group>"; };
 		2EAB54501A07FDAE00FF5AE4 /* PDAPIConnection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PDAPIConnection.h; sourceTree = "<group>"; };
 		2EAB54511A07FDAE00FF5AE4 /* PDAPIConnection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PDAPIConnection.m; sourceTree = "<group>"; };
 		2EAB54521A07FDAE00FF5AE4 /* PDAsyncURLConnection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PDAsyncURLConnection.h; sourceTree = "<group>"; };
@@ -300,13 +300,13 @@
 		2E72B4E619FA59D7001A0DE3 /* picture */ = {
 			isa = PBXGroup;
 			children = (
+				2E3730111A1638B900534A9D /* cart.png */,
+				2E3730121A1638B900534A9D /* subButton.png */,
 				2E169E1B19FF7B950048FA88 /* nonselect.png */,
 				2E169E1919FF79FA0048FA88 /* selected.png */,
-				2E72B4E719FA59D7001A0DE3 /* image.jpg */,
-				2E72B4E819FA59D7001A0DE3 /* list.png */,
-				2E72B4E919FA59D7001A0DE3 /* minus.png */,
-				2E72B4EA19FA59D7001A0DE3 /* plus.png */,
-				2E72B4EB19FA59D7001A0DE3 /* shoppingcart128.png */,
+				2E3730061A15F7EA00534A9D /* addButton.png */,
+				2E3730071A15F7EA00534A9D /* listButton.png */,
+				2E4A2D541A195743001B1BD8 /* noimage.jpg */,
 			);
 			path = picture;
 			sourceTree = "<group>";
@@ -429,13 +429,13 @@
 				2E72B48719FA5918001A0DE3 /* Main.storyboard in Resources */,
 				2E72B48C19FA5918001A0DE3 /* LaunchScreen.xib in Resources */,
 				2E72B48919FA5918001A0DE3 /* Images.xcassets in Resources */,
-				2E72B4FA19FA59D7001A0DE3 /* shoppingcart128.png in Resources */,
+				2E4A2D551A195743001B1BD8 /* noimage.jpg in Resources */,
+				2E3730081A15F7EA00534A9D /* addButton.png in Resources */,
 				2E72B4F519FA59D7001A0DE3 /* MenuTableCell.xib in Resources */,
-				2E72B4F819FA59D7001A0DE3 /* minus.png in Resources */,
-				2E72B4F619FA59D7001A0DE3 /* image.jpg in Resources */,
-				2E72B4F719FA59D7001A0DE3 /* list.png in Resources */,
+				2E3730141A1638B900534A9D /* subButton.png in Resources */,
+				2E3730131A1638B900534A9D /* cart.png in Resources */,
+				2E3730091A15F7EA00534A9D /* listButton.png in Resources */,
 				2E169E1A19FF79FA0048FA88 /* selected.png in Resources */,
-				2E72B4F919FA59D7001A0DE3 /* plus.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
