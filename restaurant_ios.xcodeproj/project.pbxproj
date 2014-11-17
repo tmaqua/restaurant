@@ -13,6 +13,12 @@
 		2E3730091A15F7EA00534A9D /* listButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 2E3730071A15F7EA00534A9D /* listButton.png */; };
 		2E3730131A1638B900534A9D /* cart.png in Resources */ = {isa = PBXBuildFile; fileRef = 2E3730111A1638B900534A9D /* cart.png */; };
 		2E3730141A1638B900534A9D /* subButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 2E3730121A1638B900534A9D /* subButton.png */; };
+		2E47A45D1A19AFBB00010404 /* calendar_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 2E47A45A1A19AFBB00010404 /* calendar_icon.png */; };
+		2E47A45E1A19AFBB00010404 /* menu_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 2E47A45B1A19AFBB00010404 /* menu_icon.png */; };
+		2E47A45F1A19AFBB00010404 /* other_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 2E47A45C1A19AFBB00010404 /* other_icon.png */; };
+		2E47A4631A19B45A00010404 /* calendar_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2E47A4601A19B45A00010404 /* calendar_icon@2x.png */; };
+		2E47A4641A19B45A00010404 /* menu_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2E47A4611A19B45A00010404 /* menu_icon@2x.png */; };
+		2E47A4651A19B45A00010404 /* other_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2E47A4621A19B45A00010404 /* other_icon@2x.png */; };
 		2E4A2D551A195743001B1BD8 /* noimage.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 2E4A2D541A195743001B1BD8 /* noimage.jpg */; };
 		2E646D3E1A05F4E100D9CBE9 /* _EatList.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E646D3B1A05F4E100D9CBE9 /* _EatList.m */; };
 		2E646D3F1A05F4E100D9CBE9 /* EatList.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E646D3D1A05F4E100D9CBE9 /* EatList.m */; };
@@ -60,6 +66,12 @@
 		2E3730071A15F7EA00534A9D /* listButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = listButton.png; sourceTree = "<group>"; };
 		2E3730111A1638B900534A9D /* cart.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cart.png; sourceTree = "<group>"; };
 		2E3730121A1638B900534A9D /* subButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = subButton.png; sourceTree = "<group>"; };
+		2E47A45A1A19AFBB00010404 /* calendar_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = calendar_icon.png; sourceTree = "<group>"; };
+		2E47A45B1A19AFBB00010404 /* menu_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = menu_icon.png; sourceTree = "<group>"; };
+		2E47A45C1A19AFBB00010404 /* other_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = other_icon.png; sourceTree = "<group>"; };
+		2E47A4601A19B45A00010404 /* calendar_icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "calendar_icon@2x.png"; sourceTree = "<group>"; };
+		2E47A4611A19B45A00010404 /* menu_icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "menu_icon@2x.png"; sourceTree = "<group>"; };
+		2E47A4621A19B45A00010404 /* other_icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "other_icon@2x.png"; sourceTree = "<group>"; };
 		2E4A2D541A195743001B1BD8 /* noimage.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = noimage.jpg; sourceTree = "<group>"; };
 		2E646D3A1A05F4E100D9CBE9 /* _EatList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = _EatList.h; path = restaurant_ios/CoreData/_EatList.h; sourceTree = SOURCE_ROOT; };
 		2E646D3B1A05F4E100D9CBE9 /* _EatList.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = _EatList.m; path = restaurant_ios/CoreData/_EatList.m; sourceTree = SOURCE_ROOT; };
@@ -214,7 +226,6 @@
 			children = (
 				2EAB544F1A07FDAE00FF5AE4 /* Utility */,
 				2E72B4CE19FA59D7001A0DE3 /* classes */,
-				2E72B4E619FA59D7001A0DE3 /* picture */,
 				2E72B47C19FA5918001A0DE3 /* AppDelegate.h */,
 				2E72B47D19FA5918001A0DE3 /* AppDelegate.m */,
 				2E72B48819FA5918001A0DE3 /* Images.xcassets */,
@@ -226,6 +237,7 @@
 		2E72B47819FA5918001A0DE3 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				2E72B4E619FA59D7001A0DE3 /* picture */,
 				2E72B47919FA5918001A0DE3 /* Info.plist */,
 				2E72B47A19FA5918001A0DE3 /* main.m */,
 			);
@@ -300,7 +312,13 @@
 		2E72B4E619FA59D7001A0DE3 /* picture */ = {
 			isa = PBXGroup;
 			children = (
+				2E47A4601A19B45A00010404 /* calendar_icon@2x.png */,
+				2E47A4611A19B45A00010404 /* menu_icon@2x.png */,
+				2E47A4621A19B45A00010404 /* other_icon@2x.png */,
 				2E3730111A1638B900534A9D /* cart.png */,
+				2E47A45A1A19AFBB00010404 /* calendar_icon.png */,
+				2E47A45B1A19AFBB00010404 /* menu_icon.png */,
+				2E47A45C1A19AFBB00010404 /* other_icon.png */,
 				2E3730121A1638B900534A9D /* subButton.png */,
 				2E169E1B19FF7B950048FA88 /* nonselect.png */,
 				2E169E1919FF79FA0048FA88 /* selected.png */,
@@ -427,13 +445,19 @@
 			files = (
 				2E169E1C19FF7B950048FA88 /* nonselect.png in Resources */,
 				2E72B48719FA5918001A0DE3 /* Main.storyboard in Resources */,
+				2E47A45D1A19AFBB00010404 /* calendar_icon.png in Resources */,
 				2E72B48C19FA5918001A0DE3 /* LaunchScreen.xib in Resources */,
 				2E72B48919FA5918001A0DE3 /* Images.xcassets in Resources */,
+				2E47A4651A19B45A00010404 /* other_icon@2x.png in Resources */,
 				2E4A2D551A195743001B1BD8 /* noimage.jpg in Resources */,
 				2E3730081A15F7EA00534A9D /* addButton.png in Resources */,
 				2E72B4F519FA59D7001A0DE3 /* MenuTableCell.xib in Resources */,
+				2E47A45E1A19AFBB00010404 /* menu_icon.png in Resources */,
+				2E47A4631A19B45A00010404 /* calendar_icon@2x.png in Resources */,
+				2E47A4641A19B45A00010404 /* menu_icon@2x.png in Resources */,
 				2E3730141A1638B900534A9D /* subButton.png in Resources */,
 				2E3730131A1638B900534A9D /* cart.png in Resources */,
+				2E47A45F1A19AFBB00010404 /* other_icon.png in Resources */,
 				2E3730091A15F7EA00534A9D /* listButton.png in Resources */,
 				2E169E1A19FF79FA0048FA88 /* selected.png in Resources */,
 			);

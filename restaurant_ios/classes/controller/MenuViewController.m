@@ -25,6 +25,7 @@
     // navbar change color
     self.navigationController.navigationBar.barTintColor =
         [UIColor colorWithRed:1.00 green:0.56 blue:0.19 alpha:1.0];
+//    [UINavigationBar appearance].titleTextAttributes = @{NSForegroundColorAttributeName: [UIColor whiteColor]};
     
     [self initHeaderButton];
     
@@ -361,9 +362,10 @@
         [PDUtils alertDialog:NOT_CONNECT_NETWORK delegate:self];
         return;
     }
-    
-    
-    NSString *params = [@"?date=" stringByAppendingString:@"1398351600"];
+    NSDate *today = [self getDateSZero:[NSDate date]];
+    NSString *unixtime = @"1398351600";
+//    NSString *unixtime = [NSString stringWithFormat:@"%d",(int)[today timeIntervalSince1970]];
+    NSString *params = [@"?date=" stringByAppendingString:unixtime];
     [ExtendedPDAPIConnection getMessages:10.0f params:params completeBlock:^(NSArray *messages) {
         [SVProgressHUD show];
         

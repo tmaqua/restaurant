@@ -10,8 +10,8 @@
 #import "PDAPIConnection.h"
 #import "MenuList.h"
 
-#define API_MESSEAGE_GET @"http://restaurant.planningdev.com/api/menu/list.json"
-//#define API_MESSEAGE_GET @"http://restaurant.planningdev.com/api/menu"
+//#define API_MESSEAGE_GET @"http://restaurant.planningdev.com/api/menu/list.json"
+#define API_MESSEAGE_GET @"http://restaurant.planningdev.com/api/menu"
 
 @interface ExtendedPDAPIConnection: PDAPIConnection
 
