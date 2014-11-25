@@ -50,4 +50,7 @@
 - (IBAction)backButton:(id)sender;
 - (IBAction)newxtButton:(id)sender;
 
+
+- (IBAction)testAllDelete:(id)sender;
+
 @end

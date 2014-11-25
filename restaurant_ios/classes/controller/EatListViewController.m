@@ -20,6 +20,7 @@
     
     // navbar change color
     self.navigationController.navigationBar.barTintColor = [UIColor colorWithRed:1.00 green:0.56 blue:0.19 alpha:1.0];
+    [UINavigationBar appearance].titleTextAttributes = @{NSForegroundColorAttributeName: [UIColor whiteColor]};
     
     _weekSelectNum = 0;
     _selectedImage = [UIImage imageNamed:@"selected.png"];
@@ -42,6 +43,9 @@
     
     NSDate *today = [self getDateSZero:[NSDate date]];
     int unixtime = [today timeIntervalSince1970];
+    
+    NSLog(@"\n\n******UNIXTIME******%d", unixtime);
+    
     [self getEatListsFromDay:[NSNumber numberWithInt:unixtime]];
     
     NSDate *weekStart = _selectedWeeks[0];
@@ -505,6 +509,14 @@
     [self calcSumPrice];
 }
 
+
+// ! test func
+- (IBAction)testAllDelete:(id)sender {
+    // CoreData All Delete
+    [EatList MR_truncateAll];
+    [Food MR_truncateAll];
+}
+
 - (NSArray*)findDataInDay:(NSNumber*)day{
     NSPredicate *predicate = [NSPredicate predicateWithFormat:@"ate_at == %@", day];
     return [EatList MR_findAllWithPredicate:predicate];
@@ -526,8 +538,8 @@
 
 - (void)getSelectedMenuData{
     NSDateFormatter *dateFormatterZero = [[NSDateFormatter alloc] init];
-    [dateFormatterZero setLocale:[NSLocale currentLocale]];
     [dateFormatterZero setDateFormat:@"yyyy/MM/dd HH:mm:ss"];
+    [dateFormatterZero setLocale:[[NSLocale alloc] initWithLocaleIdentifier:@"en-US"]];
     NSString *todayStr = [_todayDate.text stringByAppendingString:@" 00:00:00"];
     NSDate* date = [dateFormatterZero dateFromString:todayStr];
     int unixtime = [date timeIntervalSince1970];

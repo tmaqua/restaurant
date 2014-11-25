@@ -12,6 +12,7 @@
 
 //#define API_MESSEAGE_GET @"http://restaurant.planningdev.com/api/menu/list.json"
 #define API_MESSEAGE_GET @"http://restaurant.planningdev.com/api/menu"
+//#define API_MESSEAGE_GET @"http://fankami.restaurant.planningdev.com/api/menu/list.json"
 
 @interface ExtendedPDAPIConnection: PDAPIConnection
 

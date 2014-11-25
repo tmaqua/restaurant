@@ -20,6 +20,7 @@
     
     // navbar change color
     self.navigationController.navigationBar.barTintColor = [UIColor colorWithRed:1.00 green:0.56 blue:0.19 alpha:1.0];
+    [UINavigationBar appearance].titleTextAttributes = @{NSForegroundColorAttributeName: [UIColor whiteColor]};
     
     _otherTable.delegate = self;
     _otherTable.dataSource = self;

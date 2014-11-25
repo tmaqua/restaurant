@@ -19,13 +19,13 @@
     [super viewDidLoad];
     
     // CoreData All Delete
-    [EatList MR_truncateAll];
-    [Food MR_truncateAll];
+//    [EatList MR_truncateAll];
+//    [Food MR_truncateAll];
     
     // navbar change color
     self.navigationController.navigationBar.barTintColor =
         [UIColor colorWithRed:1.00 green:0.56 blue:0.19 alpha:1.0];
-//    [UINavigationBar appearance].titleTextAttributes = @{NSForegroundColorAttributeName: [UIColor whiteColor]};
+    [UINavigationBar appearance].titleTextAttributes = @{NSForegroundColorAttributeName: [UIColor whiteColor]};
     
     [self initHeaderButton];
     
@@ -249,32 +249,25 @@
     UIButton *button = (UIButton *)sender;
     NSPredicate *predicate;
     _menuArray = _srcArray;
+    _saveButton.enabled = NO;
+    _saveButton.alpha = 0.3;
+    
     switch (button.tag) {
         case 1:
-            _saveButton.enabled = NO;
-            _saveButton.alpha = 0.3;
             break;
         case 2:
-            _saveButton.enabled = NO;
-            _saveButton.alpha = 0.3;
             predicate = [NSPredicate predicateWithFormat:@"%K = %@", @"category", @0];
             _menuArray = [_menuArray filteredArrayUsingPredicate:predicate];
             break;
         case 3:
-            _saveButton.enabled = NO;
-            _saveButton.alpha = 0.3;
             predicate = [NSPredicate predicateWithFormat:@"%K = %@", @"category", @1];
             _menuArray = [_menuArray filteredArrayUsingPredicate:predicate];
             break;
         case 4:
-            _saveButton.enabled = NO;
-            _saveButton.alpha = 0.3;
             predicate = [NSPredicate predicateWithFormat:@"%K = %@", @"category", @2];
             _menuArray = [_menuArray filteredArrayUsingPredicate:predicate];
             break;
         case 5:
-            _saveButton.enabled = NO;
-            _saveButton.alpha = 0.3;
             predicate = [NSPredicate predicateWithFormat:@"%K = %@", @"category", @3];
             _menuArray = [_menuArray filteredArrayUsingPredicate:predicate];
             break;
@@ -304,7 +297,6 @@
     NSArray *selectedArray = [_menuArray filteredArrayUsingPredicate:predicate];
     
     if ([selectedArray count] == 0) {
-        NSLog(@"\n***** No Select *****");
         [SVProgressHUD showErrorWithStatus:@"何も選択されていません"];
     } else {
         NSDate *today = [self getDateSZero:[NSDate date]];
@@ -327,7 +319,7 @@
         }
         [[NSManagedObjectContext MR_defaultContext] MR_saveToPersistentStoreWithCompletion:^(BOOL success, NSError *error) {
             if (success) {
-                NSLog(@"successfully saved");
+//                NSLog(@"successfully saved");
                 for (int i=0; i<[_menuArray count]; i++) {
                     Menu *menu = _menuArray[i];
                     menu.isSelect = NO;
@@ -338,7 +330,7 @@
                 [self reloadViewAll];
                 
             } else if (error) {
-                NSLog(@"Error saving context: %@", error.description);
+//                NSLog(@"Error saving context: %@", error.description);
                 [SVProgressHUD showErrorWithStatus:@"保存に失敗しました"];
                 _saveButton.enabled = NO;
                 _saveButton.alpha = 0.3;
