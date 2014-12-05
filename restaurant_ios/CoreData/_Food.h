@@ -5,6 +5,7 @@
 
 
 extern const struct FoodAttributes {
+	__unsafe_unretained NSString *calory;
 	__unsafe_unretained NSString *category;
 	__unsafe_unretained NSString *food_id;
 	__unsafe_unretained NSString *green;
@@ -12,6 +13,7 @@ extern const struct FoodAttributes {
 	__unsafe_unretained NSString *name;
 	__unsafe_unretained NSString *price;
 	__unsafe_unretained NSString *red;
+	__unsafe_unretained NSString *salt;
 	__unsafe_unretained NSString *yellow;
 } FoodAttributes;
 
@@ -33,6 +35,8 @@ extern const struct FoodFetchedProperties {
 
 
 
+
+
 @interface FoodID : NSManagedObjectID {}
 @end
 
@@ -41,6 +45,20 @@ extern const struct FoodFetchedProperties {
 + (NSString*)entityName;
 + (NSEntityDescription*)entityInManagedObjectContext:(NSManagedObjectContext*)moc_;
 - (FoodID*)objectID;
+
+
+
+
+
+@property (nonatomic, strong) NSNumber* calory;
+
+
+
+@property float caloryValue;
+- (float)caloryValue;
+- (void)setCaloryValue:(float)value_;
+
+//- (BOOL)validateCalory:(id*)value_ error:(NSError**)error_;
 
 
 
@@ -136,6 +154,20 @@ extern const struct FoodFetchedProperties {
 
 
 
+@property (nonatomic, strong) NSNumber* salt;
+
+
+
+@property float saltValue;
+- (float)saltValue;
+- (void)setSaltValue:(float)value_;
+
+//- (BOOL)validateSalt:(id*)value_ error:(NSError**)error_;
+
+
+
+
+
 @property (nonatomic, strong) NSNumber* yellow;
 
 
@@ -165,6 +197,15 @@ extern const struct FoodFetchedProperties {
 @end
 
 @interface _Food (CoreDataGeneratedPrimitiveAccessors)
+
+
+- (NSNumber*)primitiveCalory;
+- (void)setPrimitiveCalory:(NSNumber*)value;
+
+- (float)primitiveCaloryValue;
+- (void)setPrimitiveCaloryValue:(float)value_;
+
+
 
 
 - (NSNumber*)primitiveCategory;
@@ -220,6 +261,15 @@ extern const struct FoodFetchedProperties {
 
 - (float)primitiveRedValue;
 - (void)setPrimitiveRedValue:(float)value_;
+
+
+
+
+- (NSNumber*)primitiveSalt;
+- (void)setPrimitiveSalt:(NSNumber*)value;
+
+- (float)primitiveSaltValue;
+- (void)setPrimitiveSaltValue:(float)value_;
 
 
 

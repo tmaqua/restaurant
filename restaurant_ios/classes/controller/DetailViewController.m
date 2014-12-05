@@ -66,10 +66,14 @@
     
     _titleLabel.text = _detailMenu.name;
     _categoryLabel.text = [_detailMenu getCategoryName:_detailMenu.category];
-    _priceLabel.text = [NSString stringWithFormat:@"%ld", (long)_detailMenu.price];
+    _priceLabel.text = [@"￥" stringByAppendingString:[NSString stringWithFormat:@"%ld", (long)_detailMenu.price]];
     _redLabel.text = [NSString stringWithFormat:@"%.2f", _detailMenu.red];
     _greenLabel.text = [NSString stringWithFormat:@"%.2f", _detailMenu.green];
     _yellowLabel.text = [NSString stringWithFormat:@"%.2f", _detailMenu.yellow];
+    
+    _caloryLabel.text = [[NSString stringWithFormat:@"%0.2f", _detailMenu.calory/1000] stringByAppendingString:@"Kcal"];
+    _saltLabel.text = [[NSString stringWithFormat:@"%.1f", _detailMenu.salt]stringByAppendingString:@"g"];
+    
     if ([_detailMenu.image_path  isEqual: @""]) {
         _foodImageView.image = [UIImage imageNamed:@"noimage.jpg"];
     } else {
@@ -81,12 +85,32 @@
         NSURLSessionDownloadTask *getImageTask = [session downloadTaskWithURL:url completionHandler:^(NSURL *location, NSURLResponse *response, NSError *error) {
             UIImage *downloadedImage = [UIImage imageWithData:[NSData dataWithContentsOfURL:location]];
             dispatch_async(dispatch_get_main_queue(), ^{
-                _foodImageView.image = downloadedImage;
+                _foodImageView.image = [self resizeImage:downloadedImage];
             });
         }];
         [getImageTask resume];
     }
     
+}
+
+- (UIImage*)resizeImage:(UIImage*)srcImage{
+    int width = srcImage.size.width;
+    int height = srcImage.size.width;
+    
+    float scale = width/height;
+    CGSize resizedSize = CGSizeMake(width, height * scale);
+    
+//    if (width > height) {
+//        resizedSize = CGSizeMake(width, width);
+//    } else {
+//        resizedSize = CGSizeMake(height, height);
+//    }
+    UIGraphicsBeginImageContext(resizedSize);
+    [srcImage drawInRect:CGRectMake(0, 0, resizedSize.width, resizedSize.height)];
+    UIImage* resizedImage = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    
+    return resizedImage;
 }
 
 - (void)didReceiveMemoryWarning

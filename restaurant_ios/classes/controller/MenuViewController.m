@@ -19,8 +19,8 @@
     [super viewDidLoad];
     
     // CoreData All Delete
-//    [EatList MR_truncateAll];
-//    [Food MR_truncateAll];
+    [EatList MR_truncateAll];
+    [Food MR_truncateAll];
     
     // navbar change color
     self.navigationController.navigationBar.barTintColor =
@@ -315,6 +315,10 @@
             food.green = [NSNumber numberWithFloat:menu.green];
             food.yellow = [NSNumber numberWithFloat:menu.yellow];
             food.image_path = menu.image_path;
+            
+            food.salt = [NSNumber numberWithFloat:menu.salt];
+            food.calory = [NSNumber numberWithFloat:menu.calory];
+            
             [eatList addFoodObject:food];
         }
         [[NSManagedObjectContext MR_defaultContext] MR_saveToPersistentStoreWithCompletion:^(BOOL success, NSError *error) {
@@ -354,7 +358,7 @@
         [PDUtils alertDialog:NOT_CONNECT_NETWORK delegate:self];
         return;
     }
-    NSDate *today = [self getDateSZero:[NSDate date]];
+//    NSDate *today = [self getDateSZero:[NSDate date]];
     NSString *unixtime = @"1398351600";
 //    NSString *unixtime = [NSString stringWithFormat:@"%d",(int)[today timeIntervalSince1970]];
     NSString *params = [@"?date=" stringByAppendingString:unixtime];
@@ -367,6 +371,11 @@
         
         for (int i=0; i< [tempDict[@"menus"] count]; i++) {
             Menu *menu = Menu.new;
+            
+            if ([tempDict[@"menus"][i][@"food_id"] isKindOfClass:[NSNull class]]) {
+                continue;
+            }
+            
             menu.id = [tempDict[@"menus"][i][@"food"][@"id"] intValue];
             menu.name = tempDict[@"menus"][i][@"food"][@"name"];
             menu.price = [tempDict[@"menus"][i][@"food"][@"price"] intValue];
@@ -377,6 +386,10 @@
             menu.yellow = [tempDict[@"menus"][i][@"food"][@"yellow"] floatValue];
             menu.isSoldout = [tempDict[@"menus"][i][@"is_soldout"] intValue];
             menu.isSelect = NO;
+            
+            menu.salt = [tempDict[@"menus"][i][@"food"][@"salt"] floatValue];
+            menu.calory = [tempDict[@"menus"][i][@"food"][@"calory"] floatValue];
+            
             [tempArray addObject:menu];
         }
         
@@ -415,6 +428,10 @@
                 menu.isSoldout = NO;
             }
             menu.isSelect = NO;
+            
+            menu.salt = 14.0+i;
+            menu.calory = 33+i;
+            
             [dummyArray addObject:menu];
             j++;
         }

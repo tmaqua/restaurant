@@ -4,6 +4,7 @@
 #import "_Food.h"
 
 const struct FoodAttributes FoodAttributes = {
+	.calory = @"calory",
 	.category = @"category",
 	.food_id = @"food_id",
 	.green = @"green",
@@ -11,6 +12,7 @@ const struct FoodAttributes FoodAttributes = {
 	.name = @"name",
 	.price = @"price",
 	.red = @"red",
+	.salt = @"salt",
 	.yellow = @"yellow",
 };
 
@@ -47,6 +49,11 @@ const struct FoodFetchedProperties FoodFetchedProperties = {
 + (NSSet*)keyPathsForValuesAffectingValueForKey:(NSString*)key {
 	NSSet *keyPaths = [super keyPathsForValuesAffectingValueForKey:key];
 	
+	if ([key isEqualToString:@"caloryValue"]) {
+		NSSet *affectingKey = [NSSet setWithObject:@"calory"];
+		keyPaths = [keyPaths setByAddingObjectsFromSet:affectingKey];
+		return keyPaths;
+	}
 	if ([key isEqualToString:@"categoryValue"]) {
 		NSSet *affectingKey = [NSSet setWithObject:@"category"];
 		keyPaths = [keyPaths setByAddingObjectsFromSet:affectingKey];
@@ -72,6 +79,11 @@ const struct FoodFetchedProperties FoodFetchedProperties = {
 		keyPaths = [keyPaths setByAddingObjectsFromSet:affectingKey];
 		return keyPaths;
 	}
+	if ([key isEqualToString:@"saltValue"]) {
+		NSSet *affectingKey = [NSSet setWithObject:@"salt"];
+		keyPaths = [keyPaths setByAddingObjectsFromSet:affectingKey];
+		return keyPaths;
+	}
 	if ([key isEqualToString:@"yellowValue"]) {
 		NSSet *affectingKey = [NSSet setWithObject:@"yellow"];
 		keyPaths = [keyPaths setByAddingObjectsFromSet:affectingKey];
@@ -80,6 +92,32 @@ const struct FoodFetchedProperties FoodFetchedProperties = {
 
 	return keyPaths;
 }
+
+
+
+
+@dynamic calory;
+
+
+
+- (float)caloryValue {
+	NSNumber *result = [self calory];
+	return [result floatValue];
+}
+
+- (void)setCaloryValue:(float)value_ {
+	[self setCalory:[NSNumber numberWithFloat:value_]];
+}
+
+- (float)primitiveCaloryValue {
+	NSNumber *result = [self primitiveCalory];
+	return [result floatValue];
+}
+
+- (void)setPrimitiveCaloryValue:(float)value_ {
+	[self setPrimitiveCalory:[NSNumber numberWithFloat:value_]];
+}
+
 
 
 
@@ -222,6 +260,32 @@ const struct FoodFetchedProperties FoodFetchedProperties = {
 
 - (void)setPrimitiveRedValue:(float)value_ {
 	[self setPrimitiveRed:[NSNumber numberWithFloat:value_]];
+}
+
+
+
+
+
+@dynamic salt;
+
+
+
+- (float)saltValue {
+	NSNumber *result = [self salt];
+	return [result floatValue];
+}
+
+- (void)setSaltValue:(float)value_ {
+	[self setSalt:[NSNumber numberWithFloat:value_]];
+}
+
+- (float)primitiveSaltValue {
+	NSNumber *result = [self primitiveSalt];
+	return [result floatValue];
+}
+
+- (void)setPrimitiveSaltValue:(float)value_ {
+	[self setPrimitiveSalt:[NSNumber numberWithFloat:value_]];
 }
 
 

@@ -131,6 +131,9 @@
         menu.isSelect = NO;
         menu.isSoldout = NO;
         
+        menu.calory = [food.calory floatValue];
+        menu.salt = [food.salt floatValue];
+        
         [menus addObject:menu];
     }
     _eatenFoodsMenuModel = menus;
