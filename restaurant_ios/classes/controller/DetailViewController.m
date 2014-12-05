@@ -7,6 +7,7 @@
 //
 
 #import "DetailViewController.h"
+#import <QuartzCore/QuartzCore.h>
 
 @interface DetailViewController ()
 
@@ -30,12 +31,45 @@
     
     self.navigationController.navigationBar.barTintColor = [UIColor colorWithRed:1.00 green:0.56 blue:0.19 alpha:1.0];
     
+    switch (_detailMenu.category) {
+        case 0:
+            _categoryLabel.backgroundColor = [UIColor colorWithRed:0.87 green:0.45 blue:0.40 alpha:1.0];
+            break;
+        case 1:
+            _categoryLabel.backgroundColor = [UIColor colorWithRed:1.00 green:0.56 blue:0.19 alpha:1.0];
+            break;
+        case 2:
+            _categoryLabel.backgroundColor = [UIColor colorWithRed:0.73 green:0.75 blue:0.00 alpha:1.0];
+            break;
+        case 3:
+            _categoryLabel.backgroundColor = [UIColor colorWithRed:0.36 green:0.69 blue:0.56 alpha:1.0];
+            break;
+        default:
+            break;
+    }
+    
+    _redBackground.backgroundColor = [UIColor colorWithRed:0.90 green:0.37 blue:0.16 alpha:1.0];
+    _greenBackground.backgroundColor = [UIColor colorWithRed:0.25 green:0.69 blue:0.52 alpha:1.0];
+    _yellowBackground.backgroundColor = [UIColor colorWithRed:0.90 green:0.78 blue:0.16 alpha:1.0];
+    _saltBackground.backgroundColor = [UIColor colorWithRed:0.43 green:0.49 blue:0.86 alpha:1.0];
+    
+    _categoryLabel.layer.cornerRadius = 4.0f;
+    _redBackground.layer.cornerRadius = 4.0f;
+    _greenBackground.layer.cornerRadius = 4.0f;
+    _yellowBackground.layer.cornerRadius = 4.0f;
+    _saltBackground.layer.cornerRadius = 4.0f;
+    
+    _redLabel.layer.cornerRadius = 4.0f;
+    _greenLabel.layer.cornerRadius = 4.0f;
+    _yellowLabel.layer.cornerRadius = 4.0f;
+    _saltLabel.layer.cornerRadius = 4.0f;
+    
     _titleLabel.text = _detailMenu.name;
     _categoryLabel.text = [_detailMenu getCategoryName:_detailMenu.category];
     _priceLabel.text = [NSString stringWithFormat:@"%ld", (long)_detailMenu.price];
-    _redLabel.text = [NSString stringWithFormat:@"%f", _detailMenu.red];
-    _greenLabel.text = [NSString stringWithFormat:@"%f", _detailMenu.green];
-    _yellowLabel.text = [NSString stringWithFormat:@"%f", _detailMenu.yellow];
+    _redLabel.text = [NSString stringWithFormat:@"%.2f", _detailMenu.red];
+    _greenLabel.text = [NSString stringWithFormat:@"%.2f", _detailMenu.green];
+    _yellowLabel.text = [NSString stringWithFormat:@"%.2f", _detailMenu.yellow];
     if ([_detailMenu.image_path  isEqual: @""]) {
         _foodImageView.image = [UIImage imageNamed:@"noimage.jpg"];
     } else {
@@ -52,7 +86,7 @@
         }];
         [getImageTask resume];
     }
-
+    
 }
 
 - (void)didReceiveMemoryWarning

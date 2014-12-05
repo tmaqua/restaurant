@@ -9,6 +9,9 @@
 /* Begin PBXBuildFile section */
 		2E169E1A19FF79FA0048FA88 /* selected.png in Resources */ = {isa = PBXBuildFile; fileRef = 2E169E1919FF79FA0048FA88 /* selected.png */; };
 		2E169E1C19FF7B950048FA88 /* nonselect.png in Resources */ = {isa = PBXBuildFile; fileRef = 2E169E1B19FF7B950048FA88 /* nonselect.png */; };
+		2E1847901A31809600048D32 /* fire_element.png in Resources */ = {isa = PBXBuildFile; fileRef = 2E18478E1A31809600048D32 /* fire_element.png */; };
+		2E1847911A31809600048D32 /* price_tag.png in Resources */ = {isa = PBXBuildFile; fileRef = 2E18478F1A31809600048D32 /* price_tag.png */; };
+		2E1847931A3187B300048D32 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2E1847921A3187B300048D32 /* QuartzCore.framework */; };
 		2E3730081A15F7EA00534A9D /* addButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 2E3730061A15F7EA00534A9D /* addButton.png */; };
 		2E3730091A15F7EA00534A9D /* listButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 2E3730071A15F7EA00534A9D /* listButton.png */; };
 		2E3730131A1638B900534A9D /* cart.png in Resources */ = {isa = PBXBuildFile; fileRef = 2E3730111A1638B900534A9D /* cart.png */; };
@@ -62,6 +65,9 @@
 /* Begin PBXFileReference section */
 		2E169E1919FF79FA0048FA88 /* selected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = selected.png; sourceTree = "<group>"; };
 		2E169E1B19FF7B950048FA88 /* nonselect.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = nonselect.png; sourceTree = "<group>"; };
+		2E18478E1A31809600048D32 /* fire_element.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = fire_element.png; sourceTree = "<group>"; };
+		2E18478F1A31809600048D32 /* price_tag.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = price_tag.png; sourceTree = "<group>"; };
+		2E1847921A3187B300048D32 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		2E3730061A15F7EA00534A9D /* addButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = addButton.png; sourceTree = "<group>"; };
 		2E3730071A15F7EA00534A9D /* listButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = listButton.png; sourceTree = "<group>"; };
 		2E3730111A1638B900534A9D /* cart.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cart.png; sourceTree = "<group>"; };
@@ -132,6 +138,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2E1847931A3187B300048D32 /* QuartzCore.framework in Frameworks */,
 				41BF5B982A124FC0CD710039 /* libPods.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -312,6 +319,8 @@
 		2E72B4E619FA59D7001A0DE3 /* picture */ = {
 			isa = PBXGroup;
 			children = (
+				2E18478E1A31809600048D32 /* fire_element.png */,
+				2E18478F1A31809600048D32 /* price_tag.png */,
 				2E47A4601A19B45A00010404 /* calendar_icon@2x.png */,
 				2E47A4611A19B45A00010404 /* menu_icon@2x.png */,
 				2E47A4621A19B45A00010404 /* other_icon@2x.png */,
@@ -347,6 +356,7 @@
 		434C1DE59E1C3DFA0DFFEA9A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				2E1847921A3187B300048D32 /* QuartzCore.framework */,
 				33F1BAED38403A5C1E000737 /* libPods.a */,
 			);
 			name = Frameworks;
@@ -446,6 +456,7 @@
 			files = (
 				2E169E1C19FF7B950048FA88 /* nonselect.png in Resources */,
 				2E72B48719FA5918001A0DE3 /* Main.storyboard in Resources */,
+				2E1847901A31809600048D32 /* fire_element.png in Resources */,
 				2E47A45D1A19AFBB00010404 /* calendar_icon.png in Resources */,
 				2E72B48C19FA5918001A0DE3 /* LaunchScreen.xib in Resources */,
 				2E72B48919FA5918001A0DE3 /* Images.xcassets in Resources */,
@@ -454,6 +465,7 @@
 				2E3730081A15F7EA00534A9D /* addButton.png in Resources */,
 				2E72B4F519FA59D7001A0DE3 /* MenuTableCell.xib in Resources */,
 				2E47A45E1A19AFBB00010404 /* menu_icon.png in Resources */,
+				2E1847911A31809600048D32 /* price_tag.png in Resources */,
 				2E47A4631A19B45A00010404 /* calendar_icon@2x.png in Resources */,
 				2E47A4641A19B45A00010404 /* menu_icon@2x.png in Resources */,
 				2E3730141A1638B900534A9D /* subButton.png in Resources */,

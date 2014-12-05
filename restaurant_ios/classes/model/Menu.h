@@ -20,6 +20,8 @@
 @property (nonatomic) float yellow;
 @property (nonatomic) BOOL isSoldout;
 @property (nonatomic) BOOL isSelect;
+@property (nonatomic) float salt;
+@property (nonatomic) float calory;
 
 
 - (void)getMenuLog;

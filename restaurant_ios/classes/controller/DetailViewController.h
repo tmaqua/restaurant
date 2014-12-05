@@ -18,6 +18,12 @@
 @property (weak, nonatomic) IBOutlet UILabel *greenLabel;
 @property (weak, nonatomic) IBOutlet UILabel *yellowLabel;
 @property (weak, nonatomic) IBOutlet UIImageView *foodImageView;
+@property (weak, nonatomic) IBOutlet UILabel *caloryLabel;
+@property (weak, nonatomic) IBOutlet UILabel *saltLabel;
+@property (weak, nonatomic) IBOutlet UILabel *redBackground;
+@property (weak, nonatomic) IBOutlet UILabel *greenBackground;
+@property (weak, nonatomic) IBOutlet UILabel *yellowBackground;
+@property (weak, nonatomic) IBOutlet UILabel *saltBackground;
 
 @property (nonatomic) Menu *detailMenu;
 
