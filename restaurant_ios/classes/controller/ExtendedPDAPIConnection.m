@@ -12,7 +12,8 @@
 
 +(void)getMessages:(CGFloat)sec params:(NSString*)params completeBlock:(getMessagesCompleteBlock)cp_block errorBlock:(errorBlock)e_block cancelBlock:(cancelBlock)cc_block{
     
-    NSString *requestMessage = [API_MESSEAGE_GET stringByAppendingString:params];
+//    NSString *requestMessage = [API_MESSEAGE_GET stringByAppendingString:params];
+    NSString *requestMessage = API_MESSEAGE_GET;
     NSLog(@"requestMessage: %@", requestMessage);
     
     NSMutableURLRequest *req = [ExtendedPDAPIConnection createGetRequest:requestMessage];

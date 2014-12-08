@@ -85,7 +85,7 @@
         NSURLSessionDownloadTask *getImageTask = [session downloadTaskWithURL:url completionHandler:^(NSURL *location, NSURLResponse *response, NSError *error) {
             UIImage *downloadedImage = [UIImage imageWithData:[NSData dataWithContentsOfURL:location]];
             dispatch_async(dispatch_get_main_queue(), ^{
-                _foodImageView.image = [self resizeImage:downloadedImage];
+                _foodImageView.image = downloadedImage;
             });
         }];
         [getImageTask resume];
@@ -93,25 +93,29 @@
     
 }
 
-- (UIImage*)resizeImage:(UIImage*)srcImage{
-    int width = srcImage.size.width;
-    int height = srcImage.size.width;
-    
-    float scale = width/height;
-    CGSize resizedSize = CGSizeMake(width, height * scale);
-    
-//    if (width > height) {
-//        resizedSize = CGSizeMake(width, width);
-//    } else {
-//        resizedSize = CGSizeMake(height, height);
-//    }
-    UIGraphicsBeginImageContext(resizedSize);
-    [srcImage drawInRect:CGRectMake(0, 0, resizedSize.width, resizedSize.height)];
-    UIImage* resizedImage = UIGraphicsGetImageFromCurrentImageContext();
-    UIGraphicsEndImageContext();
-    
-    return resizedImage;
-}
+//- (UIImage*)resizeImage:(UIImage*)srcImage{
+//    int width = srcImage.size.width;
+//    int height = srcImage.size.width;
+//    
+////    NSLog(@"width: %d\nheight: %d", width, height);
+//    
+//    float scale = width/height;
+//    
+////    NSLog(@"scale: %f", scale);
+//    CGSize resizedSize = CGSizeMake(width, height * scale);
+//    
+////    if (width > height) {
+////        resizedSize = CGSizeMake(width, width);
+////    } else {
+////        resizedSize = CGSizeMake(height, height);
+////    }
+//    UIGraphicsBeginImageContext(resizedSize);
+//    [srcImage drawInRect:CGRectMake(0, 0, resizedSize.width, resizedSize.height)];
+//    UIImage* resizedImage = UIGraphicsGetImageFromCurrentImageContext();
+//    UIGraphicsEndImageContext();
+//    
+//    return resizedImage;
+//}
 
 - (void)didReceiveMemoryWarning
 {
